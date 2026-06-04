@@ -3,7 +3,14 @@ import { Link } from 'react-router-dom';
 export const Hero = () => (
   <header className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(14,165,233,0.16),_transparent_35%),linear-gradient(180deg,rgba(15,23,42,0.85),rgba(15,23,42,0.98))]" />
-    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1441716844725-09cedc13a4e7?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-60" />
+      {/* Imagen adaptada a móviles: imagen más pequeña en mobile, más grande en desktop */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-60"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1441716844725-09cedc13a4e7?auto=format&fit=crop&w=1200&q=60')",
+          backgroundAttachment: 'fixed'
+        }}
+      />
 
     <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-4 py-24 sm:px-6 lg:px-8">
       {/* CAMBIO AQUÍ: Se agregó 'mx-auto' para centrar todo el bloque */}

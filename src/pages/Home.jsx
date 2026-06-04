@@ -9,11 +9,12 @@ const Home = () => {
       <section className="bg-white py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="text-center">
-            <p className="text-sm uppercase tracking-[0.28em] text-cyan-500 font-semibold">Servicios principales</p>
-            <h2 className="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">Encuentra tu lugar de crecimiento</h2>
-            <p className="mx-auto mt-5 max-w-2xl text-slate-600 leading-relaxed">
-              Desarrollo espiritual, comunidad y adoración diseñados para que toda la familia crezca en la fe.
-            </p>
+              <img
+                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=70"
+                alt="Comunidad de iglesia reunida"
+                className="h-96 w-full object-cover sm:h-96 md:h-96"
+                loading="lazy"
+              />
           </div>
 
           <div className="mt-16 grid gap-6 md:grid-cols-3">

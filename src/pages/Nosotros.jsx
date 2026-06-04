@@ -8,12 +8,12 @@ const tabs = [
   { id: "mision", label: "Nuestra misión" },
 ];
 
-const misionPilares = [
-  {
-    title: "Que exalta a Cristo",
-    text: "Que Jesucristo se vea reflejado en todo lo que hagamos. Él es la Cabeza del Cuerpo y por lo tanto debe tener la preeminencia en todo.",
-  },
-  {
+            <img
+              src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=800&q=70"
+              alt="Iglesia reunida"
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
     title: "Gente que procura la santidad",
     text: "Nacimos del arrollador avivamiento de las reuniones campestres de santidad. El llamado a la santidad está profundamente arraigado en nuestras raíces.",
   },

@@ -15,11 +15,12 @@ const Contacto = () => {
               <div className="rounded-4xl bg-cyan-600/10 border border-cyan-200 p-6">
                 <h3 className="text-xl font-semibold text-slate-900 mb-3">Visítanos</h3>
                 <p className="text-slate-600">Calle Falsa 123, Santiago, Chile</p>
-              </div>
-              <div className="rounded-4xl bg-slate-50 border border-slate-200 p-6">
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Habla con nosotros</h3>
-                <p className="text-slate-600">
-                  <span className="block font-medium text-slate-900">Teléfono:</span>
+              <img
+                src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=70"
+                alt="Iglesia en comunidad"
+                className="h-64 sm:h-80 md:h-96 w-full object-cover"
+                loading="lazy"
+              />
                   +56 9 1234 5678
                 </p>
                 <p className="mt-4 text-slate-600">
