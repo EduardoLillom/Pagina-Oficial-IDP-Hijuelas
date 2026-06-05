@@ -18,13 +18,19 @@ export const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/10 bg-white/85 backdrop-blur-xl shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6">
-        <Link to="/" className="flex items-center gap-3">
-          <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-cyan-600 text-lg font-extrabold text-white shadow-lg shadow-cyan-500/20">
+        <Link to="/" className="flex items-center gap-2 sm:gap-3">
+          {/* El círculo del logo se achica un poco en móvil para dar espacio */}
+          <div className="flex h-11 w-11 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-2xl sm:rounded-3xl bg-cyan-600 text-base sm:text-lg font-extrabold text-white shadow-lg shadow-cyan-500/20">
             IDP
           </div>
-          <div className="hidden sm:block">
-            <p className="text-sm font-semibold text-slate-900">Iglesia IDP Hijuelas</p>
-            <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Fe, unidad y santidad</p>
+          {/* El texto ya no se oculta, solo se adapta */}
+          <div className="flex flex-col min-w-0">
+            <p className="text-xs sm:text-sm font-semibold text-slate-900 truncate">
+              IDP Hijuelas
+            </p>
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.28em] text-slate-500 truncate">
+              Fe, unidad y santidad
+            </p>
           </div>
         </Link>
 
