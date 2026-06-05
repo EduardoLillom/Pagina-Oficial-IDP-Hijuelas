@@ -8,9 +8,13 @@ import Contacto from './pages/Contacto';
 import Construccion from './pages/Construccion';
 import  Galeria  from './pages/Galeria';
 
+import ScrollToTop from './components/ScrollToTop';
+
 function App() {
   return (
     <Router>
+      <ScrollToTop />
+
       <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />
