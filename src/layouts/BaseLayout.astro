@@ -1,0 +1,30 @@
+---
+// src/layouts/BaseLayout.astro
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+// Recibimos el título de la pestaña actual como parámetro (prop)
+const { pageTitle } = Astro.props;
+---
+
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>{pageTitle} | IDP Hijuelas</title>
+  </head>
+  
+  <body>
+    <div class="min-h-screen flex flex-col w-full m-0 p-0">
+      <Navbar />
+      
+      <main class="flex-1 w-full">
+        <slot /> 
+      </main>
+      
+      <Footer />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,227 @@
+---
+// src/pages/nosotros.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+
+const tabs = [
+  { id: "quienes", label: "Quiénes somos" },
+  { id: "vision", label: "Nuestra visión" },
+  { id: "mision", label: "Nuestra misión" },
+];
+
+const misionPilares = [
+  {
+    title: "Que exalta a Cristo",
+    text: "Que Jesucristo se vea reflejado en todo lo que hagamos. Él es la Cabeza del Cuerpo y por lo tanto debe tener la preeminencia en todo.",
+  },
+  {
+    title: "Gente que procura la santidad",
+    text: "Nacimos del arrollador avivamiento de las reuniones campestres de santidad. El llamado a la santidad está profundamente arraigado en nuestras raíces.",
+  },
+  {
+    title: "Lleno del Espíritu",
+    text: "La promesa profética de que 'en los últimos días derramará Su Espíritu' sigue siendo una parte central de nuestro ADN mundial.",
+  },
+  {
+    title: "Abierto a todas las naciones",
+    text: "Nos aferramos al ideal de que la iglesia de Dios estaría compuesta por toda 'tribu, lengua, pueblo y nación'. Celebramos la diversidad.",
+  },
+  {
+    title: "Hacedor de discípulos",
+    text: "Por más de un siglo de ministerio, esta red familiar se ha comprometido con el mandato bíblico de la Gran Comisión.",
+  },
+  {
+    title: "Establecedor de iglesias",
+    text: "Las iglesias sanas que plantan nuevas iglesias contribuyen en gran medida a la difusión del evangelio en todo el mundo.",
+  },
+  {
+    title: "Unión cristiana",
+    text: "Nos proponemos cooperar con todos los que exaltan el nombre de Cristo y Su gran evangelio en un espíritu de unidad.",
+  },
+];
+---
+
+<BaseLayout pageTitle="Sobre Nosotros">
+  <section class="bg-slate-50 py-12 md:py-20 transition-all duration-300">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-10 md:space-y-16">
+      
+      <div class="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-center">
+        <div class="space-y-6 order-2 lg:order-1">
+          <SectionTitle title="Sobre Nosotros" />
+          <p class="text-slate-600 text-base md:text-lg leading-relaxed">
+            La Iglesia de Dios de la Profecía en Hijuelas nació con el propósito de compartir el amor de Cristo y 
+            servir a la comunidad local. Sus inicios se remontan al año 2016, cuando comenzó como una misión dedicada 
+            a la evangelización mediante campañas al aire libre, actividades comunitarias y un firme compromiso con la 
+            enseñanza de la Palabra de Dios. Gracias al crecimiento de la congregación, al trabajo constante de sus miembros 
+            y a la fidelidad de Dios, la misión fue establecida oficialmente como iglesia, consolidando una comunidad de fe 
+            comprometida con la adoración, el servicio y el desarrollo espiritual de las personas.Bajo el liderazgo pastoral 
+            de Fernando Toro, la iglesia se ha caracterizado por su dedicación a la comunidad, el fortalecimiento de la hermandad
+            cristiana y el acompañamiento espiritual de familias y personas de todas las edades.Hoy continuamos trabajando con 
+            la misma visión: llevar esperanza, compartir el mensaje de Jesucristo y ser un lugar donde cada persona pueda 
+            encontrar fe, amor y propósito.
+          </p>
+          
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-3xl bg-white p-6 md:p-8 shadow-md hover:shadow-lg transition border border-slate-100">
+              <p class="text-xs md:text-sm uppercase tracking-[0.28em] text-cyan-600 font-bold">Historia</p>
+              <p class="mt-2 text-slate-600 text-sm md:text-base leading-relaxed">Más de un siglo de ministerio, tradición y un testimonio vivo en la región.</p>
+            </div>
+            <div class="rounded-3xl bg-white p-6 md:p-8 shadow-md hover:shadow-lg transition border border-slate-100">
+                <p class="text-xs md:text-sm uppercase tracking-[0.28em] text-cyan-600 font-bold">
+                Nuestra Comunidad
+                </p>
+                <p class="mt-2 text-slate-600 text-sm md:text-base leading-relaxed">
+                Somos una iglesia comprometida con el crecimiento espiritual, el compañerismo cristiano y el servicio a las familias de Hijuelas y sus alrededores.
+                </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="rounded-3xl overflow-hidden shadow-xl order-1 lg:order-2 h-48 sm:h-64 lg:h-full min-h-[250px] lg:min-h-[400px]">
+          <img
+            src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80"
+            alt="Iglesia reunida"
+            class="h-full w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <div id="contentRef" class="rounded-3xl bg-white border border-slate-100 p-6 md:p-8 shadow-md scroll-mt-6">
+        <div class="flex flex-col items-center gap-3 text-center mb-8">
+          <p class="text-xs uppercase tracking-[0.28em] text-cyan-600 font-bold">Explora</p>
+          <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Nuestra historia, visión y misión</h2>
+          <p class="max-w-2xl text-slate-500 text-sm md:text-base">
+            Descubre nuestra identidad y propósito en Hijuelas.
+          </p>
+        </div>
+
+        <div class="flex justify-start md:justify-center overflow-x-auto no-scrollbar -mx-6 px-6 md:mx-0 md:px-0">
+          <div role="tablist" aria-label="Secciones sobre nosotros" class="inline-flex rounded-full bg-slate-100 p-1 mb-2 whitespace-nowrap min-w-full md:min-w-0">
+            {tabs.map((tabItem, index) => (
+              <button
+                type="button"
+                id={`tab-${tabItem.id}-btn`}
+                role="tab"
+                aria-selected={index === 0 ? 'true' : 'false'}
+                aria-controls={`tab-${tabItem.id}`}
+                data-tab-target={tabItem.id}
+                class={`tab-btn flex-1 md:flex-initial text-center px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold transition-all duration-200 select-none cursor-pointer ${
+                  index === 0 
+                    ? 'bg-slate-950 text-white shadow-md' 
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
+                }`}
+              >
+                {tabItem.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div class="transition-all duration-300">
+        
+        <div id="tab-quienes" role="tabpanel" aria-labelledby="tab-quienes-btn" aria-hidden="false" class="tab-content space-y-6 md:space-y-8">
+          <div class="rounded-3xl bg-white p-6 md:p-10 shadow-md border border-slate-100">
+            <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-4">Quién es la Iglesia de Dios de la Profecía</h3>
+            <p class="text-slate-600 leading-relaxed text-sm md:text-base">
+              La Iglesia de Dios de la Profecía es un vibrante movimiento cristiano fundamentado en las Escrituras, firme en la fe y decidido en su pasión por las personas. Somos un cuerpo mundial de creyentes, unidos en la adoración, que trabajan hombro a hombro para compartir el amor de Dios y un mensaje de esperanza para los quebrantados de corazón.
+            </p>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="rounded-2xl bg-linear-to-br from-cyan-50/60 to-slate-50 border border-cyan-100/70 p-5 md:p-6 shadow-xs">
+              <p class="text-xs uppercase tracking-wider text-cyan-700 font-bold mb-2">Impacto Global</p>
+              <p class="text-2xl md:text-3xl font-black text-slate-900 mb-1">300</p>
+              <p class="text-slate-600 text-xs md:text-sm">personas reciben salvación cada 24 horas</p>
+            </div>
+            <div class="rounded-2xl bg-linear-to-br from-cyan-50/60 to-slate-50 border border-cyan-100/70 p-5 md:p-6 shadow-xs">
+              <p class="text-xs uppercase tracking-wider text-cyan-700 font-bold mb-2">Bautismos</p>
+              <p class="text-2xl md:text-3xl font-black text-slate-900 mb-1">~100</p>
+              <p class="text-slate-600 text-xs md:text-sm">personas bautizadas en agua cada día</p>
+            </div>
+            <div class="rounded-2xl bg-linear-to-br from-cyan-50/60 to-slate-50 border border-cyan-100/70 p-5 md:p-6 shadow-xs sm:col-span-2 lg:col-span-1">
+              <p class="text-xs uppercase tracking-wider text-cyan-700 font-bold mb-2">Predicadores</p>
+              <p class="text-2xl md:text-3xl font-black text-slate-900 mb-1">14,000+</p>
+              <p class="text-slate-600 text-xs md:text-sm">lugares de predicación activa del evangelio</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab-vision" role="tabpanel" aria-labelledby="tab-vision-btn" aria-hidden="true" class="tab-content hidden space-y-6 md:space-y-8">
+          <div class="rounded-3xl bg-white p-6 md:p-10 shadow-md border border-slate-100">
+            <div class="grid gap-8 lg:grid-cols-2 items-center">
+              <div class="space-y-4">
+                <h3 class="text-xl md:text-2xl font-bold text-slate-900">Nuestra visión</h3>
+                <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+                  Reconciliar al mundo con Cristo por medio del Espíritu Santo, con una iglesia sana y comprometida con la Gran Comisión.
+                </p>
+              </div>
+              <div class="rounded-2xl overflow-hidden shadow-lg h-48 sm:h-64 lg:h-80">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="Visión" class="h-full w-full object-cover" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab-mision" role="tabpanel" aria-labelledby="tab-mision-btn" aria-hidden="true" class="tab-content hidden space-y-6">
+          <div class="rounded-3xl bg-white p-6 md:p-10 shadow-md border border-slate-100">
+            <h3 class="text-xl md:text-2xl font-bold text-slate-900 mb-3">Nuestra misión</h3>
+            <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+              La Iglesia de Dios de la Profecía será un movimiento que exalte a Cristo, procure la santidad, esté lleno del Espíritu, esté abierto a todas las naciones, sea hacedor de discípulos, sea establecedor de iglesias, y sienta gran pasión por la unión cristiana.
+            </p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {misionPilares.map((item) => (
+              <div class="rounded-2xl bg-white border border-slate-200/60 p-5 shadow-xs">
+                <p class="text-base font-bold text-slate-900 mb-2 flex items-center gap-2">
+                  <span class="h-2 w-2 rounded-full bg-cyan-500"></span>{item.title}
+                </p>
+                <p class="text-slate-600 text-xs md:text-sm">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function initTabs() {
+    const buttons = document.querySelectorAll('[data-tab-target]');
+    const contents = document.querySelectorAll('.tab-content');
+    const contentRef = document.getElementById('contentRef');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-tab-target');
+
+        buttons.forEach(b => {
+          b.classList.remove('bg-slate-950', 'text-white', 'shadow-md');
+          b.classList.add('text-slate-600', 'hover:text-slate-900', 'hover:bg-slate-200/60');
+          b.setAttribute('aria-selected', 'false');
+        });
+
+        btn.classList.add('bg-slate-950', 'text-white', 'shadow-md');
+        btn.classList.remove('text-slate-600', 'hover:text-slate-900', 'hover:bg-slate-200/60');
+        btn.setAttribute('aria-selected', 'true');
+
+        contents.forEach(content => {
+          const isActive = content.id === `tab-${targetId}`;
+          content.classList.toggle('hidden', !isActive);
+          content.setAttribute('aria-hidden', String(!isActive));
+        });
+
+        if (contentRef) {
+          contentRef.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  }
+
+  initTabs();
+  document.addEventListener('astro:after-swap', initTabs);
+</script>

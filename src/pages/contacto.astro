@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout pageTitle="Contacto">
+  <section class="bg-white py-20">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto">
+        <p class="text-sm uppercase tracking-[0.28em] text-cyan-500 font-semibold">Contacto</p>
+        <h1 class="mt-4 text-3xl sm:text-4xl font-bold text-slate-900">Escríbenos o visítanos</h1>
+        <p class="mt-5 text-slate-600 leading-relaxed">
+          Estamos para escucharte. Envía tu mensaje, pide información sobre nuestras reuniones o recibe acompañamiento espiritual.
+        </p>
+      </div>
+
+      <div class="mt-14 grid gap-6 md:grid-cols-3">
+        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-8 shadow-sm">
+          <p class="text-xs uppercase tracking-[0.28em] text-cyan-600 font-semibold">Dirección</p>
+          <p class="mt-4 text-slate-700 leading-relaxed">Calle Falsa 123, Hijuelas</p>
+        </div>
+
+        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-8 shadow-sm">
+          <p class="text-xs uppercase tracking-[0.28em] text-cyan-600 font-semibold">Correo</p>
+          <p class="mt-4 text-slate-700 leading-relaxed">contacto@idiglesia.cl</p>
+        </div>
+
+        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-8 shadow-sm">
+          <p class="text-xs uppercase tracking-[0.28em] text-cyan-600 font-semibold">Llámanos</p>
+          <p class="mt-4 text-slate-700 leading-relaxed">Estamos disponibles para responder tus dudas y acompañarte.</p>
+        </div>
+      </div>
+
+      <div class="mt-10 text-center">
+        <a
+          href="mailto:contacto@idiglesia.cl"
+          class="inline-flex items-center justify-center rounded-full bg-cyan-600 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-600/20 transition hover:bg-cyan-500"
+        >
+          Enviar correo
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
