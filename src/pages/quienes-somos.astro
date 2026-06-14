@@ -2,6 +2,7 @@
 // src/pages/nosotros.astro
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionTitle from "../components/SectionTitle.astro";
+export const prerender = true;
 
 const tabs = [
   { id: "quienes", label: "Quiénes somos" },
@@ -40,7 +41,6 @@ const misionPilares = [
   },
 ];
 ---
-
 <BaseLayout pageTitle="Quiénes somos">
   <section class="bg-slate-50 pt-24 pb-12 md:pt-32 py-12 md:py-20 transition-all duration-300">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-10 md:space-y-16">
