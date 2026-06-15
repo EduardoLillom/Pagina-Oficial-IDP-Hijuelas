@@ -1,7 +1,7 @@
 ---
 // src/components/Navbar.astro
+export const prerender = true;
 const pathname = Astro.url.pathname;
-
 const navItems = [
   { to: '/', label: 'Inicio' },
   { 
