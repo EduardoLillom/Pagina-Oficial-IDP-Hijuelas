@@ -2,13 +2,24 @@
 import type { APIRoute } from 'astro';
 import { supabase } from '../../../lib/supabase';
 
-export const POST: APIRoute = async ({ request, redirect }) => {
+export const POST: APIRoute = async ({ request, cookies, redirect }) => {
+  // 1. Extraer el token de las cookies manualmente
+  const accessToken = cookies.get("sb-access-token")?.value;
+
+  if (!accessToken) {
+    return new Response("No autorizado: Falta token", { status: 401 });
+  }
+
+  // 2. Validar el usuario directamente con el token
+  const { data: { user }, error } = await supabase.auth.getUser(accessToken);
+
+  if (error || !user) {
+    return new Response("No autorizado: Token inválido", { status: 401 });
+  }
+
+  // 3. Procesar el formulario
   const formData = await request.formData();
   const action = formData.get('_action');
-
-  // Obtener sesión del usuario para seguridad
-  const { data: { session } } = await supabase.auth.getSession();
-  if (!session) return new Response("No autorizado", { status: 401 });
 
   switch (action) {
     case 'create':
@@ -18,7 +29,6 @@ export const POST: APIRoute = async ({ request, redirect }) => {
         summary: formData.get('summary'),
         content: formData.get('content'),
         is_active: formData.get('is_active') === 'on',
-        // ... otros campos
       }]);
       if (createErr) return new Response(createErr.message, { status: 500 });
       break;
