@@ -1,0 +1,197 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Crear Publicación">
+  <section class="mx-auto max-w-4xl px-4 py-10">
+    <div class="mb-8 flex items-center gap-4">
+      <a 
+        href="/admin/contenido-destacado" 
+        class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition hover:border-cyan-600 hover:text-cyan-600"
+        title="Volver al listado"
+      >
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      </a>
+      <div>
+        <h1 class="text-3xl font-bold tracking-tight text-slate-900">Crear publicación</h1>
+        <p class="text-sm text-slate-500">Ajusta el contenido según el tipo de publicación.</p>
+      </div>
+    </div>
+
+    <form action="/api/admin/post" method="POST" class="space-y-6">
+        <input type="hidden" name="_action" value="create" />
+        <div class="rounded-4xl border border-slate-200 bg-white p-8 shadow-sm">
+        <div class="grid gap-6 sm:grid-cols-2">
+          
+          <div class="sm:col-span-1">
+            <label class="block text-sm font-semibold text-slate-700">Tipo de publicación</label>
+            <select 
+              id="type-selector" 
+              name="type" 
+              class="mt-2 w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+            >
+              <option value="noticia">Noticia</option>
+              <option value="evento">Evento</option>
+              <option value="aviso">Aviso</option>
+              <option value="cita">Cita / Frase</option>
+            </select>
+          </div>
+
+          <div class="sm:col-span-1">
+            <label class="block text-sm font-semibold text-slate-700">Fecha de publicación / Evento</label>
+            <input 
+              name="publish_date" 
+              type="datetime-local" 
+              class="mt-2 w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500" 
+            />
+          </div>
+
+          <div class="sm:col-span-2">
+            <label id="label-title" class="block text-sm font-semibold text-slate-700">Título de la publicación *</label>
+            <input 
+              name="title" 
+              type="text" 
+              required 
+              id="input-title"
+              placeholder="Ej: Reunión de jóvenes este sábado"
+              class="mt-2 w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500" 
+            />
+          </div>
+        </div>
+      </div>
+
+      <div id="section-content" class="rounded-4xl border border-slate-200 bg-white p-8 shadow-sm space-y-6">
+        
+        <div id="group-summary">
+          <label id="label-summary" class="block text-sm font-semibold text-slate-700">Resumen / Extracto</label>
+          <textarea 
+            name="summary" 
+            rows="2" 
+            id="input-summary"
+            placeholder="Breve descripción para la portada..."
+            class="mt-2 w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+          ></textarea>
+        </div>
+
+        <div id="group-content">
+          <label class="block text-sm font-semibold text-slate-700">Contenido Completo</label>
+          <textarea 
+            name="content" 
+            rows="6" 
+            placeholder="Escribe aquí todo el detalle..."
+            class="mt-2 w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+          ></textarea>
+        </div>
+      </div>
+
+      <div id="section-extra" class="rounded-4xl border border-slate-200 bg-slate-50 p-8 shadow-sm">
+        <h2 class="mb-6 text-lg font-semibold text-slate-900">Multimedia y Redirección</h2>
+        <div class="grid gap-6 sm:grid-cols-2">
+          
+          <div id="group-image">
+            <label class="block text-sm font-semibold text-slate-700">URL de la Imagen</label>
+            <input 
+              name="image_url" 
+              type="url" 
+              placeholder="https://images.unsplash.com/..."
+              class="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500" 
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-slate-700">Enlace del botón (URL)</label>
+            <input 
+              name="target_url" 
+              type="text" 
+              placeholder="/nosotros o link externo"
+              class="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500" 
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between rounded-4xl border border-slate-200 bg-white p-8 shadow-sm">
+        <div class="flex items-center gap-4">
+          <label class="relative inline-flex cursor-pointer items-center">
+            <input type="checkbox" name="is_active" checked class="peer sr-only" />
+            <div class="h-6 w-11 rounded-full bg-slate-200 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-cyan-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none"></div>
+            <span class="ml-3 text-sm font-medium text-slate-700">Publicar inmediatamente</span>
+          </label>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <a href="/admin/contenido-destacado" class="text-sm font-semibold text-slate-600 hover:text-slate-900">
+            Cancelar
+          </a>
+          <button 
+            type="submit" 
+            class="inline-flex items-center justify-center rounded-full bg-cyan-600 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-cyan-600/20 transition hover:bg-cyan-500 hover:shadow-cyan-500/30"
+          >
+            Guardar Publicación
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </section>
+</AdminLayout>
+
+<script>
+  // Lógica para adaptar el formulario al tipo de contenido
+  function setupForm() {
+    const selector = document.getElementById('type-selector') as HTMLSelectElement;
+    
+    // Grupos de campos
+    const groupSummary = document.getElementById('group-summary');
+    const groupContent = document.getElementById('group-content');
+    const groupImage = document.getElementById('group-image');
+    const sectionExtra = document.getElementById('section-extra');
+    
+    // Etiquetas e inputs para cambiar el texto
+    const labelTitle = document.getElementById('label-title');
+    const labelSummary = document.getElementById('label-summary');
+    const inputTitle = document.getElementById('input-title') as HTMLInputElement;
+    const inputSummary = document.getElementById('input-summary') as HTMLTextAreaElement;
+
+    if (!selector) return;
+
+    selector.addEventListener('change', () => {
+      const type = selector.value;
+
+      // 1. Resetear visibilidad por defecto
+      groupSummary?.classList.remove('hidden');
+      groupContent?.classList.remove('hidden');
+      groupImage?.classList.remove('hidden');
+      sectionExtra?.classList.remove('hidden');
+      
+      // 2. Aplicar cambios según tipo
+      if (type === 'cita') {
+        // En una cita: El título es la frase, el resumen es el autor.
+        if(labelTitle) labelTitle.innerText = "Frase / Cita *";
+        if(labelSummary) labelSummary.innerText = "Autor de la cita";
+        if(inputTitle) inputTitle.placeholder = "Escribe la frase aquí...";
+        if(inputSummary) inputSummary.placeholder = "Nombre del autor o fuente...";
+        
+        groupContent?.classList.add('hidden');
+        groupImage?.classList.add('hidden');
+      } 
+      else if (type === 'aviso') {
+        // En un aviso: Solo título y un resumen corto.
+        if(labelTitle) labelTitle.innerText = "Título del Aviso *";
+        if(labelSummary) labelSummary.innerText = "Mensaje del aviso";
+        
+        groupContent?.classList.add('hidden');
+        groupImage?.classList.add('hidden');
+      } 
+      else {
+        // Noticias y Eventos: Mostrar todo
+        if(labelTitle) labelTitle.innerText = "Título de la publicación *";
+        if(labelSummary) labelSummary.innerText = "Resumen / Extracto";
+      }
+    });
+  }
+
+  // Ejecución inicial y soporte para ViewTransitions de Astro
+  setupForm();
+  document.addEventListener('astro:after-swap', setupForm);
+</script>

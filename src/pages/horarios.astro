@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout pageTitle="Horarios">
+  <section class="bg-slate-50 py-20 pt-24">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6">
+      
+      <!-- Encabezado -->
+      <div class="text-center mb-16">
+        <span class="text-cyan-600 font-bold tracking-widest uppercase text-sm">Nuestros encuentros</span>
+        <h1 class="mt-3 text-4xl font-extrabold text-slate-900">Horarios de Reuniones</h1>
+      </div>
+
+      <!-- Contenedor de Horarios -->
+      <div class="space-y-6">
+        
+        <!-- Tarjeta de Horario (Componente reutilizable) -->
+        {[
+          { day: "Domingo", time: "10:30 AM", event: "Reunión General", location: "Salón Principal" },
+          { day: "Miércoles", time: "19:30 PM", event: "Estudio Bíblico", location: "Salón Anexo" },
+          { day: "Viernes", time: "18:00 PM", event: "Reunión de Jóvenes", location: "Salón Principal" }
+        ].map((item) => (
+          <div class="group bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:shadow-md transition-all">
+            <div class="flex items-center gap-6">
+              <!-- Día destacado -->
+              <div class="text-center min-w-[80px]">
+                <span class="block text-2xl font-bold text-slate-900">{item.day.slice(0,3)}</span>
+                <span class="text-xs uppercase text-cyan-600 font-bold">{item.day}</span>
+              </div>
+              <!-- Detalles -->
+              <div>
+                <h3 class="text-xl font-bold text-slate-900">{item.event}</h3>
+                <p class="text-slate-500 text-sm">Ubicación: {item.location}</p>
+              </div>
+            </div>
+            <!-- Hora resaltada -->
+            <div class="bg-cyan-50 px-4 py-2 rounded-lg">
+              <span class="text-cyan-700 font-bold font-mono">{item.time}</span>
+            </div>
+          </div>
+        ))}
+
+      </div>
+
+      <!-- Nota de bienvenida -->
+      <div class="mt-12 p-8 bg-cyan-900 rounded-3xl text-center text-white">
+        <h3 class="text-xl font-bold mb-2">¿Es tu primera vez?</h3>
+        <p class="text-cyan-100">Te recibiremos con los brazos abiertos. No necesitas invitación, solo ven con ganas de compartir.</p>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

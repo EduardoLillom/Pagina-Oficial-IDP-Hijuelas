@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout pageTitle="Contacto">
+  <!-- Fondo con gradiente sutil -->
+  <section class="relative bg-slate-50 py-20 pt-30 overflow-hidden">
+    <!-- Círculo decorativo de fondo -->
+    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-cyan-100 rounded-full blur-3xl opacity-50"></div>
+    
+    <div class="relative mx-auto max-w-6xl px-4 sm:px-6">
+      
+      <!-- Encabezado -->
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-cyan-600 font-bold tracking-widest uppercase text-sm">Contacto</span>
+        <h1 class="mt-3 text-5xl font-extrabold text-slate-900 tracking-tight">Escríbenos o visítanos</h1>
+        <p class="mt-6 text-lg text-slate-600">
+          Estamos para escucharte. Ya sea que busques información, apoyo o un lugar donde pertenecer, nuestra puerta siempre está abierta.
+        </p>
+      </div>
+
+      <!-- Tarjetas estilo Glassmorphism -->
+      <div class="grid gap-8 md:grid-cols-3">
+        {[
+          { title: "Dirección", desc: "Calle Falsa 123, Hijuelas", action: "Ver en mapa", color: "cyan" },
+          { title: "Correo", desc: "contacto@idiglesia.cl", action: "Enviar correo", color: "cyan" },
+          { title: "Llámanos", desc: "Estamos para acompañarte", action: "Solicitar apoyo", color: "emerald" }
+        ].map((item) => (
+          <div class="bg-white/70 backdrop-blur-lg border border-white/50 p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 transition-all hover:-translate-y-2">
+            <div class={`text-${item.color}-600 mb-6`}>
+              <!-- Icono placeholder -->
+              <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+            </div>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">{item.title}</h3>
+            <p class="mt-3 text-xl font-semibold text-slate-900">{item.desc}</p>
+            <a href="#" class={`mt-6 inline-block font-medium text-${item.color}-600 hover:text-${item.color}-700`}>
+              {item.action} →
+            </a>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

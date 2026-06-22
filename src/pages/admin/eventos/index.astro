@@ -1,0 +1,71 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { getEventos } from '../../../lib/eventos'; 
+
+const eventos = await getEventos();
+---
+
+<AdminLayout title="Eventos">
+  <div class="mx-auto max-w-4xl">
+    <!-- Action Bar -->
+    <div class="mb-8 flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-900">Eventos</h1>
+        <p class="text-sm text-slate-500">Gestiona la agenda y cronograma de actividades.</p>
+      </div>
+      <a href="/admin/eventos/nuevo" 
+         class="bg-cyan-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-cyan-700 shadow-sm transition-all flex items-center gap-2">
+        <span>+</span> Nuevo evento
+      </a>
+    </div>
+
+    <!-- Lista de Eventos -->
+    <div class="grid gap-4">
+      {eventos.length === 0 ? (
+        <div class="p-12 text-center border-2 border-dashed border-slate-200 rounded-2xl text-slate-400">
+          No hay eventos programados.
+        </div>
+      ) : (
+        eventos.map((evento) => (
+          <div class="flex items-center gap-6 rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:border-cyan-200 transition-all">
+            <!-- Bloque de Fecha: Estilo calendario visual -->
+            <div class="flex flex-col items-center justify-center bg-slate-50 border border-slate-100 rounded-lg w-16 h-16 shrink-0">
+              <span class="text-xs font-bold text-cyan-600 uppercase tracking-wide">
+                {new Date(evento.fecha).toLocaleDateString('es-ES', { month: 'short' })}
+              </span>
+              <span class="text-xl font-bold text-slate-700">
+                {new Date(evento.fecha).getDate()}
+              </span>
+            </div>
+
+            <!-- Detalles -->
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-1">
+                <h4 class="font-semibold text-slate-900">{evento.title}</h4>
+                <span class="text-xs font-medium text-slate-400 bg-slate-100 px-2 py-0.5 rounded">
+                  {evento.hora}
+                </span>
+              </div>
+              <p class="text-sm text-slate-500 line-clamp-1">{evento.descripcion}</p>
+            </div>
+
+            <!-- Acciones -->
+            <div class="flex items-center gap-2">
+              <a href={`/admin/eventos/editar/${evento.id}`} class="text-xs text-slate-500 hover:text-cyan-600">Editar</a>
+              <button onclick={`handleDelete('${evento.id}')`} class="text-xs font-medium text-red-500 hover:text-red-700 px-3 py-1.5">Eliminar</button>
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+  </div>
+</AdminLayout>
+
+<script is:inline>
+  function handleDelete(id) {
+    if (confirm("¿Estás seguro de eliminar este evento?")) {
+      console.log("Eliminando evento:", id);
+      // Aquí tu lógica de eliminación
+    }
+  }
+</script>
