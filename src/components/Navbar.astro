@@ -7,9 +7,10 @@ const navItems = [
   { 
     label: 'Sobre Nosotros', 
     dropdown: [
-      { title: 'Sobre Nosotros', links: [{ to: '/quienes-somos', label: 'Quiénes somos' }, { to: '/doctrina', label: 'Doctrina' }] },
+      { title: 'Conócenos', links: [{ to: '/quienes-somos', label: 'Quiénes somos' }, { to: '/doctrina', label: 'Doctrina' }] },
     ] 
   },
+  { to: '/horarios', label: 'Horarios'},
   { to: '/eventos', label: 'Eventos' },
   { to: '/nuestro-templo', label: 'Nuestro Templo' },
   { to: '/contacto', label: 'Contacto' },
@@ -20,74 +21,56 @@ const navItems = [
   <div class="mx-auto flex max-w-5xl items-center justify-between rounded-full border border-slate-200/50 bg-white/80 px-4 py-3 shadow-lg backdrop-blur-xl">
     
     <a href="/" class="flex items-center gap-2 pl-2 shrink-0">
-      <div class="h-9 w-9 shrink-0 sm:h-10 sm:w-10">
-        <img src="/logo.webp" alt="Logo IDP Hijuelas" class="h-full w-full object-contain" />
-      </div>
+      <img src="/logo.webp" alt="Logo IDP Hijuelas" class="h-9 w-9 shrink-0 sm:h-10 sm:w-10 object-contain" />
       <div class="flex flex-col min-w-0">
-        <p class="text-xs font-semibold text-slate-900 truncate sm:text-sm">IDP Hijuelas</p>
-        <p class="text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.28em] text-slate-500 truncate">
-            Fe, unidad y santidad
-        </p>
+        <p class="text-xs font-semibold text-slate-900 truncate">IDP Hijuelas</p>
+        <p class="text-[10px] uppercase tracking-[0.2em] text-slate-500 truncate">Fe, unidad y santidad</p>
       </div>
     </a>
 
-    <nav class="hidden md:flex items-center gap-8 text-md font-medium text-slate-700">
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700">
       {navItems.map((item) => (
         item.dropdown ? (
-          <div class="relative group">
-            <button class="flex items-center gap-1 transition-colors hover:text-cyan-600">
+          <div class="relative group" tabindex="0">
+            <button class="flex items-center gap-1 hover:text-cyan-600 transition-colors" aria-haspopup="true" aria-expanded="false">
               {item.label}
-              <span class="text-[10px] opacity-50">▼</span>
+              <span class="text-[8px] opacity-50 group-hover:rotate-180 transition-transform">▼</span>
             </button>
-            
-            <div class="absolute left-1/2 -translate-x-1/2 top-[calc(100%+24px)] w-max min-w-[200px] rounded-3xl border border-slate-200/50 bg-slate-900 p-6 text-white shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-              <div class="flex gap-8">
-                {item.dropdown.map((col) => (
-                  <div class="flex flex-col gap-3">
-                    <h4 class="font-bold text-cyan-400 text-sm uppercase tracking-wider border-b border-slate-700 pb-2 whitespace-nowrap">{col.title}</h4>
-                    <ul class="flex flex-col gap-2">
-                      {col.links.map((link) => (
-                        <li>
-                          <a href={link.to} class="text-sm text-slate-300 hover:text-white hover:translate-x-1 transition-all block whitespace-nowrap">{link.label}</a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
+            <div class="absolute left-1/2 -translate-x-1/2 top-[calc(100%+12px)] w-max min-w-[180px] rounded-2xl bg-slate-900 p-4 text-white shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 z-50">
+              {item.dropdown.map((col) => (
+                <ul class="flex flex-col gap-2">
+                  {col.links.map((link) => (
+                    <li><a href={link.to} class="text-sm text-slate-300 hover:text-white px-2 py-1 block">{link.label}</a></li>
+                  ))}
+                </ul>
+              ))}
             </div>
           </div>
         ) : (
-          <a href={item.to} class={`transition-colors ${pathname === item.to ? 'text-cyan-600 font-semibold' : 'hover:text-cyan-600'}`}>
+          <a href={item.to} class={`transition-colors ${pathname === item.to ? 'text-cyan-600' : 'hover:text-cyan-600'}`}>
             {item.label}
           </a>
         )
       ))}
     </nav>
 
-    <div class="flex items-center gap-3">
-      <button id="menu-toggle" class="md:hidden flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
-        <span id="menu-icon">≡</span>
-      </button>
-    </div>
+    <button id="menu-toggle" class="md:hidden p-2 rounded-full hover:bg-slate-100 transition-colors" aria-label="Abrir menú">
+      <span id="menu-icon" class="text-xl">≡</span>
+    </button>
   </div>
 
-  <div id="mobile-menu" class="hidden absolute top-full left-2 right-2 mt-2 rounded-3xl border border-slate-200/50 bg-white/95 p-4 shadow-xl backdrop-blur-xl md:hidden">
-    <nav class="flex flex-col gap-2">
+  <div id="mobile-menu" class="hidden absolute top-full left-2 right-2 mt-2 rounded-3xl border border-slate-200/50 bg-white/95 p-6 shadow-xl backdrop-blur-xl md:hidden transition-all duration-300">
+    <nav class="flex flex-col gap-4">
       {navItems.map((item) => (
         item.dropdown ? (
-          <div class="px-4 py-2">
-            <p class="font-bold text-slate-400 uppercase text-xs mb-1">{item.label}</p>
-            {item.dropdown.map(col => (
-              <div class="ml-2">
-                {col.links.map(link => (
-                  <a href={link.to} class="block py-2 text-slate-700 hover:text-cyan-600">{link.label}</a>
-                ))}
-              </div>
+          <div>
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">{item.label}</p>
+            {item.dropdown.flatMap(col => col.links).map(link => (
+              <a href={link.to} class="block py-2 text-slate-700 pl-4 border-l border-slate-200 hover:border-cyan-500 hover:text-cyan-600">{link.label}</a>
             ))}
           </div>
         ) : (
-          <a href={item.to} class="px-4 py-3 rounded-xl hover:bg-slate-100 transition font-medium text-slate-700">{item.label}</a>
+          <a href={item.to} class="py-2 text-lg font-medium text-slate-800">{item.label}</a>
         )
       ))}
     </nav>
@@ -103,6 +86,14 @@ const navItems = [
     toggleBtn?.addEventListener('click', () => {
       const isHidden = mobileMenu?.classList.toggle('hidden');
       if (menuIcon) menuIcon.textContent = isHidden ? '≡' : '×';
+    });
+
+    // Cerrar menú al hacer clic en un enlace
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu?.classList.add('hidden');
+        if (menuIcon) menuIcon.textContent = '≡';
+      });
     });
   }
   setupMenu();

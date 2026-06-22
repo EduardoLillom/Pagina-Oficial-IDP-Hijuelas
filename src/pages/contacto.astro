@@ -1,44 +1,47 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-export const prerender = true;
 ---
 
 <BaseLayout pageTitle="Contacto">
-  <section class="bg-white py-20">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto">
-        <p class="text-sm uppercase tracking-[0.28em] text-cyan-500 font-semibold">Contacto</p>
-        <h1 class="mt-4 text-3xl sm:text-4xl font-bold text-slate-900">Escríbenos o visítanos</h1>
-        <p class="mt-5 text-slate-600 leading-relaxed">
-          Estamos para escucharte. Envía tu mensaje, pide información sobre nuestras reuniones o recibe acompañamiento espiritual.
+  <!-- Fondo con gradiente sutil -->
+  <section class="relative bg-slate-50 py-20 pt-30 overflow-hidden">
+    <!-- Círculo decorativo de fondo -->
+    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-cyan-100 rounded-full blur-3xl opacity-50"></div>
+    
+    <div class="relative mx-auto max-w-6xl px-4 sm:px-6">
+      
+      <!-- Encabezado -->
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-cyan-600 font-bold tracking-widest uppercase text-sm">Contacto</span>
+        <h1 class="mt-3 text-5xl font-extrabold text-slate-900 tracking-tight">Escríbenos o visítanos</h1>
+        <p class="mt-6 text-lg text-slate-600">
+          Estamos para escucharte. Ya sea que busques información, apoyo o un lugar donde pertenecer, nuestra puerta siempre está abierta.
         </p>
       </div>
 
-      <div class="mt-14 grid gap-6 md:grid-cols-3">
-        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-8 shadow-sm">
-          <p class="text-xs uppercase tracking-[0.28em] text-cyan-600 font-semibold">Dirección</p>
-          <p class="mt-4 text-slate-700 leading-relaxed">Calle Falsa 123, Hijuelas</p>
-        </div>
-
-        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-8 shadow-sm">
-          <p class="text-xs uppercase tracking-[0.28em] text-cyan-600 font-semibold">Correo</p>
-          <p class="mt-4 text-slate-700 leading-relaxed">contacto@idiglesia.cl</p>
-        </div>
-
-        <div class="rounded-3xl border border-slate-200 bg-slate-50 p-8 shadow-sm">
-          <p class="text-xs uppercase tracking-[0.28em] text-cyan-600 font-semibold">Llámanos</p>
-          <p class="mt-4 text-slate-700 leading-relaxed">Estamos disponibles para responder tus dudas y acompañarte.</p>
-        </div>
+      <!-- Tarjetas estilo Glassmorphism -->
+      <div class="grid gap-8 md:grid-cols-3">
+        {[
+          { title: "Dirección", desc: "Calle Falsa 123, Hijuelas", action: "Ver en mapa", color: "cyan" },
+          { title: "Correo", desc: "contacto@idiglesia.cl", action: "Enviar correo", color: "cyan" },
+          { title: "Llámanos", desc: "Estamos para acompañarte", action: "Solicitar apoyo", color: "emerald" }
+        ].map((item) => (
+          <div class="bg-white/70 backdrop-blur-lg border border-white/50 p-8 rounded-[2rem] shadow-xl shadow-slate-200/50 transition-all hover:-translate-y-2">
+            <div class={`text-${item.color}-600 mb-6`}>
+              <!-- Icono placeholder -->
+              <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+            </div>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">{item.title}</h3>
+            <p class="mt-3 text-xl font-semibold text-slate-900">{item.desc}</p>
+            <a href="#" class={`mt-6 inline-block font-medium text-${item.color}-600 hover:text-${item.color}-700`}>
+              {item.action} →
+            </a>
+          </div>
+        ))}
       </div>
 
-      <div class="mt-10 text-center">
-        <a
-          href="mailto:contacto@idiglesia.cl"
-          class="inline-flex items-center justify-center rounded-full bg-cyan-600 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-600/20 transition hover:bg-cyan-500"
-        >
-          Enviar correo
-        </a>
-      </div>
     </div>
   </section>
 </BaseLayout>
