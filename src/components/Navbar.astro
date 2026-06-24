@@ -36,7 +36,7 @@ const navItems = [
               {item.label}
               <span class="text-[8px] opacity-50 group-hover:rotate-180 transition-transform">▼</span>
             </button>
-            <div class="absolute left-1/2 -translate-x-1/2 top-[calc(100%+12px)] w-max min-w-[180px] rounded-2xl bg-slate-900 p-4 text-white shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 z-50">
+            <div class="absolute left-1/2 -translate-x-1/2 top-[calc(100%+12px)] w-max min-w-45 rounded-2xl bg-slate-900 p-4 text-white shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 z-50">
               {item.dropdown.map((col) => (
                 <ul class="flex flex-col gap-2">
                   {col.links.map((link) => (
