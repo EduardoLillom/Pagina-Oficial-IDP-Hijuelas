@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+export const prerender = true;
+// Importa tus datos aquí o tenlos definidos
+const valores = [
+  { title: "La Oración", text: "El aliento de nuestra alma.", icon: "🙏" },
+  { title: "La Cosecha", text: "Anunciando las buenas nuevas.", icon: "🌾" },
+  { title: "Liderazgo", text: "Capacitando con integridad.", icon: "🌱" },
+  { title: "Mayordomía", text: "Administrando con fidelidad.", icon: "⚖️" },
+  { title: "Servicio", text: "Manos y pies de Jesús.", icon: "❤️" },
+];
+---
+<BaseLayout pageTitle="valores">
+<section class="py-20 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center text-slate-900 mb-12">Nuestros Valores</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {valores.map((item, index) => (
+        <div 
+          class={`rounded-3xl p-8 border border-slate-100 bg-white shadow-sm flex flex-col justify-between 
+          animate-slide-in-top 
+          ${index === 0 || index === 4 ? 'md:col-span-2' : ''}`}
+          style={`animation-delay: ${index * 150}ms; animation-fill-mode: backwards;`}
+        >
+          <div class="w-12 h-12 mb-6 flex items-center justify-center bg-cyan-50 text-cyan-600 rounded-2xl text-2xl">
+            {item.icon}
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">{item.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+</BaseLayout>
