@@ -1,52 +1,81 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const horarios = [
+  { 
+    day: "Miércoles", 
+    time: "19:30", 
+    event: "Estudio Bíblico", 
+    location: "Salón Anexo",
+    gradient: "from-sky-100 to-sky-50" 
+  },
+  { 
+    day: "Viernes", 
+    time: "19:30", 
+    event: "Reunión de Jóvenes", 
+    location: "Sede villa los naranjos",
+    gradient: "from-blue-100 to-blue-50" 
+  },
+  { 
+    day: "Viernes", 
+    time: "19:30", 
+    event: "Reunión de Damas", 
+    location: "Pasaje el Rauli poblacion Sven krarup casa 940",
+    gradient: "from-blue-100 to-blue-50" 
+  },
+  { 
+    day: "Viernes", 
+    time: "20:00", 
+    event: "Reunión de Varones", 
+    location: "Hogar hnm. Jaime Reinoso",
+    gradient: "from-blue-100 to-blue-50" 
+  },
+  { 
+    day: "Domingo", 
+    time: "10:30", 
+    event: "Reunión General", 
+    location: "Salón Principal",
+    gradient: "from-cyan-100 to-cyan-50" 
+  },
+
+];
 ---
 
 <BaseLayout pageTitle="Horarios">
   <section class="bg-slate-50 py-20 pt-24">
-    <div class="mx-auto max-w-4xl px-4 sm:px-6">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6">
       
-      <!-- Encabezado -->
       <div class="text-center mb-16">
         <span class="text-cyan-600 font-bold tracking-widest uppercase text-sm">Nuestros encuentros</span>
         <h1 class="mt-3 text-4xl font-extrabold text-slate-900">Horarios de Reuniones</h1>
       </div>
 
-      <!-- Contenedor de Horarios -->
       <div class="space-y-6">
-        
-        <!-- Tarjeta de Horario (Componente reutilizable) -->
-        {[
-          { day: "Domingo", time: "10:30 AM", event: "Reunión General", location: "Salón Principal" },
-          { day: "Miércoles", time: "19:30 PM", event: "Estudio Bíblico", location: "Salón Anexo" },
-          { day: "Viernes", time: "18:00 PM", event: "Reunión de Jóvenes", location: "Salón Principal" }
-        ].map((item) => (
-          <div class="group bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:shadow-md transition-all">
+        {horarios.map((item) => (
+          <div class={`group p-6 rounded-2xl border border-white/50 shadow-sm flex items-center justify-between hover:shadow-lg transition-all duration-300 bg-gradient-to-r ${item.gradient}`}>
+            
             <div class="flex items-center gap-6">
-              <!-- Día destacado -->
-              <div class="text-center min-w-[80px]">
+              <div class="text-center min-w-20 bg-white/50 p-2 rounded-xl backdrop-blur-sm">
                 <span class="block text-2xl font-bold text-slate-900">{item.day.slice(0,3)}</span>
-                <span class="text-xs uppercase text-cyan-600 font-bold">{item.day}</span>
+                <span class="text-xs uppercase text-slate-700 font-bold">{item.day}</span>
               </div>
-              <!-- Detalles -->
+              
               <div>
                 <h3 class="text-xl font-bold text-slate-900">{item.event}</h3>
-                <p class="text-slate-500 text-sm">Ubicación: {item.location}</p>
+                <p class="text-slate-700/80 text-sm font-medium">Ubicación: {item.location}</p>
               </div>
             </div>
-            <!-- Hora resaltada -->
-            <div class="bg-cyan-50 px-4 py-2 rounded-lg">
-              <span class="text-cyan-700 font-bold font-mono">{item.time}</span>
+
+            <div class="bg-white/70 border border-white/50 px-4 py-2 rounded-lg shadow-sm backdrop-blur-sm">
+              <span class="text-slate-900 font-bold font-mono">{item.time}</span>
             </div>
           </div>
         ))}
-
       </div>
 
-      <!-- Nota de bienvenida -->
-      <div class="mt-12 p-8 bg-cyan-900 rounded-3xl text-center text-white">
+      <div class="mt-12 p-8 bg-slate-900 rounded-3xl text-center text-white">
         <h3 class="text-xl font-bold mb-2">¿Es tu primera vez?</h3>
-        <p class="text-cyan-100">Te recibiremos con los brazos abiertos. No necesitas invitación, solo ven con ganas de compartir.</p>
+        <p class="text-slate-300">Te recibiremos con los brazos abiertos. No necesitas invitación, solo ven con ganas de compartir.</p>
       </div>
 
     </div>
