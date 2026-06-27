@@ -1,0 +1,84 @@
+---
+const { slides } = Astro.props;
+---
+
+{slides && slides.length > 0 && (
+  <section class="relative z-30 -mt-24 px-4 pb-12">
+    <div id="carousel-container" class="mx-auto max-w-4xl bg-white rounded-3xl p-8 shadow-2xl border border-slate-100 transition-all duration-500">
+      
+      <div id="slide-content" class="text-center space-y-4 min-h-50 flex flex-col items-center justify-center">
+        <span id="slide-type" class="text-xs uppercase tracking-widest text-cyan-600 font-bold">
+          {slides[0].type}
+        </span>
+        
+        <h3 id="slide-title" class="text-3xl font-bold text-slate-900 transition-opacity duration-300">
+          {slides[0].title}
+        </h3>
+        
+        <p id="slide-desc" class="text-slate-600 max-w-xl">
+          {slides[0].summary}
+        </p>
+        
+        <a id="slide-btn" href={slides[0].target_url || '#'} 
+           style={{ display: slides[0].target_url ? 'inline-block' : 'none' }}
+           class="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-3 rounded-full text-sm font-semibold transition-all">
+          {slides[0].buttonText}
+        </a>
+      </div>
+
+      <div class="flex justify-between items-center mt-8 pt-6 border-t border-slate-100">
+        <div id="dot-container" class="flex gap-2">
+          {slides.map((_, i) => (
+            <div class={`dot w-2 h-2 rounded-full ${i === 0 ? 'bg-cyan-600' : 'bg-slate-200'}`}></div>
+          ))}
+        </div>
+        <div class="flex gap-2">
+          <button id="prev-btn" class="p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-900 transition">←</button>
+          <button id="next-btn" class="p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-900 transition">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+<script is:inline define:vars={{ slides }}>
+  let index = 0;
+  const elements = {
+    type: document.getElementById('slide-type'),
+    title: document.getElementById('slide-title'),
+    desc: document.getElementById('slide-desc'),
+    btn: document.getElementById('slide-btn'),
+    dots: document.querySelectorAll('.dot')
+  };
+
+  function updateSlide(newIndex) {
+    index = (newIndex + slides.length) % slides.length;
+    const s = slides[index];
+
+    // Efecto de desvanecimiento
+    [elements.type, elements.title, elements.desc, elements.btn].forEach(el => el.style.opacity = '0');
+
+    setTimeout(() => {
+      elements.type.textContent = s.type;
+      elements.title.textContent = s.title;
+      elements.desc.textContent = s.summary;
+      
+      if (s.target_url) {
+        elements.btn.style.display = 'inline-block';
+        elements.btn.href = s.target_url;
+        elements.btn.textContent = s.buttonText;
+      } else {
+        elements.btn.style.display = 'none';
+      }
+
+      elements.dots.forEach((dot, i) => {
+        dot.className = `dot w-2 h-2 rounded-full ${i === index ? 'bg-cyan-600' : 'bg-slate-200'}`;
+      });
+
+      [elements.type, elements.title, elements.desc, elements.btn].forEach(el => el.style.opacity = '1');
+    }, 300);
+  }
+
+  document.getElementById('next-btn')?.addEventListener('click', () => updateSlide(index + 1));
+  document.getElementById('prev-btn')?.addEventListener('click', () => updateSlide(index - 1));
+</script>
