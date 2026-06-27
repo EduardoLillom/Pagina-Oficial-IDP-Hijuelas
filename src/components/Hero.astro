@@ -1,21 +1,19 @@
 ---
-import { getActivePosts } from '../lib/posts';
-
-const posts = await getActivePosts();
-
-const slides = posts.map(post => ({
-  title: post.title,
-  summary: post.summary || (post.content ? post.content.substring(0, 100) + '...' : ''),
-  type: post.type,
-  target_url: post.target_url,
-  buttonText: post.type === 'evento' ? 'Inscribirse' : 'Leer más'
-}));
+import { Image } from 'astro:assets';
+import HomeImage from '../assets/home.webp'
 ---
 
 <header class="relative min-h-screen overflow-hidden bg-slate-950 text-white flex items-center justify-center">
   {/* Fondo visual con capas para profundidad */}
   <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(14,165,233,0.16),transparent_35%),linear-gradient(180deg,rgba(15,23,42,0.2),rgba(15,23,42,0.1))] z-10" />
-  <div class="absolute inset-0 bg-cover bg-center opacity-40" style="background-image: url('home.webp'); background-attachment: fixed;"></div>
+  <div class="absolute inset-0 z-0">
+    <Image
+      src={HomeImage},
+      alt="Iglesia de Dios de la Profecía",
+      class="w-full h-full object-cover opacity-40"
+      loading="eager"
+    />
+  </div>
 
   <div class="relative z-20 mx-auto flex flex-col items-center px-4 pt-24 py-24 sm:px-6 lg:px-8 w-full max-w-4xl">
     
@@ -36,87 +34,5 @@ const slides = posts.map(post => ({
         </a>
       </div>
     </div>
-
-    {/* Carrusel de Contenido Destacado */}
   </div>
 </header>
-{slides.length > 0 && (
-  <div id="carousel-container" class="relative w-full bg-slate-900/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-2xl transition-all duration-500">
-    
-    <div id="slide-content" class="text-center space-y-4">
-      {/* Etiqueta del tipo */}
-      <span id="slide-type" class="text-[10px] uppercase tracking-widest text-cyan-400 font-bold">
-        {slides[0].type}
-      </span>
-      
-      <h3 id="slide-title" class="text-xl font-bold text-white transition-opacity duration-500">
-        {slides[0].title}
-      </h3>
-      <p id="slide-desc" class="text-sm text-slate-300 transition-opacity duration-500">
-        {slides[0].summary}
-      </p>
-      
-      {/* Botón siempre presente en el DOM para evitar errores de JS */}
-      <a id="slide-btn" href={slides[0].target_url || '#'} 
-         style={{ display: slides[0].target_url ? 'inline-block' : 'none' }}
-         class="bg-white/10 hover:bg-white/20 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all duration-500">
-        {slides[0].buttonText}
-      </a>
-    </div>
-
-    {/* Botones de navegación */}
-    <button id="prev-btn" class="absolute left-2 top-1/2 -translate-y-1/2 p-2 text-white/50 hover:text-white transition-colors">←</button>
-    <button id="next-btn" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-white/50 hover:text-white transition-colors">→</button>
-
-    {/* Indicadores */}
-    <div id="dot-container" class="flex justify-center gap-2 mt-6">
-      {slides.map((_, i) => (
-        <div class={`dot w-2 h-2 rounded-full ${i === 0 ? 'bg-cyan-500' : 'bg-white/20'}`}></div>
-      ))}
-    </div>
-  </div>
-)}
-
-<script is:inline define:vars={{ slides }}>
-  let index = 0;
-  const typeLabel = document.getElementById('slide-type');
-  const title = document.getElementById('slide-title');
-  const desc = document.getElementById('slide-desc');
-  const btn = document.getElementById('slide-btn');
-  const dots = document.querySelectorAll('.dot');
-  
-  function updateSlide(newIndex) {
-    index = (newIndex + slides.length) % slides.length;
-    const s = slides[index];
-
-    // Aplicar opacidad 0 para el efecto de transición
-    [typeLabel, title, desc, btn].forEach(el => el.style.opacity = '0');
-
-    setTimeout(() => {
-      // Actualizar textos
-      typeLabel.textContent = s.type;
-      title.textContent = s.title;
-      desc.textContent = s.summary;
-      
-      // Lógica de visualización del botón
-      if (s.target_url) {
-        btn.style.display = 'inline-block';
-        btn.href = s.target_url;
-        btn.textContent = s.buttonText;
-      } else {
-        btn.style.display = 'none';
-      }
-
-      // Actualizar puntos
-      dots.forEach((dot, i) => {
-        dot.className = 'dot w-2 h-2 rounded-full ' + (i === index ? 'bg-cyan-500' : 'bg-white/20');
-      });
-
-      // Restaurar opacidad
-      [typeLabel, title, desc, btn].forEach(el => el.style.opacity = '1');
-    }, 300);
-  }
-
-  document.getElementById('next-btn').addEventListener('click', () => updateSlide(index + 1));
-  document.getElementById('prev-btn').addEventListener('click', () => updateSlide(index - 1));
-</script>
