@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import temploImage from '../assets/interior-iglesia.webp'
 
 // Datos de los hitos: Puedes editarlos fácilmente aquí
 const hitos = [
@@ -30,8 +32,8 @@ const hitos = [
             </p>
           </div>
           <div class="bg-slate-200 overflow-hidden rounded-3xl shadow-2xl h-64 flex items-center justify-center text-slate-400">
-            <img
-            src="interior-iglesia.webp"
+            <Image
+            src={ temploImage }
             alt="Futura Iglesia Dios de la profesia Hijuelas interior"
             class="h-full w-full object-cover"
             loading="lazy"

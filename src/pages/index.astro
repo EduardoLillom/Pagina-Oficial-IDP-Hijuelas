@@ -5,7 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import FeaturedCarousel from '../components/FeaturedCarousel.astro';
 import { services } from '../consts/services.js';
-import { getActivePosts } from '../lib/posts';
+import { getActivePosts, type Slide } from '../lib/posts';
 
 import JovenImage from '../assets/joven.webp'
 import bautizoImage from '../assets/bautizo.webp'
@@ -15,11 +15,11 @@ import iconoServicio from '../assets/icono-servicio.webp'
 
 const posts = await getActivePosts();
 
-const slides = posts.map(post => ({
+const slides: Slide[] = posts.map(post => ({
   title: post.title,
-  summary: post.summary || (post.content ? post.content.substring(0, 100) + '...' : ''),
+  summary: post.summary || (post.content ? `${post.content.substring(0, 100)}...` : ''),
   type: post.type,
-  target_url: post.target_url,
+  target_url: post.target_url || '#',
   buttonText: post.type === 'evento' ? 'Inscribirse' : 'Leer más'
 }));
 
@@ -27,7 +27,7 @@ const slides = posts.map(post => ({
 
 <BaseLayout pageTitle="Inicio">
   <Hero />
-  <FeaturedCarousel slides={slides}/>
+  <FeaturedCarousel slides={ slides }/>
   <section class="bg-white py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <div class="text-center">

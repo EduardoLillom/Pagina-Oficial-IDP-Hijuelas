@@ -1,5 +1,13 @@
 ---
+import { getActivePosts, type Slide } from '../lib/posts';
+
+interface Props {
+  slides: Slide[]; // Aquí reutilizas el tipo importado
+}
+
 const { slides } = Astro.props;
+
+
 ---
 
 <section id="destacados" class="relative z-30 px-4 pb-12 transition-all duration-700 ease-out">
