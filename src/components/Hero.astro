@@ -1,20 +1,19 @@
 ---
-import { getActivePosts } from '../lib/posts';
-
-const posts = await getActivePosts();
-
-const slides = posts.map(post => ({
-  title: post.title,
-  description: post.summary || post.content?.substring(0, 100) + '...',
-  buttonText: post.target_url ? 'Ver más' : 'Leer',
-  link: post.target_url || `/posts/${post.id}`
-}));
+import { Image } from 'astro:assets';
+import HomeImage from '../assets/home.webp'
 ---
 
 <header class="relative min-h-screen overflow-hidden bg-slate-950 text-white flex items-center justify-center">
   {/* Fondo visual con capas para profundidad */}
-  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(14,165,233,0.16),transparent_35%),linear-gradient(180deg,rgba(15,23,42,0.85),rgba(15,23,42,0.98))] z-10" />
-  <div class="absolute inset-0 bg-cover bg-center opacity-40" style="background-image: url('https://images.unsplash.com/photo-1441716844725-09cedc13a4e7?auto=format&fit=crop&w=1200&q=60'); background-attachment: fixed;"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(14,165,233,0.16),transparent_35%),linear-gradient(180deg,rgba(15,23,42,0.2),rgba(15,23,42,0.1))] z-10" />
+  <div class="absolute inset-0 z-0">
+    <Image
+      src={HomeImage},
+      alt="Iglesia de Dios de la Profecía",
+      class="w-full h-full object-cover opacity-40"
+      loading="eager"
+    />
+  </div>
 
   <div class="relative z-20 mx-auto flex flex-col items-center px-4 pt-24 py-24 sm:px-6 lg:px-8 w-full max-w-4xl">
     
@@ -22,68 +21,25 @@ const slides = posts.map(post => ({
     <div class="text-center space-y-6 mb-16">
       <p class="text-sm uppercase tracking-[0.35em] text-cyan-300 font-semibold">Iglesia de Dios de la Profecía</p>
       <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-        Una comunidad viva de fe, servicio y encuentro.
+        Una comunidad viva, de fe, servicio y encuentro.
       </h1>
-      <p class="max-w-2xl mx-auto text-lg text-slate-300">
-        En Hijuelas cultivamos adoración sincera, crecimiento espiritual y un ministerio que abraza a toda la familia.
-      </p>
 
       {/* Botones de Navegación Principal (UX: Prioridad visual) */}
       <div class="flex flex-wrap justify-center gap-4 pt-4">
         <a href="/doctrina/" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-8 py-3 rounded-full font-bold transition-all transform hover:scale-105">
           Nuestras Doctrinas
         </a>
-        <a href="/eventos/" class="bg-transparent border border-white/30 hover:bg-white/10 text-white px-8 py-3 rounded-full font-medium transition-all">
-          Ver Eventos
+        <a href="/valores" class="bg-transparent border border-white/30 hover:bg-white/10 text-white px-8 py-3 rounded-full font-medium transition-all">
+          Nuestros Valores
         </a>
       </div>
     </div>
-
-    {/* Carrusel de Contenido Destacado */}
-    {slides.length > 0 && (
-      <div class="w-full bg-slate-900/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl">
-        <div id="slide-content" class="text-center space-y-4">
-          <h3 id="slide-title" class="text-xl font-bold text-white transition-opacity duration-500">{slides[0].title}</h3>
-          <p id="slide-desc" class="text-sm text-slate-300 transition-opacity duration-500">{slides[0].description}</p>
-          <a id="slide-btn" href={slides[0].link} target="_blank" class="inline-block bg-white/10 hover:bg-white/20 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all">
-            {slides[0].buttonText}
-          </a>
-        </div>
-        
-        <div class="flex justify-between items-center mt-6 pt-4 border-t border-white/10">
-          <button id="prev-btn" class="p-2 text-white/50 hover:text-white transition-colors">←</button>
-          <div id="dot-container" class="flex gap-2">
-            {slides.map((_, i) => <div class={`dot w-2 h-2 rounded-full ${i === 0 ? 'bg-cyan-500' : 'bg-white/20'}`}></div>)}
-          </div>
-          <button id="next-btn" class="p-2 text-white/50 hover:text-white transition-colors">→</button>
-        </div>
-      </div>
-    )}
   </div>
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer z-20">
+    <a href="#destacados" class="text-white/70 hover:text-white transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </a>
+  </div>  
 </header>
-
-{slides.length > 0 && (
-  <script is:inline define:vars={{ slides }}>
-    let index = 0;
-    const title = document.getElementById('slide-title');
-    const desc = document.getElementById('slide-desc');
-    const btn = document.getElementById('slide-btn');
-    const dots = document.querySelectorAll('.dot');
-    
-    function updateSlide(newIndex) {
-      index = (newIndex + slides.length) % slides.length;
-      [title, desc, btn].forEach(el => el.style.opacity = '0');
-      setTimeout(() => {
-        title.textContent = slides[index].title;
-        desc.textContent = slides[index].description;
-        btn.textContent = slides[index].buttonText;
-        btn.href = slides[index].link;
-        dots.forEach((dot, i) => dot.className = `dot w-2 h-2 rounded-full ${i === index ? 'bg-cyan-500' : 'bg-white/20'}`);
-        [title, desc, btn].forEach(el => el.style.opacity = '1');
-      }, 300);
-    }
-
-    document.getElementById('next-btn').addEventListener('click', () => updateSlide(index + 1));
-    document.getElementById('prev-btn').addEventListener('click', () => updateSlide(index - 1));
-  </script>
-)}

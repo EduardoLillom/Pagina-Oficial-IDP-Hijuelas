@@ -1,0 +1,98 @@
+---
+import { getActivePosts, type Slide } from '../lib/posts';
+
+interface Props {
+  slides: Slide[]; // Aquí reutilizas el tipo importado
+}
+
+const { slides } = Astro.props;
+
+
+---
+
+<section id="destacados" class="relative z-30 px-4 pb-12 transition-all duration-700 ease-out">
+  <div class="mx-auto max-w-4xl bg-white/80 backdrop-blur-xl rounded-[2rem] p-10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-white/50">
+    
+    <div id="slide-content" class="h-64 flex flex-col justify-center items-center text-center transition-opacity duration-300">
+      <span id="slide-type" class="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-600 mb-4 bg-cyan-50 px-3 py-1 rounded-full">
+        {slides[0].type}
+      </span>
+      
+      <h3 id="slide-title" class="text-3xl font-extrabold text-slate-900 mb-4 leading-tight transition-opacity duration-300">
+        {slides[0].title}
+      </h3>
+      
+      <p id="slide-desc" class="text-slate-600 max-w-lg mb-6 line-clamp-2">
+        {slides[0].summary}
+      </p>
+      
+      <a id="slide-btn" href={slides[0].target_url || '#'} 
+         class="text-sm font-bold text-slate-900 border-b-2 border-cyan-500 hover:text-cyan-600 transition">
+        {slides[0].buttonText}
+      </a>
+    </div>
+
+    <div class="flex justify-center items-center gap-6 mt-4">
+      <button id="prev-btn" class="text-slate-400 hover:text-cyan-600 transition">←</button>
+      <div id="dot-container" class="flex gap-2">
+        {slides.map((_, i) => (
+          <div class={`dot w-2 h-2 rounded-full transition-all ${i === 0 ? 'bg-cyan-500 scale-125' : 'bg-slate-300'}`}></div>
+        ))}
+      </div>
+      <button id="next-btn" class="text-slate-400 hover:text-cyan-600 transition">→</button>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ slides }}>
+  // 1. Lógica de Scroll (El "salto" al hacer scroll)
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.getElementById('destacados');
+    let hasMoved = false;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 150 && !hasMoved) {
+        // Añadimos el margen negativo y la animación de tailwind-animations
+        section.classList.add('-mt-24', 'animate-fade-up', 'animate-duration-1000');
+        hasMoved = true;
+      } else if (window.scrollY <= 150 && hasMoved) {
+        section.classList.remove('-mt-24', 'animate-fade-up', 'animate-duration-1000');
+        hasMoved = false;
+      }
+    });
+  });
+
+  // 2. Lógica del Carrusel
+  let index = 0;
+  const elements = {
+    type: document.getElementById('slide-type'),
+    title: document.getElementById('slide-title'),
+    desc: document.getElementById('slide-desc'),
+    btn: document.getElementById('slide-btn'),
+    dots: document.querySelectorAll('.dot')
+  };
+
+  function updateSlide(newIndex) {
+    index = (newIndex + slides.length) % slides.length;
+    const s = slides[index];
+
+    [elements.type, elements.title, elements.desc, elements.btn].forEach(el => el.style.opacity = '0');
+
+    setTimeout(() => {
+      elements.type.textContent = s.type;
+      elements.title.textContent = s.title;
+      elements.desc.textContent = s.summary;
+      elements.btn.href = s.target_url;
+      elements.btn.textContent = s.buttonText;
+      
+      elements.dots.forEach((dot, i) => {
+        dot.className = `dot w-2 h-2 rounded-full transition-all ${i === index ? 'bg-cyan-500 scale-125' : 'bg-slate-300'}`;
+      });
+
+      [elements.type, elements.title, elements.desc, elements.btn].forEach(el => el.style.opacity = '1');
+    }, 300);
+  }
+
+  document.getElementById('next-btn')?.addEventListener('click', () => updateSlide(index + 1));
+  document.getElementById('prev-btn')?.addEventListener('click', () => updateSlide(index - 1));
+</script>

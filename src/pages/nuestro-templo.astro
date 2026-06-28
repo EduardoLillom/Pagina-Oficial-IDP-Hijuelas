@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import temploImage from '../assets/interior-iglesia.webp'
 
 // Datos de los hitos: Puedes editarlos fácilmente aquí
 const hitos = [
@@ -29,8 +31,13 @@ const hitos = [
               Este templo no es solo un edificio; es el cumplimiento de una visión de décadas. Necesitamos un espacio permanente que nos permita acoger a más familias y albergar nuestros programas de ayuda social.
             </p>
           </div>
-          <div class="bg-slate-200 h-64 rounded-2xl flex items-center justify-center text-slate-400">
-            [Espacio para foto del diseño del templo]
+          <div class="bg-slate-200 overflow-hidden rounded-3xl shadow-2xl h-64 flex items-center justify-center text-slate-400">
+            <Image
+            src={ temploImage }
+            alt="Futura Iglesia Dios de la profesia Hijuelas interior"
+            class="h-full w-full object-cover"
+            loading="lazy"
+            />
           </div>
         </div>
       </section>
