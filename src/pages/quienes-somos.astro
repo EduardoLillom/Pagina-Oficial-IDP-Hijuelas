@@ -1,7 +1,11 @@
 ---
 // src/pages/nosotros.astro
+import { Image } from 'astro:assets';
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionTitle from "../components/SectionTitle.astro";
+
+import logoHijuelas from "../assets/logo-hijuelas.webp"
+
 export const prerender = true;
 
 const tabs = [
@@ -63,9 +67,9 @@ const misionPilares = [
         </div>
 
         <div class="overflow-hidden order-1 lg:order-2 h-48 sm:h-64 lg:h-full min-h-[250px] lg:min-h-[400px]">
-          <img
-            src="logo-hijuelas.webp"
-            alt="Iglesia reunida"
+          <Image
+            src={ logoHijuelas }
+            alt="Logo Oficial Iglesia Dios de la Profesia Hijuelas"
             class="h-full w-full object-cover"
             loading="lazy"
           />
