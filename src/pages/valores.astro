@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import AccordionCard from "../components/AccordionCard.astro"
 import { valores } from "../consts/valores.ts";
 ---
 
@@ -16,20 +17,12 @@ import { valores } from "../consts/valores.ts";
       
       <div class="space-y-4">
         {valores.map((item) => (
-          <details class="group bg-white border border-slate-200 rounded-2xl p-6 transition-all duration-300 hover:border-cyan-200">
-            <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-lg text-slate-900">
-              <div class="flex items-center gap-4">
-                <span class="text-2xl">{item.icon}</span>
-                {item.title}
-              </div>
-              <span class="transition group-open:rotate-45 text-2xl text-cyan-600">+</span>
-            </summary>
-            <div class="mt-4 pt-4 border-t border-slate-100 text-slate-600 leading-relaxed text-base">
-              {item.text}
-            </div>
-          </details>
+          <AccordionCard 
+            title={item.title} 
+            text={item.text} 
+          />
         ))}
-      </div>
+</div>
     </div>
   </section>
 </BaseLayout>

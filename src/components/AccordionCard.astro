@@ -1,0 +1,18 @@
+---
+// src/components/AccordionCard.astro
+const { title, text, icon, id } = Astro.props;
+---
+<details class="group bg-white border border-slate-200 rounded-2xl p-6 transition-all duration-300 hover:border-cyan-200">
+  <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-lg text-slate-900">
+    <div class="flex items-center gap-4">
+      {icon && <span class="text-2xl">{icon}</span>}
+      <span class="font-bold">{title}</span>
+    </div>
+    <span class="transition group-open:rotate-45 text-2xl text-cyan-600">+</span>
+  </summary>
+  <div class="mt-4 pt-4 border-t border-slate-100 text-slate-600 leading-relaxed text-base" set:html={text} />
+</details>
+
+<style>
+  summary::-webkit-details-marker { display: none; }
+</style>
