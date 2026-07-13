@@ -1,0 +1,43 @@
+---
+interface Props {
+  post: {
+    type: string;
+    title: string;
+    summary: string;
+    target_url: string;
+  };
+}
+
+const { post } = Astro.props;
+const isQuote = post.type === 'cita';
+const isEvent = post.type === 'evento';
+---
+
+<div class="slide-content h-64 flex flex-col justify-center items-center text-center transition-opacity duration-300">
+  <div class="max-w-xl px-6">
+    {isQuote ? (
+      <div class="relative">
+        <span class="block text-5xl text-cyan-200 mb-4 font-serif">“</span>
+        <p class="text-2xl font-serif text-slate-800 italic leading-snug">{post.summary}</p>
+        <div class="mt-8 flex items-center justify-center gap-3">
+          <div class="h-[1px] w-8 bg-cyan-500"></div>
+          <span class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">{post.title}</span>
+        </div>
+      </div>
+    ) : (
+      <div>
+        <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-600 mb-4 bg-cyan-50 px-3 py-1 rounded-full">
+          {post.type}
+        </span>
+        <h3 class="text-2xl font-extrabold text-slate-900 mt-2">{post.title}</h3>
+        <p class="text-slate-600 mt-3 line-clamp-2">{post.summary}</p>
+        
+        {isEvent && (
+          <a href="/eventos" class="inline-block mt-6 text-sm font-bold text-cyan-600 border-b border-cyan-600 hover:text-cyan-800 transition">
+            Ver detalles →
+          </a>
+        )}
+      </div>
+    )}
+  </div>
+</div>

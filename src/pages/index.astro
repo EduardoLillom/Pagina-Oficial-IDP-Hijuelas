@@ -20,7 +20,6 @@ const slides: Slide[] = posts.map(post => ({
   summary: post.summary || (post.content ? `${post.content.substring(0, 100)}...` : ''),
   type: post.type,
   target_url: post.target_url || '#',
-  buttonText: post.type === 'evento' ? 'Inscribirse' : 'Leer más'
 }));
 
 ---
@@ -33,8 +32,8 @@ const slides: Slide[] = posts.map(post => ({
       <div class="text-center">
         <Image
           src={ JovenImage }
-          alt="Comunidad de iglesia reunida"
-          class="h-96 w-full object-cover sm:h-96 md:h-96 rounded-3xl"
+          alt="Comunidad de jovenes reunida"
+          class="h-96 w-full object-cover sm:h-96 md:h-96 rounded-3xl object-right"
         />
       </div>
       <div class="mt-16 grid gap-6 md:grid-cols-3">
@@ -80,7 +79,7 @@ const slides: Slide[] = posts.map(post => ({
           <Image
             src={ bautizoImage }
             alt="Encuentro de hermanos en adoración"
-            class="h-96 w-full object-cover"
+            class="h-96 w-full object-cover object-right"
           />
         </div>
       </div>
