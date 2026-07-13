@@ -1,0 +1,58 @@
+---
+// src/pages/lideres.astro
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import LeaderCard from "../components/LeaderCard.astro";
+
+// Nota: Como no tengo tus archivos locales, usaremos URLs de Unsplash como ejemplo.
+// Cuando tengas tus fotos, reemplaza 'image: "..."' por 'image: fotoPastor'.
+
+const leaders = [
+  {
+    name: "Fernando Toro",
+    role: "Pastor Principal",
+    description: "Con años de dedicación al servicio, el Pastor Fernando guía nuestra congregación con firmeza, amor y un compromiso inquebrantable con la enseñanza bíblica.",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    name: "María Elena Ruiz",
+    role: "Líder de Alabanza",
+    description: "Dedicada a crear espacios de adoración auténticos, María Elena coordina el equipo musical con pasión, buscando siempre que la congregación se conecte con Dios a través del canto.",
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80"
+  }
+];
+---
+
+<BaseLayout pageTitle="Nuestro Liderazgo">
+  <section class="bg-slate-50 pt-24 pb-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <SectionTitle title="Nuestro Equipo Pastoral" />
+        <p class="mt-4 text-slate-500 max-w-xl mx-auto">
+          Conoce a quienes sirven y guían a nuestra familia en la Iglesia de Dios de la Profecía en Hijuelas.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        {leaders.map((leader) => (
+          <div class="group bg-white rounded-3xl border border-slate-100 shadow-md p-6 md:p-8 flex flex-col md:flex-row gap-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+            <div class="w-full md:w-1/3 aspect-square md:aspect-auto overflow-hidden rounded-2xl">
+              <img 
+                src={leader.image} 
+                alt={leader.name} 
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" 
+              />
+            </div>
+            <div class="w-full md:w-2/3 flex flex-col justify-center space-y-3">
+              <span class="text-xs uppercase tracking-[0.2em] text-cyan-600 font-bold">{leader.role}</span>
+              <h3 class="text-2xl font-bold text-slate-900">{leader.name}</h3>
+              <p class="text-slate-600 leading-relaxed text-sm md:text-base">
+                {leader.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
