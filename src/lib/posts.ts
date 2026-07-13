@@ -9,7 +9,6 @@ export interface Post {
   summary: string;
   content?: string; // Opcional por si es nulo en la BD
   target_url: string;
-  buttonText: string;
   is_active: boolean;
   priority: number;
 }
@@ -20,7 +19,6 @@ export interface Slide {
   title: string;
   summary: string;
   target_url: string;
-  buttonText: string;
 }
 
 export async function getActivePosts(): Promise<Post[]> {
