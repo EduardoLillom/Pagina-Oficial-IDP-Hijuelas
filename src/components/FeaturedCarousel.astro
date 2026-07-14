@@ -6,15 +6,14 @@ const { slides } = Astro.props;
 <section id="destacados" class="relative z-30 px-4 pb-12 transition-all duration-700 ease-out">
   <div class="mx-auto max-w-4xl bg-white/80 backdrop-blur-xl rounded-[2rem] p-10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-white/50">
     
-    <div id="slide-content">
+    <div id="slide-content" class="min-h-[256px] transition-opacity duration-300">
       <PostSlide post={slides[0]} />
     </div>
 
-    <!-- Navegación con tipado explícito para evitar errores de TS -->
     <div class="flex justify-center items-center gap-6 mt-8">
       <button id="prev-btn" class="text-slate-400 hover:text-cyan-600 transition">←</button>
       <div id="dot-container" class="flex gap-2">
-        {slides.map((_post: any, i: number) => (
+        {slides.map((_: any, i: number) => (
           <div class={`dot w-2 h-2 rounded-full transition-all ${i === 0 ? 'bg-cyan-500 scale-125' : 'bg-slate-300'}`}></div>
         ))}
       </div>
@@ -24,7 +23,7 @@ const { slides } = Astro.props;
 </section>
 
 <script is:inline define:vars={{ slides }}>
-  // Animación de scroll al bajar por la página
+  // Lógica de scroll original (sin cambios)
   document.addEventListener('DOMContentLoaded', () => {
     const section = document.getElementById('destacados');
     let hasMoved = false;
@@ -39,26 +38,31 @@ const { slides } = Astro.props;
     });
   });
 
-  // Lógica del carrusel dinámico
+  // Lógica de carrusel con estructura fija
   let index = 0;
   const container = document.getElementById('slide-content');
   
   function updateSlide(newIndex) {
     index = (newIndex + slides.length) % slides.length;
     const s = slides[index];
-    const isQuote = s.type === 'cita';
     
     container.style.opacity = '0';
     setTimeout(() => {
       container.innerHTML = `
-        <div class="max-w-xl px-6 mx-auto text-center">
-          ${isQuote 
-            ? `<div class="relative"><p class="text-2xl md:text-3xl font-serif text-slate-800 italic leading-relaxed">${s.title}</p></div>`
-            : `<div class="space-y-4"><span class="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-600 bg-cyan-50 px-3 py-1 rounded-full">${s.type}</span><h3 class="text-2xl font-extrabold text-slate-900 leading-tight">${s.title}</h3><p class="text-slate-600 line-clamp-2">${s.summary}</p>${s.type === 'evento' ? `<a href="/eventos" class="inline-block text-sm font-bold text-cyan-600 border-b border-cyan-600 hover:text-cyan-800 transition">Ver detalles →</a>` : ''}</div>`
-          }
+        <div class="slide-content h-64 flex flex-col justify-center items-center text-center">
+          <div class="max-w-xl px-6 w-full">
+            ${s.type === 'cita' 
+              ? `<p class="text-2xl md:text-3xl font-serif text-slate-800 italic leading-relaxed">${s.title}</p>`
+              : `<div class="space-y-4">
+                   <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-600 bg-cyan-50 px-3 py-1 rounded-full">${s.type}</span>
+                   <h3 class="text-2xl font-extrabold text-slate-900 leading-tight">${s.title}</h3>
+                   <p class="text-slate-600 line-clamp-2">${s.summary}</p>
+                   <div class="h-6">${s.type === 'evento' ? `<a href="/eventos" class="text-sm font-bold text-cyan-600 border-b border-cyan-600">Ver detalles →</a>` : ''}</div>
+                 </div>`
+            }
+          </div>
         </div>
       `;
-      // Actualizar estilo de los puntos
       document.querySelectorAll('.dot').forEach((d, i) => {
         d.className = `dot w-2 h-2 rounded-full transition-all ${i === index ? 'bg-cyan-500 scale-125' : 'bg-slate-300'}`;
       });
