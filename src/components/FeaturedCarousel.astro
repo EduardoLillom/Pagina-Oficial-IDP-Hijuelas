@@ -10,10 +10,13 @@ const { slides } = Astro.props;
       <PostSlide post={slides[0]} />
     </div>
 
+    <!-- Navegación con tipado explícito para evitar errores de TS -->
     <div class="flex justify-center items-center gap-6 mt-8">
       <button id="prev-btn" class="text-slate-400 hover:text-cyan-600 transition">←</button>
       <div id="dot-container" class="flex gap-2">
-        {slides.map((_, i) => <div class="dot w-2 h-2 rounded-full transition-all bg-slate-300"></div>)}
+        {slides.map((_post: any, i: number) => (
+          <div class={`dot w-2 h-2 rounded-full transition-all ${i === 0 ? 'bg-cyan-500 scale-125' : 'bg-slate-300'}`}></div>
+        ))}
       </div>
       <button id="next-btn" class="text-slate-400 hover:text-cyan-600 transition">→</button>
     </div>
@@ -21,7 +24,7 @@ const { slides } = Astro.props;
 </section>
 
 <script is:inline define:vars={{ slides }}>
-  // Mantenemos la lógica de scroll intacta
+  // Animación de scroll al bajar por la página
   document.addEventListener('DOMContentLoaded', () => {
     const section = document.getElementById('destacados');
     let hasMoved = false;
@@ -36,7 +39,7 @@ const { slides } = Astro.props;
     });
   });
 
-  // Carrusel dinámico simplificado
+  // Lógica del carrusel dinámico
   let index = 0;
   const container = document.getElementById('slide-content');
   
@@ -55,11 +58,14 @@ const { slides } = Astro.props;
           }
         </div>
       `;
-      // Actualizar dots
-      document.querySelectorAll('.dot').forEach((d, i) => d.className = `dot w-2 h-2 rounded-full transition-all ${i === index ? 'bg-cyan-500 scale-125' : 'bg-slate-300'}`);
+      // Actualizar estilo de los puntos
+      document.querySelectorAll('.dot').forEach((d, i) => {
+        d.className = `dot w-2 h-2 rounded-full transition-all ${i === index ? 'bg-cyan-500 scale-125' : 'bg-slate-300'}`;
+      });
       container.style.opacity = '1';
     }, 300);
   }
+
   document.getElementById('next-btn')?.addEventListener('click', () => updateSlide(index + 1));
   document.getElementById('prev-btn')?.addEventListener('click', () => updateSlide(index - 1));
 </script>
