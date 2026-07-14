@@ -1,13 +1,9 @@
 ---
-// src/pages/lideres.astro
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionTitle from "../components/SectionTitle.astro";
 import LeaderCard from "../components/LeaderCard.astro";
 
-// Nota: Como no tengo tus archivos locales, usaremos URLs de Unsplash como ejemplo.
-// Cuando tengas tus fotos, reemplaza 'image: "..."' por 'image: fotoPastor'.
-
-const leaders = [
+const pastoralTeam = [
   {
     name: "Fernando Toro",
     role: "Pastor Principal",
@@ -16,43 +12,118 @@ const leaders = [
   },
   {
     name: "Nelzy Saez",
-    role: "Líder de Alabanza",
-    description: "Dedicada a crear espacios de adoración auténticos, María Elena coordina el equipo musical con pasión, buscando siempre que la congregación se conecte con Dios a través del canto.",
+    role: "Pastora / Líder de Alabanza",
+    description: "Dedicada a crear espacios de adoración auténticos, coordina el equipo de alabanza con pasión para que toda la congregación se conecte con Dios a través del canto.",
     image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80"
+  }
+];
+
+const ministryLeaders = [
+  {
+    name: "Nombre del Líder",
+    role: "Líder de Niños",
+    description: "Responsable de formar a los más pequeños en el conocimiento y amor de Dios.",
+    image: "https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    name: "Nombre del Líder",
+    role: "Líder de Jóvenes",
+    description: "Guía a los jóvenes en su crecimiento espiritual y discipulado.",
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    name: "Nombre del Líder",
+    role: "Líder de Damas",
+    description: "Dirige el ministerio de mujeres con amor y sabiduría.",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    name: "Nombre del Líder",
+    role: "Líder de Hombres",
+    description: "Fortalece a los hombres para ser líderes según el corazón de Dios.",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=80"
+  }
+];
+
+const adminTeam = [
+  {
+    name: "Nombre del Responsable",
+    role: "Tesorero",
+    description: "Administra los recursos con transparencia y fidelidad.",
+    image: "https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=800&q=80"
   }
 ];
 ---
 
 <BaseLayout pageTitle="Nuestro Liderazgo">
-  <section class="bg-slate-50 pt-24 pb-20">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="text-center mb-16">
-        <SectionTitle title="Nuestro Equipo Pastoral" />
-        <p class="mt-4 text-slate-500 max-w-xl mx-auto">
-          Conoce a quienes sirven y guían a nuestra familia en la Iglesia de Dios de la Profecía en Hijuelas.
-        </p>
-      </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
-        {leaders.map((leader) => (
-          <div class="group bg-white rounded-3xl border border-slate-100 shadow-md p-6 md:p-8 flex flex-col md:flex-row gap-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-            <div class="w-full md:w-1/3 aspect-square md:aspect-auto overflow-hidden rounded-2xl">
-              <img 
-                src={leader.image} 
-                alt={leader.name} 
-                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" 
-              />
-            </div>
-            <div class="w-full md:w-2/3 flex flex-col justify-center space-y-3">
-              <span class="text-xs uppercase tracking-[0.2em] text-cyan-600 font-bold">{leader.role}</span>
-              <h3 class="text-2xl font-bold text-slate-900">{leader.name}</h3>
-              <p class="text-slate-600 leading-relaxed text-sm md:text-base">
-                {leader.description}
-              </p>
-            </div>
-          </div>
-        ))}
+  <!-- === HEADER DE PÁGINA === -->
+  <section class="pt-32 sm:pt-40 pb-16 bg-white">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 text-center">
+      <div class="flex items-center justify-center gap-3 mb-6">
+        <span class="h-px w-10 bg-cyan-500"></span>
+        <span class="text-xs uppercase tracking-[0.3em] text-cyan-600 font-semibold">
+          Iglesia de Dios de la Profecía
+        </span>
+        <span class="h-px w-10 bg-cyan-500"></span>
       </div>
+      <h1 class="text-4xl sm:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
+        Nuestro Liderazgo
+      </h1>
+      <p class="text-slate-500 text-lg leading-relaxed">
+        Conoce al equipo que Dios ha levantado para pastorear y servir en nuestra congregación en Hijuelas.
+      </p>
     </div>
   </section>
+
+  <!-- === CONTENIDO === -->
+  <section class="bg-slate-50 pt-4 pb-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+
+      <!-- === EQUIPO PASTORAL === -->
+      <div class="mb-24">
+        <div class="flex items-center gap-4 mb-12 max-w-7xl">
+          <h2 class="text-2xl font-bold text-slate-800 whitespace-nowrap">Equipo Pastoral</h2>
+          <span class="h-px flex-1 bg-slate-200"></span>
+        </div>
+        <div class="grid md:grid-cols-2 gap-10">
+          {pastoralTeam.map((leader, index) => (
+            <LeaderCard 
+              client:load 
+              leader={leader} 
+              priority={index === 0 ? "high" : "normal"}
+            />
+          ))}
+        </div>
+      </div>
+
+      <!-- === LÍDERES DE MINISTERIOS === -->
+      <div class="mb-24">
+        <div class="flex items-center gap-4 mb-12">
+          <h2 class="text-2xl font-bold text-slate-800 whitespace-nowrap">Líderes de Ministerios</h2>
+          <span class="h-px flex-1 bg-slate-200"></span>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {ministryLeaders.map((leader) => (
+            <LeaderCard client:load leader={leader} />
+          ))}
+        </div>
+      </div>
+
+      <!-- === EQUIPO ADMINISTRATIVO === -->
+      <div>
+        <div class="flex items-center gap-4 mb-12">
+          <h2 class="text-2xl font-bold text-slate-800 whitespace-nowrap">Equipo Administrativo</h2>
+          <span class="h-px flex-1 bg-slate-200"></span>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+          {adminTeam.map((leader) => (
+            <LeaderCard client:load leader={leader} />
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+
 </BaseLayout>
