@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import 'swiper/css';
+import 'swiper/css/bundle';
+
+interface CarouselImage {
+  src: ImageMetadata;
+  alt?: string;
+  pos?: string;
+}
+
+interface Props {
+  images: CarouselImage[];
+  className?: string;
+}
+
+const { images, className = "h-96" } = Astro.props;
+---
+
+<!-- Se usa bg-slate-200 para que no sea un blanco puro si la imagen demora en cargar -->
+<div class={`swiper mySwiper w-full rounded-3xl overflow-hidden shadow-lg bg-slate-200 ${className}`}>
+  <div class="swiper-wrapper">
+    {images.map((item) => (
+      <div class="swiper-slide relative">
+        <Image 
+          src={item.src} 
+          alt={item.alt || 'Comunidad'}
+          class={`w-full h-full object-cover ${item.pos || 'object-center'}`}
+        />
+        
+        <!-- Overlay cian muy sutil para unificar con tu marca -->
+        <!-- bg-cyan-950/10 le da un tono ligeramente azulado/profundo a la foto -->
+        <div class="absolute inset-0 bg-cyan-950/20 pointer-events-none"></div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  import Swiper from 'swiper';
+  import { Autoplay, EffectFade } from 'swiper/modules';
+
+  const swipers = document.querySelectorAll('.mySwiper');
+  swipers.forEach((swiperEl) => {
+    new Swiper(swiperEl as HTMLElement, {
+      modules: [Autoplay, EffectFade],
+      loop: true,
+      effect: 'slide',
+      fadeEffect: { crossFade: true },
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+    });
+  });
+</script>

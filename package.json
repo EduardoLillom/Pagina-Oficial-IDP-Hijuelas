@@ -17,6 +17,7 @@
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.4.4",
     "sharp": "^0.35.2",
+    "swiper": "^14.0.5",
     "tailwind-animations": "^1.0.1",
     "tailwindcss": "^4.3.0"
   },

@@ -23,6 +23,9 @@ importers:
       sharp:
         specifier: ^0.35.2
         version: 0.35.2
+      swiper:
+        specifier: ^14.0.5
+        version: 14.0.5
       tailwind-animations:
         specifier: ^1.0.1
         version: 1.0.1(tailwindcss@4.3.0)
@@ -1881,6 +1884,10 @@ packages:
     resolution: {integrity: sha512-XDpWUOPC6FEibaLzjfe0ucaV0YrOjYotGJO1WpF0Zd+n6ZGEQUsSugaoLq9QkEZtAfQIxT42UChcssDVPP3+/w==}
     engines: {node: '>=16'}
     hasBin: true
+
+  swiper@14.0.5:
+    resolution: {integrity: sha512-SMSKS0sj+lPIFzngfIKb5cyBtzmAuJw7rXgXdyYiDReb+pSpJXuNljHYgT4DXa5Stnl2Ew2/Lam5ipv4PIqZ7A==}
+    engines: {node: '>= 4.7.0'}
 
   tailwind-animations@1.0.1:
     resolution: {integrity: sha512-5ouCdgfGS4kcyuzRSb/1O3o9f5Akssi7ue46PHfKjvPLMWjtnzmqM8i6ElES3tKVTyhjSaTPfLti7aB7WSxhZg==}
@@ -4145,6 +4152,8 @@ snapshots:
       csso: 5.0.5
       picocolors: 1.1.1
       sax: 1.6.0
+
+  swiper@14.0.5: {}
 
   tailwind-animations@1.0.1(tailwindcss@4.3.0):
     dependencies:
