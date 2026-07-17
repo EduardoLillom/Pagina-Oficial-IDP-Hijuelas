@@ -4,8 +4,24 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import ContactWidget from '../components/ContactWidget.astro';
 import '../styles/global.css';
-// Recibimos el título de la pestaña actual como parámetro (prop)
-const { pageTitle } = Astro.props;
+
+interface Props {
+  pageTitle: string;
+  description?: string;
+  image?: string;
+}
+
+const { pageTitle, description = "Comunidad de fe y servicio en Hijuelas.", image = "public/og-image.jpg" } = Astro.props;
+
+const canonicalURL = Astro.site 
+  ? new URL(Astro.url.pathname, Astro.site) 
+  : Astro.url.href;
+
+// Función auxiliar para construir imágenes de forma segura
+const getFullImageUrl = (img: string) => {
+  return Astro.site ? new URL(img, Astro.site).toString() : img;
+};
+
 ---
 
 <html lang="es" class="scroll-smooth">
@@ -14,7 +30,23 @@ const { pageTitle } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- SEO Básico -->
     <title>{pageTitle} | IDP Hijuelas</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:title" content={`${pageTitle} | IDP Hijuelas`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={getFullImageUrl(image)} />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${pageTitle} | IDP Hijuelas`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={getFullImageUrl(image)} />
   </head>
   
   <body>
