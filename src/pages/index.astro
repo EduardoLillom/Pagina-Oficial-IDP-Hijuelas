@@ -4,15 +4,24 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import FeaturedCarousel from '../components/FeaturedCarousel.astro';
+import Carousel from '../components/Carousel.astro';
 import { services } from '../consts/services.js';
 import { getActivePosts, type Slide } from '../lib/posts';
 
 import JovenImage from '../assets/joven.webp'
+import bibliaImage from '../assets/biblia.webp'
+import alabanzaBautizoImage from '../assets/alabanzaBautizo.webp'
+
 import bautizoImage from '../assets/bautizo.webp'
 import iconoOracion from '../assets/icono-oracion.webp'
 import iconoAdoracion from '../assets/icono-adoracion.webp'
 import iconoServicio from '../assets/icono-servicio.webp'
 
+const images = [
+  { src: JovenImage, pos: 'object-center', alt: 'Joven en adoración' },
+  { src: bibliaImage, pos: 'object-center', alt: 'Biblia abierta' },
+  { src: alabanzaBautizoImage, pos: 'object-[10%_center]', alt: 'Alabanza en bautizo' },
+];
 const posts = await getActivePosts();
 
 const slides: Slide[] = posts.map(post => ({
@@ -27,28 +36,29 @@ const slides: Slide[] = posts.map(post => ({
 <BaseLayout pageTitle="Inicio">
   <Hero />
   <FeaturedCarousel slides={ slides }/>
-  <section class="bg-white py-20">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
-      <div class="text-center">
-        <Image
-          src={ JovenImage }
-          alt="Comunidad de jovenes reunida"
-          class="h-96 w-full object-cover sm:h-96 md:h-96 rounded-3xl object-right"
-        />
-      </div>
-      <div class="mt-16 grid gap-6 md:grid-cols-3">
-        {services.map((service) => (
-          <div
-            class={`rounded-3xl border bg-slate-50 p-8 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl ${service.accent || 'border-cyan-500'}`}
-          >
-            <h3 class="text-2xl font-bold text-slate-900 mb-3">{service.title}</h3>
-            <p class="text-sm uppercase tracking-[0.28em] text-cyan-500 mb-4">{service.time}</p>
-            <p class="text-slate-600 leading-relaxed">{service.description}</p>
-          </div>
-        ))}
-      </div>
+<section class="bg-white py-20">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="text-center">
+      <!-- Aquí reemplazamos la etiqueta Image original por tu nuevo componente genérico -->
+      <Carousel 
+        images={images} 
+        className="h-96 w-full rounded-3xl object-right" 
+      />
     </div>
-  </section>
+    
+    <div class="mt-16 grid gap-6 md:grid-cols-3">
+      {services.map((service) => (
+        <div
+          class={`rounded-3xl border bg-slate-50 p-8 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl ${service.accent || 'border-cyan-500'}`}
+        >
+          <h3 class="text-2xl font-bold text-slate-900 mb-3">{service.title}</h3>
+          <p class="text-sm uppercase tracking-[0.28em] text-cyan-500 mb-4">{service.time}</p>
+          <p class="text-slate-600 leading-relaxed">{service.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
   <section class="bg-slate-950 py-20 text-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
@@ -75,12 +85,13 @@ const slides: Slide[] = posts.map(post => ({
           </div>
         </div>
 
-        <div class="overflow-hidden rounded-3xl shadow-2xl ring-1 ring-white/10">
+        <div class="overflow-hidden relative rounded-3xl shadow-2xl ring-1 ring-white/10">
           <Image
             src={ bautizoImage }
             alt="Encuentro de hermanos en adoración"
             class="h-96 w-full object-cover object-right"
           />
+          <div class="absolute inset-0 bg-cyan-950/10 pointer-events-none"></div>
         </div>
       </div>
     </div>
@@ -97,19 +108,19 @@ const slides: Slide[] = posts.map(post => ({
       <div class="mt-16 grid gap-6 md:grid-cols-3">
         <div class="rounded-3xl bg-white p-8 shadow-lg text-center">
           <div class="mb-4 flex justify-center text-indigo-600">
-            <Image src={ iconoAdoracion } alt="Adoración" class="w-12 h-12 object-contain">
+            <Image src={ iconoAdoracion } alt="Adoración" class="w-32 h-32 object-contain">
           </div>
           <h3 class="text-2xl font-semibold text-slate-900 mb-3">Adoración</h3>
         </div>
         <div class="rounded-3xl bg-white p-8 shadow-lg text-center">
           <div class="mb-4 flex justify-center text-indigo-600">
-            <Image src={ iconoOracion } alt="Oracion" class="w-12 h-12 object-contain">
+            <Image src={ iconoOracion } alt="Oracion" class="w-32 h-32 object-contain">
           </div>
           <h3 class="text-2xl font-semibold text-slate-900 mb-3">Oracion</h3>
         </div>
         <div class="rounded-3xl bg-white p-8 shadow-lg text-center">
           <div class="mb-4 flex justify-center text-indigo-600">
-            <Image src={ iconoServicio } alt="Servicio" class="w-12 h-12 object-contain">
+            <Image src={ iconoServicio } alt="Servicio" class="w-32 h-32 object-contain">
           </div>
           <h3 class="text-2xl font-semibold text-slate-900 mb-3">Servicio</h3>
         </div>
