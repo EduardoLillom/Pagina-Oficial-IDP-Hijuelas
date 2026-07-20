@@ -1,0 +1,22 @@
+---
+// src/pages/404.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+---
+
+<BaseLayout pageTitle="Página no encontrada | IDP Hijuelas" description='Lo sentimos, la página que buscas no existe o ha sido movida. Regresa al inicio para continuar explorando nuestro sitio web.'> 
+  <Navbar />
+  
+  <main class="flex min-h-screen flex-col items-center justify-center p-6 text-center">
+    <h1 class="text-6xl font-bold text-slate-900 mb-4">404</h1>
+    <p class="text-xl text-slate-600 mb-8">
+      Lo sentimos, la página que buscas no existe o ha sido movida.
+    </p>
+    <a 
+      href="/" 
+      class="rounded-full bg-cyan-600 px-6 py-3 text-white font-medium hover:bg-cyan-700 transition-colors"
+    >
+      Volver al Inicio
+    </a>
+  </main>
+</BaseLayout>
