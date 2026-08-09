@@ -1,124 +1,223 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import SectionTitle from "../components/SectionTitle.astro";
 import LeaderCard from "../components/LeaderCard.astro";
+import { pastoralTeam, ministriesWithTeam, adminTeam, committees, logistics, sections } from '../consts/leadership.ts';
 
-const pastoralTeam = [
-  {
-    name: "Fernando Toro",
-    role: "Pastor Principal",
-    description: "Con años de dedicación al servicio, el Pastor Fernando guía nuestra congregación con firmeza, amor y un compromiso inquebrantable con la enseñanza bíblica.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    name: "Nelzy Saez",
-    role: "Pastora / Líder de Alabanza",
-    description: "Dedicada a crear espacios de adoración auténticos, coordina el equipo de alabanza con pasión para que toda la congregación se conecte con Dios a través del canto.",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80"
-  }
-];
-
-const ministryLeaders = [
-  {
-    name: "Nombre del Líder",
-    role: "Líder de Niños",
-    description: "Responsable de formar a los más pequeños en el conocimiento y amor de Dios.",
-    image: "https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    name: "Nombre del Líder",
-    role: "Líder de Jóvenes",
-    description: "Guía a los jóvenes en su crecimiento espiritual y discipulado.",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    name: "Nombre del Líder",
-    role: "Líder de Damas",
-    description: "Dirige el ministerio de mujeres con amor y sabiduría.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    name: "Nombre del Líder",
-    role: "Líder de Hombres",
-    description: "Fortalece a los hombres para ser líderes según el corazón de Dios.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=80"
-  }
-];
-
-const adminTeam = [
-  {
-    name: "Nombre del Responsable",
-    role: "Tesorero",
-    description: "Administra los recursos con transparencia y fidelidad.",
-    image: "https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=800&q=80"
-  }
-];
+// Genera iniciales para el avatar de respaldo cuando no hay foto real
+function initials(name: string) {
+  return name.split(" ").filter(Boolean).slice(0, 2).map(n => n[0]).join("").toUpperCase();
+}
 ---
 
 <BaseLayout pageTitle="Nuestro Liderazgo">
 
   <!-- === HEADER DE PÁGINA === -->
-  <section class="pt-32 sm:pt-40 pb-16 bg-white">
+  <section class="pt-32 sm:pt-40 pb-10 bg-gradient-to-b from-slate-50 to-white">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 text-center">
-      <div class="flex items-center justify-center gap-3 mb-6">
-        <span class="h-px w-10 bg-cyan-500"></span>
-        <span class="text-xs uppercase tracking-[0.3em] text-cyan-600 font-semibold">
-          Iglesia de Dios de la Profecía
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-100 mb-6">
+        <span class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
+        <span class="text-xs uppercase tracking-wider text-cyan-700 font-semibold">
+          Iglesia de Dios de la Profecía • Hijuelas
         </span>
-        <span class="h-px w-10 bg-cyan-500"></span>
       </div>
-      <h1 class="text-4xl sm:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
+      <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight">
         Nuestro Liderazgo
       </h1>
-      <p class="text-slate-500 text-lg leading-relaxed">
-        Conoce al equipo que Dios ha levantado para pastorear y servir en nuestra congregación en Hijuelas.
+      <p class="text-slate-600 text-lg leading-relaxed max-w-2xl mx-auto">
+        Conoce al equipo comprometido que Dios ha levantado para guiar, servir y edificar a nuestra congregación.
       </p>
     </div>
   </section>
 
-  <!-- === CONTENIDO === -->
-  <section class="bg-slate-50 pt-4 pb-20">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+  <!-- === CONTENIDO PRINCIPAL === -->
+  <section class="bg-slate-50/50 pt-4 pb-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 space-y-28">
+
+      <!-- === NAVEGACIÓN INTERNA (sticky) === -->
+      <nav
+        aria-label="Secciones de liderazgo"
+        class="flex flex-nowrap md:flex-wrap gap-2 justify-start md:justify-center overflow-x-auto md:overflow-visible sticky top-24 z-20 bg-slate-50/80 backdrop-blur-md py-4 px-4 -mx-4 md:mx-0 md:px-0 scrollbar-hide"
+      >
+        {sections.map((s) => (
+          <a
+            href={`#${s.id}`}
+            class="whitespace-nowrap px-5 py-2.5 bg-white border border-slate-200 rounded-full text-sm font-semibold text-slate-700 hover:border-cyan-500 hover:text-cyan-700 transition-all shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-500"
+          >
+            {s.label}
+          </a>
+        ))}
+      </nav>
 
       <!-- === EQUIPO PASTORAL === -->
-      <div class="mb-24">
-        <div class="flex items-center gap-4 mb-12 max-w-7xl">
-          <h2 class="text-2xl font-bold text-slate-800 whitespace-nowrap">Equipo Pastoral</h2>
+      <div id="pastoral" class="scroll-mt-45 md:scroll-mt-55">
+        <div class="flex items-center gap-4 mb-10">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-6 bg-cyan-600 rounded-full"></span>
+            <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Equipo Pastoral</h2>
+          </div>
           <span class="h-px flex-1 bg-slate-200"></span>
         </div>
-        <div class="grid md:grid-cols-2 gap-10">
+
+        <div class="flex flex-wrap justify-center gap-8">
           {pastoralTeam.map((leader, index) => (
-            <LeaderCard 
-              client:load 
-              leader={leader} 
-              priority={index === 0 ? "high" : "normal"}
-            />
+            <div class="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.35rem)] max-w-sm transition-transform duration-300 hover:-translate-y-1">
+              <LeaderCard leader={leader} priority={index === 0 ? "high" : "normal"} />
+            </div>
           ))}
         </div>
       </div>
 
-      <!-- === LÍDERES DE MINISTERIOS === -->
-      <div class="mb-24">
-        <div class="flex items-center gap-4 mb-12">
-          <h2 class="text-2xl font-bold text-slate-800 whitespace-nowrap">Líderes de Ministerios</h2>
+      <!-- === MINISTERIOS === -->
+      <div id="ministerios" class="scroll-mt-45 md:scroll-mt-55">
+        <div class="flex items-center gap-4 mb-10">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-6 bg-cyan-600 rounded-full"></span>
+            <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Liderazgo de Ministerios</h2>
+          </div>
           <span class="h-px flex-1 bg-slate-200"></span>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {ministryLeaders.map((leader) => (
-            <LeaderCard client:load leader={leader} />
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+          {ministriesWithTeam.map((ministry) => (
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100/80 flex flex-col justify-between hover:shadow-md transition-shadow duration-300 mx-auto w-full max-w-sm lg:max-w-none">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-4">
+                  <span class="text-xs font-bold uppercase tracking-wider text-cyan-600 bg-cyan-50 px-3 py-1 rounded-full inline-block">
+                    {ministry.ministryName}
+                  </span>
+                  {ministry.leader.dualRole && (
+                    <span
+                      class="text-[11px] font-medium text-slate-400"
+                      title="Esta persona también lidera otra área"
+                    >
+                      + otra área
+                    </span>
+                  )}
+                </div>
+                <div class="mt-2">
+                  {ministry.leader.image ? (
+                    <LeaderCard leader={ministry.leader} />
+                  ) : (
+                    <div class="flex items-center gap-4">
+                      <div
+                        class="flex-shrink-0 w-14 h-14 rounded-full bg-cyan-100 text-cyan-700 font-bold flex items-center justify-center text-lg"
+                        aria-hidden="true"
+                      >
+                        {initials(ministry.leader.name)}
+                      </div>
+                      <div>
+                        <p class="font-semibold text-slate-900 text-sm">{ministry.leader.name}</p>
+                        <p class="text-slate-500 text-xs">{ministry.leader.role}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
 
       <!-- === EQUIPO ADMINISTRATIVO === -->
-      <div>
-        <div class="flex items-center gap-4 mb-12">
-          <h2 class="text-2xl font-bold text-slate-800 whitespace-nowrap">Equipo Administrativo</h2>
+      <div id="administracion" class="scroll-mt-45 md:scroll-mt-55">
+        <div class="flex items-center gap-4 mb-10">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-6 bg-cyan-600 rounded-full"></span>
+            <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Equipo Administrativo</h2>
+          </div>
           <span class="h-px flex-1 bg-slate-200"></span>
         </div>
-        <div class="grid md:grid-cols-2 gap-8">
+
+        <div class="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
           {adminTeam.map((leader) => (
-            <LeaderCard client:load leader={leader} />
+            <div class="w-full md:w-[calc(50%-1rem)] max-w-sm transition-transform duration-300 hover:-translate-y-1">
+              <LeaderCard leader={leader} priority="normal" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- === COMITÉS Y DIRECTORIO === -->
+      <div id="comites" class="scroll-mt-45 md:scroll-mt-55">
+        <div class="flex items-center gap-4 mb-10">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-6 bg-cyan-600 rounded-full"></span>
+            <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Comités de Trabajo</h2>
+          </div>
+          <span class="h-px flex-1 bg-slate-200"></span>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 justify-center items-stretch">
+          {committees.map((committee) => (
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100/80 overflow-hidden flex flex-col mx-auto w-full max-w-xl h-full">
+              {committee.image ? (
+                <div class="relative h-48 sm:h-56 w-full overflow-hidden bg-slate-100">
+                  <img
+                    src={committee.image}
+                    alt={committee.title}
+                    class={`w-full h-full object-cover ${committee.imagePosition || 'object-center'}`}
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent flex items-end p-6">
+                    <span class="text-xs font-bold uppercase tracking-wider text-cyan-300 bg-cyan-950/60 backdrop-blur-md px-3 py-1 rounded-full">
+                      Directorio
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <div class="h-48 sm:h-56 w-full bg-gradient-to-br from-cyan-50 to-white flex items-end p-6">
+                  <span class="text-xs font-bold uppercase tracking-wider text-cyan-600 bg-cyan-50 px-3 py-1 rounded-full">
+                    Comité
+                  </span>
+                </div>
+              )}
+
+              <div class="p-6 sm:p-8 flex-1">
+                <h3 class="text-lg font-bold text-slate-900 mb-6 pb-3 border-b border-slate-100">
+                  {committee.title}
+                </h3>
+                <ul class="space-y-4">
+                  {committee.members.map((member) => (
+                    <li class="flex items-center justify-between text-sm py-1.5 border-b border-slate-50 last:border-0">
+                      <span class="font-medium text-slate-800">{member.name}</span>
+                      <span class="text-cyan-700 font-medium bg-cyan-50/80 px-3 py-1 rounded-full text-xs">
+                        {member.role}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- === LOGÍSTICA Y ÁREAS DE APOYO === -->
+      <div id="logistica" class="scroll-mt-45 md:scroll-mt-55">
+        <div class="flex items-center gap-4 mb-10">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-6 bg-cyan-600 rounded-full"></span>
+            <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Logística y Áreas de Apoyo</h2>
+          </div>
+          <span class="h-px flex-1 bg-slate-200"></span>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
+          {logistics.map((item) => (
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100/80 overflow-hidden hover:border-cyan-200 transition-all duration-300 mx-auto w-full max-w-sm sm:max-w-none flex flex-col">
+              {item.image && (
+                <div class="relative h-40 w-full overflow-hidden bg-slate-100">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    class={`w-full h-full object-cover ${item.imagePosition || 'object-center'}`}
+                  />
+                </div>
+              )}
+              <div class="p-5 flex flex-col justify-between flex-grow">
+                <p class="text-slate-800 font-medium text-sm mb-1">{item.name}</p>
+                <span class="text-xs uppercase tracking-wider text-cyan-600 font-bold block">{item.role}</span>
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -127,3 +226,12 @@ const adminTeam = [
   </section>
 
 </BaseLayout>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
