@@ -156,7 +156,7 @@ function initials(name: string) {
                   <Image
                     src={committee.image}
                     alt={committee.title}
-                    class={`w-full h-full object-cover ${committee.imagePosition || 'object-center'}`}
+                    class={`w-full h-full object-contain sm:object-cover ${committee.imagePosition || 'object-center'}`}
                   />
                   <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent flex items-end p-6">
                     <span class="text-xs font-bold uppercase tracking-wider text-cyan-300 bg-cyan-950/60 backdrop-blur-md px-3 py-1 rounded-full">
