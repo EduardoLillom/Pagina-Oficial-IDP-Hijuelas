@@ -1,5 +1,6 @@
 ---
 const { leader, priority = "normal" } = Astro.props;
+import { Image } from 'astro:assets';
 
 const imagePos = leader.imagePosition ?? "object-top";
 ---
@@ -7,9 +8,10 @@ const imagePos = leader.imagePosition ?? "object-top";
 <div class="group bg-white rounded-3xl border border-slate-100 shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col h-full w-full min-w-0">  
   <!-- Imagen optimizada -->
   <div class="aspect-4/3 overflow-hidden bg-slate-100">
-    <img 
+    <Image 
       src={leader.image} 
       alt={leader.name}
+      inferSize={true}
       loading={priority === "high" ? "eager" : "lazy"}
       class=`w-full ${imagePos} h-full object-cover transition-transform duration-500 group-hover:scale-105`
     />
