@@ -8,19 +8,21 @@ import comiteSocial from "../assets/comite_social.webp";
 import irmaNunez from "../assets/Irma_nunez_zambrano.webp";
 import karinaSaez from "../assets/karina_saez_salinas.webp";
 import jessicaDilello from "../assets/jessica_betania_dilello.webp";
+import pamelaCollao from "../assets/pamela_collao_olivares.webp";
+
 
 export const pastoralTeam = [
   {
     name: "Fernando Toro",
     role: "Pastor Principal • Maestría en Teología • Ministro Ordenado",
-    description: "Con años de dedicación al servicio, el Pastor Fernando guía nuestra congregación con firmeza, amor y un compromiso inquebrantable con la enseñanza bíblica.",
+    description: "Con 11 años de estudios en Teología y habiendo egresado recientemente de su Maestría, el Pastor Fernando guía nuestra congregación con firmeza, amor y un compromiso inquebrantable con la enseñanza bíblica.",
     image: pastorFernandoToro,
     imagePosition: "object-[center_20%]"
   },
   {
     name: "Nelsy Saez Salinas",
-    role: "Pastora / Líder de Alabanza • Licenciada en Teología • Ministra Ordenada",
-    description: "Dedicada a crear espacios de adoración auténticos, coordina el equipo de alabanza con pasión para que toda la congregación se conecte con Dios a través del canto.",
+    role: "Pastora • Licenciada en Teología • Ministra Ordenada",
+    description: "Dedicada a guiar y formar a los hermanos en la Palabra, la Pastora Nelsy camina junto a la congregación con firmeza y amor, tal como lo hace nuestro Pastor Fernando.",
     image: pastoraNelsySaez,
     imagePosition: "object-[center_20%]",
   }
@@ -33,7 +35,8 @@ export const ministriesWithTeam = [
       name: "Pamela Collao Olivares",
       role: "Líder Ministerio de Niños • Bachiller en Teología",
       description: "Responsable de formar a los más pequeños en el conocimiento y amor de Dios.",
-      image: ""
+      imagePosition: "object-[center_40%]",
+      image: pamelaCollao
     }
   },
   {
@@ -64,6 +67,17 @@ export const ministriesWithTeam = [
       role: "Líder Ministerio de Alabanza",
       description: "Dirige el equipo de alabanza, inspirando a la congregación a adorar a Dios con pasión y devoción.",
       image: martinaToroSaez,
+      imagePosition: "object-[center_20%]",
+      dualRole: true
+    }
+  },
+  {
+    ministryName: "Ministerio de Damas",
+    leader: {
+      name: "Nelsy Saez Salinas",
+      role: "Líder Ministerio de Damas",
+      description: "Fomenta la unidad y el crecimiento espiritual entre las mujeres de la congregación.",
+      image: pastoraNelsySaez,
       imagePosition: "object-[center_20%]",
       dualRole: true
     }
@@ -107,13 +121,7 @@ export const committees = [
 
 export const logistics = [
   {
-    role: "Aseo",
-    name: "Irma Nuñez Zamorano",
-    image: irmaNunez,
-    imagePosition: "object-[50%_18%]"
-  },
-  {
-    role: "Fechas de Cumpleaños",
+    role: "Aseo y Fechas de Cumpleaños",
     name: "Irma Nuñez Zambrano",
     image: irmaNunez,
     imagePosition: "object-[50%_18%]"
@@ -129,6 +137,12 @@ export const logistics = [
     name: "Jessica Betania Dilello",
     image: jessicaDilello,
     imagePosition: "object-[50%_30%]"
+  },
+  {
+    role: "Fechas Relevantes",
+    name: "Pamela Collao Olivares",
+    image: pamelaCollao,
+    imagePosition: "object-[center_40%]"
   }
 ];
 
@@ -137,5 +151,5 @@ export const sections = [
   { id: "ministerios", label: "Ministerios" },
   { id: "administracion", label: "Administración" },
   { id: "comites", label: "Comités" },
-  { id: "logistica", label: "Logística" }
+  { id: "Areas de Apoyo y Servicio", label: "Áreas de Apoyo y Servicio" }
 ];
