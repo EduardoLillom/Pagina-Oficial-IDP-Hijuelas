@@ -1,42 +1,41 @@
-// src/pages/api/admin/post.ts
 import type { APIRoute } from 'astro';
-import { supabase } from '../../../lib/supabase';
+import { crearPost, actualizarPost, eliminarPost } from '../../../lib/posts';
 
-export const POST: APIRoute = async ({ request, cookies, redirect }) => {
-  // 1. Extraer el token de las cookies manualmente
-  const accessToken = cookies.get("sb-access-token")?.value;
+export const POST: APIRoute = async ({ request, locals, redirect }) => {
+  const { supabase, user } = locals;
+  if (!user) return new Response("No autorizado", { status: 401 });
 
-  if (!accessToken) {
-    return new Response("No autorizado: Falta token", { status: 401 });
-  }
-
-  // 2. Validar el usuario directamente con el token
-  const { data: { user }, error } = await supabase.auth.getUser(accessToken);
-
-  if (error || !user) {
-    return new Response("No autorizado: Token inválido", { status: 401 });
-  }
-
-  // 3. Procesar el formulario
   const formData = await request.formData();
   const action = formData.get('_action');
 
-  switch (action) {
-    case 'create':
-      const { error: createErr } = await supabase.from('posts').insert([{
-        title: formData.get('title'),
-        type: formData.get('type'),
-        summary: formData.get('summary'),
-        content: formData.get('content'),
-        is_active: formData.get('is_active') === 'on',
-      }]);
-      if (createErr) return new Response(createErr.message, { status: 500 });
-      break;
+  try {
+    switch (action) {
+      case 'create':
+        await crearPost(supabase, {
+          title: formData.get('title') as string,
+          type: formData.get('type') as string,
+          summary: formData.get('summary') as string,
+          content: formData.get('content') as string,
+          is_active: formData.get('is_active') === 'on',
+        });
+        break;
 
-    case 'delete':
-      const { error: delErr } = await supabase.from('posts').delete().eq('id', formData.get('id'));
-      if (delErr) return new Response(delErr.message, { status: 500 });
-      break;
+      case 'update':
+        await actualizarPost(supabase, formData.get('id') as string, {
+          title: formData.get('title') as string,
+          type: formData.get('type') as string,
+          summary: formData.get('summary') as string,
+          content: formData.get('content') as string,
+          is_active: formData.get('is_active') === 'on',
+        });
+        break;
+
+      case 'delete':
+        await eliminarPost(supabase, formData.get('id') as string);
+        break;
+    }
+  } catch (err) {
+    return new Response((err as Error).message, { status: 500 });
   }
 
   return redirect('/admin/contenido-destacado');

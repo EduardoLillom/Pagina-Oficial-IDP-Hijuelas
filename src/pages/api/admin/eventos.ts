@@ -1,40 +1,39 @@
 import type { APIRoute } from 'astro';
-import { supabase } from '../../../lib/supabase';
+import { crearEvento, actualizarEvento, eliminarEvento } from '../../../lib/eventos';
 
-export const POST: APIRoute = async ({ request, cookies, redirect }) => {
-  // 1. Extraer el token de las cookies
-  const accessToken = cookies.get("sb-access-token")?.value;
+export const POST: APIRoute = async ({ request, locals, redirect }) => {
+  const { supabase, user } = locals;
+  if (!user) return new Response("No autorizado", { status: 401 });
 
-  if (!accessToken) {
-    return new Response("No autorizado: Falta token", { status: 401 });
-  }
-
-  // 2. Validar usuario
-  const { data: { user }, error: authErr } = await supabase.auth.getUser(accessToken);
-
-  if (authErr || !user) {
-    return new Response("No autorizado: Token inválido", { status: 401 });
-  }
-
-  // 3. Procesar el formulario
   const formData = await request.formData();
   const action = formData.get('_action');
 
-  switch (action) {
-    case 'create':
-      const { error: createErr } = await supabase.from('eventos').insert([{
-        title: formData.get('title'),
-        descripcion: formData.get('descripcion'),
-        fecha: formData.get('fecha'),
-        hora: formData.get('hora'),
-      }]);
-      if (createErr) return new Response(createErr.message, { status: 500 });
-      break;
+  try {
+    switch (action) {
+      case 'create':
+        await crearEvento(supabase, {
+          title: formData.get('title') as string,
+          descripcion: formData.get('descripcion') as string,
+          fecha: formData.get('fecha') as string,
+          hora: formData.get('hora') as string,
+        });
+        break;
 
-    case 'delete':
-      const { error: delErr } = await supabase.from('eventos').delete().eq('id', formData.get('id'));
-      if (delErr) return new Response(delErr.message, { status: 500 });
-      break;
+      case 'update':
+        await actualizarEvento(supabase, formData.get('id') as string, {
+          title: formData.get('title') as string,
+          descripcion: formData.get('descripcion') as string,
+          fecha: formData.get('fecha') as string,
+          hora: formData.get('hora') as string,
+        });
+        break;
+
+      case 'delete':
+        await eliminarEvento(supabase, formData.get('id') as string);
+        break;
+    }
+  } catch (err) {
+    return new Response((err as Error).message, { status: 500 });
   }
 
   return redirect('/admin/eventos');
