@@ -1,4 +1,5 @@
 ---
+// src/pages/admin/contenido-destacado/index.astro
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import { getActivePosts } from '../../../lib/posts';
 
@@ -6,48 +7,64 @@ const featuredItems = await getActivePosts();
 ---
 
 <AdminLayout title="Contenido Destacado">
-  <div class="mx-auto max-w-4xl">
-    <div class="mb-8 flex items-center justify-between">
+  <div class="max-w-4xl mx-auto space-y-8">
+    
+    <!-- Cabecera -->
+    <div class="flex flex-col gap-4 rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm sm:flex-row sm:items-center sm:justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-slate-900">Contenido Destacado</h1>
-        <p class="text-sm text-slate-500">Arrastra para reordenar la prioridad.</p>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 text-cyan-700 text-xs font-semibold mb-3 border border-cyan-100">
+          <span class="h-1.5 w-1.5 rounded-full bg-cyan-600 animate-pulse"></span> Módulo de Contenidos
+        </div>
+        <h1 class="text-3xl font-bold tracking-tight text-slate-900">Contenido Destacado</h1>
+        <p class="mt-1 text-sm text-slate-500">Organiza y reordena las publicaciones principales de tu web.</p>
       </div>
+
       <a href="/admin/contenido-destacado/nuevo" 
-         class="bg-cyan-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-cyan-700 shadow-sm transition-all flex items-center gap-2">
-        <span>+</span> Nuevo
+         class="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-600/20 transition hover:bg-cyan-500 active:scale-[0.98]">
+        <span>+</span> Nuevo contenido
       </a>
     </div>
 
-    <ul id="sortable-list" class="flex flex-col gap-3">
-      {featuredItems.map((item) => (
-        <li data-id={item.id} class="group flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm hover:border-cyan-200 transition-all">
-          <div class="cursor-grab text-slate-300 hover:text-cyan-600 p-2">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path></svg>
-          </div>
-          <div class="flex-1">
-            <h4 class="font-semibold text-slate-900">{item.title}</h4>
-            <p class="text-xs text-slate-500">{item.summary || item.type}</p>
-          </div>
-          
-          <div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-            <a href={`/admin/contenido-destacado/editar/${item.id}`} class="px-3 py-1.5 text-xs text-slate-600 hover:text-cyan-600">Editar</a>
+    <!-- Lista de elementos -->
+    <section class="rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm">
+      <div class="mb-6 pb-4 border-b border-slate-100 flex items-center justify-between">
+        <h2 class="text-xl font-bold text-slate-900">Lista activa</h2>
+        <span class="text-xs text-slate-400 font-medium">Arrastra desde el icono para ordenar</span>
+      </div>
+
+      <ul id="sortable-list" class="flex flex-col gap-3">
+        {featuredItems.map((item) => (
+          <li data-id={item.id} class="group flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4 shadow-sm hover:border-cyan-200 hover:bg-white transition-all">
+            <div class="cursor-grab text-slate-400 hover:text-cyan-600 p-2 transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path></svg>
+            </div>
             
-            <form id={`delete-form-${item.id}`} action="/api/admin/post" method="POST" class="hidden">
-              <input type="hidden" name="_action" value="delete" />
-              <input type="hidden" name="id" value={item.id} />
-            </form>
+            <div class="flex-1 min-w-0">
+              <h4 class="font-bold text-slate-900 text-sm truncate">{item.title}</h4>
+              <p class="text-xs text-slate-500 truncate mt-0.5">{item.summary || item.type}</p>
+            </div>
             
-            <button 
-              type="button"
-              onclick={`handleDelete('${item.id}')`} 
-              class="px-3 py-1.5 text-xs font-medium text-red-500 hover:text-red-700"
-            >
-              Eliminar
-            </button>
-          </div>
-        </li>
-      ))}
-    </ul>
+            <div class="flex items-center gap-3 opacity-90 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+              <a href={`/admin/contenido-destacado/editar/${item.id}`} class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-cyan-600 rounded-xl hover:bg-slate-100 transition-colors">Editar</a>
+              
+              <form id={`delete-form-${item.id}`} action="/api/admin/post" method="POST" class="hidden">
+                <input type="hidden" name="_action" value="delete" />
+                <input type="hidden" name="id" value={item.id} />
+              </form>
+              
+              <button 
+                type="button"
+                onclick={`handleDelete('${item.id}')`} 
+                class="px-3 py-1.5 text-xs font-semibold text-red-500 hover:text-red-700 rounded-xl hover:bg-red-50 transition-colors"
+              >
+                Eliminar
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
   </div>
 </AdminLayout>
 
