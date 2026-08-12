@@ -1,6 +1,6 @@
 ---
 import AdminLayout from '../../../layouts/AdminLayout.astro';
-import { getEventos } from '../../../lib/eventos'; 
+import { getEventos } from '../../../lib/eventos';
 
 const eventos = await getEventos();
 ---
@@ -51,8 +51,16 @@ const eventos = await getEventos();
 
             <!-- Acciones -->
             <div class="flex items-center gap-2">
-              <a href={`/admin/eventos/editar/${evento.id}`} class="text-xs text-slate-500 hover:text-cyan-600">Editar</a>
-              <button onclick={`handleDelete('${evento.id}')`} class="text-xs font-medium text-red-500 hover:text-red-700 px-3 py-1.5">Eliminar</button>
+              <a href={`/admin/eventos/editar/${evento.id}`} class="text-xs text-slate-500 hover:text-cyan-600 px-3 py-1.5">
+                Editar
+              </a>
+              <form method="POST" action="/api/admin/eventos" onsubmit="return confirm('¿Estás seguro de eliminar este evento?')">
+                <input type="hidden" name="_action" value="delete" />
+                <input type="hidden" name="id" value={evento.id} />
+                <button type="submit" class="text-xs font-medium text-red-500 hover:text-red-700 px-3 py-1.5">
+                  Eliminar
+                </button>
+              </form>
             </div>
           </div>
         ))
@@ -60,12 +68,3 @@ const eventos = await getEventos();
     </div>
   </div>
 </AdminLayout>
-
-<script is:inline>
-  function handleDelete(id) {
-    if (confirm("¿Estás seguro de eliminar este evento?")) {
-      console.log("Eliminando evento:", id);
-      // Aquí tu lógica de eliminación
-    }
-  }
-</script>
