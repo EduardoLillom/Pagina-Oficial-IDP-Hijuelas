@@ -1,9 +1,9 @@
-// With `output: 'static'` configured:
-export const prerender = false;
+// src/pages/api/auth/signout.ts
 import type { APIRoute } from "astro";
+import { createSupabaseServerClient } from "../../../lib/supabase";
 
-export const GET: APIRoute = async ({ cookies, redirect }) => {
-  cookies.delete("sb-access-token", { path: "/" });
-  cookies.delete("sb-refresh-token", { path: "/" });
+export const GET: APIRoute = async ({ request, cookies, redirect }) => {
+  const supabase = createSupabaseServerClient({ request, cookies });
+  await supabase.auth.signOut();
   return redirect("/admin/login");
 };

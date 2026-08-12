@@ -1,30 +1,22 @@
 import { defineMiddleware } from "astro:middleware";
-import { supabase } from "./lib/supabase";
+import { createSupabaseServerClient } from "./lib/supabase";
 
 export const onRequest = defineMiddleware(async (context, next) => {
-  const { url, cookies, redirect } = context;
+  const supabase = createSupabaseServerClient({
+    request: context.request,
+    cookies: context.cookies,
+  });
 
-  // 1. Solo proteger rutas bajo /admin
-  if (url.pathname.startsWith("/admin")) {
-    const accessToken = cookies.get("sb-access-token")?.value;
-    const refreshToken = cookies.get("sb-refresh-token")?.value;
+  // getUser() valida el JWT contra Supabase Y refresca la sesión si hace falta
+  const { data: { user } } = await supabase.auth.getUser();
 
-    // 2. Si no hay tokens y no está en login, redirigir
-    if (!accessToken && url.pathname !== "/admin/login") {
-      return redirect("/admin/login");
-    }
+  context.locals.supabase = supabase;
+  context.locals.user = user;
 
-    // 3. Validar si el usuario existe (autenticación)
-    if (accessToken) {
-      const { data: { user }, error } = await supabase.auth.getUser(accessToken);
-      
-      if (error || !user) {
-        // Token inválido o expirado
-        cookies.delete("sb-access-token", { path: "/" });
-        cookies.delete("sb-refresh-token", { path: "/" });
-        return redirect("/admin/login");
-      }
-    }
+  if (context.url.pathname.startsWith("/admin") &&
+      context.url.pathname !== "/admin/login" &&
+      !user) {
+    return context.redirect("/admin/login");
   }
 
   return next();
