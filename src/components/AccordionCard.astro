@@ -1,11 +1,11 @@
 ---
-// src/components/AccordionCard.astro
-const { title, text, icon, id } = Astro.props;
+const { title, text, icon: IconComponent } = Astro.props;
 ---
 <details class="group bg-white border border-idp-purpura/20 rounded-2xl p-6 transition-all duration-300 hover:border-idp-dorado shadow-sm">
   <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-lg text-idp-azul">
     <div class="flex items-center gap-4">
-      {icon && <span class="text-2xl text-idp-purpura">{icon}</span>}
+      <!-- Verificamos si existe el icono antes de renderizarlo -->
+      {IconComponent && <IconComponent class="w-12 h-12 fill-idp-rojo stroke-idp-rojo" />}
       <span class="font-headline font-bold text-idp-azul">{title}</span>
     </div>
     <span class="transition group-open:rotate-45 text-2xl text-idp-rojo font-bold">+</span>
