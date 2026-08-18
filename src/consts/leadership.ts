@@ -1,14 +1,14 @@
 // 1. Importa todas tus imágenes locales estáticamente
-import pastorFernandoToro from "../assets/pastor_fernando_toro.webp";
-import pastoraNelsySaez from "../assets/pastora_nelsy_saez_salinas.webp";
-import martinaToroSaez from "../assets/martina_toro_saez.webp";
-import catherineSuazo from "../assets/catherine_suazo_vargas.webp";
-import comiteFinanzas from "../assets/comite_finanzas.webp";
-import comiteSocial from "../assets/comite_social.webp";
-import irmaNunez from "../assets/Irma_nunez_zambrano.webp";
-import karinaSaez from "../assets/karina_saez_salinas.webp";
-import jessicaDilello from "../assets/jessica_betania_dilello.webp";
-import pamelaCollao from "../assets/pamela_collao_olivares.webp";
+import pastorFernandoToro from "../assets/people/pastor_fernando_toro.webp";
+import pastoraNelsySaez from "../assets/people/pastora_nelsy_saez_salinas.webp";
+import martinaToroSaez from "../assets/people/martina_toro_saez.webp";
+import catherineSuazo from "../assets/people/catherine_suazo_vargas.webp";
+import comiteFinanzas from "../assets/people/comite_finanzas.webp";
+import comiteSocial from "../assets/people/comite_social.webp";
+import irmaNunez from "../assets/people/Irma_nunez_zambrano.webp";
+import karinaSaez from "../assets/people/karina_saez_salinas.webp";
+import jessicaDilello from "../assets/people/jessica_betania_dilello.webp";
+import pamelaCollao from "../assets/people/pamela_collao_olivares.webp";
 
 
 export const pastoralTeam = [
@@ -151,5 +151,5 @@ export const sections = [
   { id: "ministerios", label: "Ministerios" },
   { id: "administracion", label: "Administración" },
   { id: "comites", label: "Comités" },
-  { id: "Areas de Apoyo y Servicio", label: "Áreas de Apoyo y Servicio" }
+  { id: "Apeople/reas de Apoyo y Servicio", label: "Áreas de Apoyo y Servicio" }
 ];
