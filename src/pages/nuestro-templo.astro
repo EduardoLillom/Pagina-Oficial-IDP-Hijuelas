@@ -1,4 +1,5 @@
 ---
+// src/pages/nuestro-templo.astro
 export const prerender = true;
 
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -17,61 +18,69 @@ const hitos = [
   pageTitle="Nuestro Nuevo Templo"
   description="Seguimos creciendo en Hijuelas. Conoce el progreso de la construcción de nuestro nuevo templo, un espacio diseñado para la adoración y el servicio a nuestra comunidad."
 >
-  <div class="bg-slate-50 min-h-screen pt-28 py-20">
+  <div class="bg-idp-azul/5 min-h-screen pt-28 py-20">
     <div class="max-w-4xl mx-auto px-4">
       
+      <!-- Encabezado -->
       <div class="text-center mb-20">
-        <h1 class="text-4xl md:text-6xl font-bold text-slate-900 mb-6">Construyendo nuestra casa</h1>
-        <p class="text-lg text-slate-600 max-w-2xl mx-auto">Un espacio diseñado para adorar, aprender y servir a nuestra comunidad en Hijuelas.</p>
+        <p class="font-highlight text-xs uppercase tracking-[0.28em] text-idp-rojo font-bold mb-3">Fe y Progreso</p>
+        <h1 class="font-headline text-4xl md:text-6xl font-bold text-idp-azul mb-6">Construyendo nuestra casa</h1>
+        <p class="font-sans font-light text-slate-600 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+          Un espacio diseñado para adorar, aprender y servir a nuestra comunidad en Hijuelas.
+        </p>
       </div>
 
-      <section class="mb-20 bg-white p-10 rounded-3xl border border-slate-100 shadow-sm">
+      <!-- Sección de Historia / Nuestra Visión -->
+      <section class="mb-20 bg-white p-10 rounded-3xl border border-idp-dorado/30 shadow-md">
         <div class="grid md:grid-cols-2 gap-10 items-center">
           <div>
-            <h2 class="text-3xl font-bold text-slate-900 mb-6">Nuestra Historia</h2>
-            <p class="text-slate-600 leading-relaxed mb-4">
+            <h2 class="font-headline text-2xl md:text-3xl font-bold text-idp-azul mb-6">Nuestra Historia</h2>
+            <p class="font-sans font-light text-slate-700 leading-relaxed mb-4 text-sm md:text-base">
               Desde nuestros inicios en Hijuelas, nuestra comunidad ha crecido no solo en número, sino en fe y servicio. Tras años de reuniones en espacios temporales, Dios abrió la puerta para obtener nuestro terreno propio.
             </p>
-            <p class="text-slate-600 leading-relaxed">
+            <p class="font-sans font-light text-slate-700 leading-relaxed text-sm md:text-base">
               Este templo no es solo un edificio; es el cumplimiento de una visión de décadas. Necesitamos un espacio permanente que nos permita acoger a más familias y albergar nuestros programas de ayuda social.
             </p>
           </div>
-          <div class="bg-slate-200 overflow-hidden rounded-3xl shadow-2xl h-64 flex items-center justify-center text-slate-400">
+          <div class="bg-idp-azul/10 overflow-hidden rounded-3xl shadow-xl h-64 flex items-center justify-center text-idp-azul border-2 border-idp-dorado/30">
             <Image
-            src={ temploImage }
-            alt="Futura Iglesia Dios de la profesia Hijuelas interior"
-            class="h-full w-full object-cover"
-            loading="lazy"
+              src={temploImage}
+              alt="Futura Iglesia Dios de la profesia Hijuelas interior"
+              class="h-full w-full object-cover"
+              loading="lazy"
             />
           </div>
         </div>
       </section>
 
-      <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 mb-16">
+      <!-- Barra de Progreso de Obra -->
+      <div class="bg-white p-8 rounded-3xl shadow-md border border-idp-dorado/30 mb-16">
         <div class="flex justify-between mb-2">
-          <span class="font-bold text-slate-900">Progreso de obra</span>
-          <span class="text-cyan-600 font-bold">45%</span>
+          <span class="font-headline font-bold text-idp-azul">Progreso de obra</span>
+          <span class="font-sans text-idp-rojo font-bold">45%</span>
         </div>
-        <div class="w-full bg-slate-100 rounded-full h-4">
-          <div class="bg-cyan-600 h-4 rounded-full" style="width: 45%"></div>
+        <div class="w-full bg-idp-azul/10 rounded-full h-4 overflow-hidden border border-idp-azul/15">
+          <div class="bg-linear-to-r from-idp-azul to-idp-rojo h-4 rounded-full transition-all duration-500" style="width: 45%"></div>
         </div>
       </div>
 
-      <div class="relative border-l-2 border-slate-200 ml-3 space-y-12 mb-20">
+      <!-- Línea de Tiempo / Hitos -->
+      <div class="relative border-l-2 border-idp-dorado/50 ml-3 space-y-12 mb-20">
         {hitos.map((hito) => (
           <div class="relative pl-8">
-            <div class="absolute -left-[9px] top-1 w-4 h-4 bg-cyan-600 rounded-full"></div>
-            <span class="text-sm font-bold text-cyan-600 uppercase tracking-widest">{hito.fecha}</span>
-            <h3 class="text-xl font-bold text-slate-900 mt-1">{hito.titulo}</h3>
-            <p class="text-slate-600 mt-2">{hito.desc}</p>
+            <div class="absolute -left-2.25 top-1 w-4 h-4 bg-idp-rojo rounded-full ring-4 ring-white shadow-xs"></div>
+            <span class="font-highlight text-xs font-bold text-idp-rojo uppercase tracking-widest">{hito.fecha}</span>
+            <h3 class="font-headline text-xl font-bold text-idp-azul mt-1">{hito.titulo}</h3>
+            <p class="font-sans font-light text-slate-600 mt-2 text-sm md:text-base">{hito.desc}</p>
           </div>
         ))}
       </div>
 
-    <!-- <div class="text-center bg-slate-900 p-12 rounded-3xl text-white shadow-xl">
-        <h2 class="text-3xl font-bold mb-4">¿Quieres ser parte?</h2>
-        <p class="text-slate-300 mb-8 max-w-md mx-auto">Cada oración y cada aporte cuenta para ver esta visión hecha realidad.</p>
-        <a href="/donar" class="bg-cyan-600 px-8 py-4 rounded-full font-bold hover:bg-cyan-500 transition shadow-lg">Conocer cómo ayudar</a>
+    <!-- Bloque de Llamado a la Acción (Comentado originalmente) -->
+    <!-- <div class="text-center bg-idp-azul p-12 rounded-3xl text-white shadow-xl border border-idp-dorado/40">
+        <h2 class="font-headline text-3xl font-bold mb-4 text-idp-dorado">¿Quieres ser parte?</h2>
+        <p class="font-sans font-light text-slate-200 mb-8 max-w-md mx-auto text-sm md:text-base">Cada oración y cada aporte cuenta para ver esta visión hecha realidad.</p>
+        <a href="/donar" class="bg-idp-rojo px-8 py-4 rounded-full font-sans font-bold hover:bg-red-700 transition shadow-lg text-white">Conocer cómo ayudar</a>
     </div> -->
 
     </div>

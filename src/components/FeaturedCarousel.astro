@@ -1,29 +1,30 @@
 ---
+// src/components/FeaturedCarousel.astro
 import PostSlide from './PostSlide.astro';
 const { slides } = Astro.props;
 ---
 
 <section id="destacados" class="relative z-30 px-4 pb-12 transition-all duration-700 ease-out">
-  <div class="mx-auto max-w-4xl bg-white/80 backdrop-blur-xl rounded-[2rem] p-10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-white/50">
+  <div class="mx-auto max-w-4xl bg-white/90 backdrop-blur-xl rounded-4xl p-10 shadow-[0_20px_50px_rgba(23,33,114,0.1)] border border-idp-dorado/30">
     
-    <div id="slide-content" class="min-h-[256px] transition-opacity duration-300">
+    <div id="slide-content" class="min-h-64 transition-opacity duration-300">
       <PostSlide post={slides[0]} />
     </div>
 
     <div class="flex justify-center items-center gap-6 mt-8">
-      <button id="prev-btn" class="text-slate-400 hover:text-cyan-600 transition">←</button>
+      <button id="prev-btn" class="text-idp-azul/50 hover:text-idp-rojo transition text-lg font-bold">←</button>
       <div id="dot-container" class="flex gap-2">
         {slides.map((_: any, i: number) => (
-          <div class={`dot w-2 h-2 rounded-full transition-all ${i === 0 ? 'bg-cyan-500 scale-125' : 'bg-slate-300'}`}></div>
+          <div class={`dot w-2.5 h-2.5 rounded-full transition-all ${i === 0 ? 'bg-idp-rojo scale-125' : 'bg-idp-azul/20'}`}></div>
         ))}
       </div>
-      <button id="next-btn" class="text-slate-400 hover:text-cyan-600 transition">→</button>
+      <button id="next-btn" class="text-idp-azul/50 hover:text-idp-rojo transition text-lg font-bold">→</button>
     </div>
   </div>
 </section>
 
 <script is:inline define:vars={{ slides }}>
-  // Lógica de scroll original (sin cambios)
+  // Lógica de scroll original
   document.addEventListener('DOMContentLoaded', () => {
     const section = document.getElementById('destacados');
     let hasMoved = false;
@@ -38,7 +39,7 @@ const { slides } = Astro.props;
     });
   });
 
-  // Lógica de carrusel con estructura fija
+  // Lógica de carrusel con estructura fija inyectada por JS
   let index = 0;
   const container = document.getElementById('slide-content');
   
@@ -52,19 +53,19 @@ const { slides } = Astro.props;
         <div class="slide-content h-64 flex flex-col justify-center items-center text-center">
           <div class="max-w-xl px-6 w-full">
             ${s.type === 'cita' 
-              ? `<p class="text-2xl md:text-3xl font-serif text-slate-800 italic leading-relaxed">${s.title}</p>`
+              ? `<p class="text-2xl md:text-3xl font-highlight text-idp-azul italic leading-relaxed">"${s.title}"</p>`
               : `<div class="space-y-4">
-                   <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-600 bg-cyan-50 px-3 py-1 rounded-full">${s.type}</span>
-                   <h3 class="text-2xl font-extrabold text-slate-900 leading-tight">${s.title}</h3>
-                   <p class="text-slate-600 line-clamp-2">${s.summary}</p>
-                   <div class="h-6">${s.type === 'evento' ? `<a href="/eventos" class="text-sm font-bold text-cyan-600 border-b border-cyan-600">Ver detalles →</a>` : ''}</div>
+                   <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-idp-rojo bg-idp-rojo/10 px-3 py-1 rounded-full font-sans">${s.type}</span>
+                   <h3 class="text-2xl font-bold text-idp-azul leading-tight font-headline">${s.title}</h3>
+                   <p class="font-sans font-light text-slate-700 line-clamp-2">${s.summary}</p>
+                   <div class="h-6">${s.type === 'evento' ? `<a href="/eventos" class="text-sm font-bold text-idp-rojo border-b border-idp-rojo hover:text-red-700">Ver detalles →</a>` : ''}</div>
                  </div>`
             }
           </div>
         </div>
       `;
       document.querySelectorAll('.dot').forEach((d, i) => {
-        d.className = `dot w-2 h-2 rounded-full transition-all ${i === index ? 'bg-cyan-500 scale-125' : 'bg-slate-300'}`;
+        d.className = `dot w-2.5 h-2.5 rounded-full transition-all ${i === index ? 'bg-idp-rojo scale-125' : 'bg-idp-azul/20'}`;
       });
       container.style.opacity = '1';
     }, 300);

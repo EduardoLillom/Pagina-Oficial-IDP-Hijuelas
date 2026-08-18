@@ -1,4 +1,5 @@
 ---
+// src/pages/horarios.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const horarios = [
@@ -7,37 +8,36 @@ const horarios = [
     time: "19:30", 
     event: "Estudio Bíblico", 
     location: "Sede villa los naranjos",
-    gradient: "from-sky-100 to-sky-50" 
+    gradient: "from-idp-azul/10 to-idp-purpura/5" 
   },
   { 
     day: "Viernes", 
     time: "19:30", 
     event: "Reunión de Jóvenes", 
     location: "Sede villa los naranjos",
-    gradient: "from-blue-100 to-blue-50" 
+    gradient: "from-idp-purpura/10 to-idp-azul/5" 
   },
   { 
     day: "Viernes", 
     time: "19:30", 
     event: "Reunión de Damas", 
     location: "Pasaje el Rauli poblacion Sven krarup casa 940",
-    gradient: "from-blue-100 to-blue-50" 
+    gradient: "from-idp-purpura/10 to-idp-azul/5" 
   },
   { 
     day: "Viernes", 
     time: "20:00", 
     event: "Reunión de Varones", 
     location: "Hogar hnm. Jaime Reinoso",
-    gradient: "from-blue-100 to-blue-50" 
+    gradient: "from-idp-purpura/10 to-idp-azul/5" 
   },
   { 
     day: "Domingo", 
     time: "10:30", 
     event: "Culto General", 
     location: "Sede villa los naranjos",
-    gradient: "from-cyan-100 to-cyan-50" 
+    gradient: "from-idp-azul/15 to-idp-dorado/10" 
   },
-
 ];
 ---
 
@@ -45,40 +45,45 @@ const horarios = [
   pageTitle="Horarios"
   description="Consulta nuestros horarios de reuniones en la Iglesia de Dios de la Profecía en Hijuelas. ¡Te esperamos en nuestros encuentros semanales de adoración, estudio y comunidad!"
 >
-  <section class="bg-slate-50 py-20 pt-24">
+  <section class="bg-idp-azul/5 py-20 pt-24 min-h-screen">
     <div class="mx-auto max-w-5xl px-4 sm:px-6">
       
+      <!-- Encabezado -->
       <div class="text-center mb-16">
-        <span class="text-cyan-600 font-bold tracking-widest uppercase text-sm">Nuestros encuentros</span>
-        <h1 class="mt-3 text-4xl font-extrabold text-slate-900">Horarios de Reuniones</h1>
+        <p class="font-highlight text-xs uppercase tracking-[0.28em] text-idp-rojo font-bold mb-3">Nuestros encuentros</p>
+        <h1 class="font-headline text-4xl md:text-5xl font-extrabold text-idp-azul">Horarios de Reuniones</h1>
       </div>
 
+      <!-- Tarjetas de Horarios -->
       <div class="space-y-6">
         {horarios.map((item) => (
-          <div class={`group p-6 rounded-2xl border border-white/50 shadow-sm flex items-center justify-between hover:shadow-lg transition-all duration-300 bg-gradient-to-r ${item.gradient}`}>
+          <div class={`group p-6 rounded-2xl border border-idp-dorado/30 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:shadow-xl hover:border-idp-dorado transition-all duration-300 bg-linear-to-r ${item.gradient}`}>
             
             <div class="flex items-center gap-6">
-              <div class="text-center min-w-20 bg-white/50 p-2 rounded-xl backdrop-blur-sm">
-                <span class="block text-2xl font-bold text-slate-900">{item.day.slice(0,3)}</span>
-                <span class="text-xs uppercase text-slate-700 font-bold">{item.day}</span>
+              <div class="text-center min-w-20 bg-white/80 p-2 rounded-xl backdrop-blur-sm border border-idp-dorado/30 shadow-xs">
+                <span class="font-headline block text-2xl font-bold text-idp-azul">{item.day.slice(0,3)}</span>
+                <span class="font-highlight text-xs uppercase text-idp-purpura font-bold">{item.day}</span>
               </div>
               
               <div>
-                <h3 class="text-xl font-bold text-slate-900">{item.event}</h3>
-                <p class="text-slate-700/80 text-sm font-medium">Ubicación: {item.location}</p>
+                <h3 class="font-headline text-xl font-bold text-idp-azul">{item.event}</h3>
+                <p class="font-sans font-light text-slate-700 text-sm mt-0.5"><strong class="font-semibold text-idp-azul">Ubicación:</strong> {item.location}</p>
               </div>
             </div>
 
-            <div class="bg-white/70 border border-white/50 px-4 py-2 rounded-lg shadow-sm backdrop-blur-sm">
-              <span class="text-slate-900 font-bold font-mono">{item.time}</span>
+            <div class="bg-white/90 border border-idp-dorado/40 px-4 py-2 rounded-lg shadow-xs backdrop-blur-sm self-end sm:self-center">
+              <span class="font-sans text-idp-rojo font-bold tracking-wide">{item.time} hrs.</span>
             </div>
           </div>
         ))}
       </div>
 
-      <div class="mt-12 p-8 bg-slate-900 rounded-3xl text-center text-white">
-        <h3 class="text-xl font-bold mb-2">¿Es tu primera vez?</h3>
-        <p class="text-slate-300">Te recibiremos con los brazos abiertos. No necesitas invitación, solo ven con ganas de compartir.</p>
+      <!-- Tarjeta Informativa Final -->
+      <div class="mt-12 p-8 bg-idp-azul rounded-3xl text-center text-white shadow-xl border border-idp-dorado/40">
+        <h3 class="font-headline text-xl md:text-2xl font-bold mb-2 text-idp-dorado">¿Es tu primera vez?</h3>
+        <p class="font-sans font-light text-slate-200 max-w-xl mx-auto text-sm md:text-base">
+          Te recibiremos con los brazos abiertos. No necesitas invitación, solo ven con ganas de compartir y alabar a Dios.
+        </p>
       </div>
 
     </div>

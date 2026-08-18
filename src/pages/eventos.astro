@@ -1,4 +1,5 @@
 ---
+// src/pages/eventos.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getEventos } from '../lib/eventos';
 
@@ -16,43 +17,54 @@ try {
   description="Mantente al día con todas las actividades y eventos de la Iglesia de Dios de la Profecía en Hijuelas. ¡Participa con nosotros en nuestros próximos encuentros!"  
 >
 
-  <div class="bg-slate-50 min-h-screen pt-32 pb-20">
+  <div class="bg-idp-azul/5 min-h-screen pt-32 pb-20">
     <div class="max-w-3xl mx-auto px-4">
       
+      <!-- Encabezado -->
       <header class="text-center mb-16">
-        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Nuestros Eventos</h1>
-        <p class="text-slate-600 max-w-lg mx-auto">Únete a nuestras próximas actividades y sé parte de nuestra comunidad.</p>
+        <p class="font-highlight text-xs uppercase tracking-[0.28em] text-idp-rojo font-bold mb-3">Próximas Actividades</p>
+        <h1 class="font-headline text-4xl md:text-5xl font-bold text-idp-azul mb-4">Nuestros Eventos</h1>
+        <p class="font-sans font-light text-slate-600 max-w-lg mx-auto text-sm md:text-base">
+          Únete a nuestras próximas actividades y sé parte de nuestra comunidad.
+        </p>
       </header>
 
+      <!-- Listado de Eventos -->
       <div class="space-y-6">
         {eventos.length > 0 ? (
           eventos.map(evento => (
-            <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col md:flex-row gap-6 items-center">
+            <div class="bg-white border border-idp-dorado/30 rounded-3xl p-6 shadow-xs hover:shadow-xl hover:border-idp-dorado transition-all duration-300 flex flex-col md:flex-row gap-6 items-center">
               
-              <div class="flex flex-col items-center justify-center bg-cyan-50 rounded-2xl p-4 min-w-20 w-20 shrink-0 border border-cyan-100">
-                <span class="text-cyan-700 font-bold text-2xl">{new Date(evento.fecha).getDate()}</span>
-                <span class="text-cyan-600 font-bold uppercase text-xs tracking-wider">
+              <!-- Tarjeta de Fecha -->
+              <div class="flex flex-col items-center justify-center bg-idp-azul/5 rounded-2xl p-4 min-w-20 w-20 shrink-0 border border-idp-azul/15">
+                <span class="font-headline text-idp-azul font-bold text-2xl">{new Date(evento.fecha).getDate()}</span>
+                <span class="font-highlight text-idp-rojo font-bold uppercase text-xs tracking-wider">
                   {new Date(evento.fecha).toLocaleString('es-ES', { month: 'short' })}
                 </span>
               </div>
 
+              <!-- Información del Evento -->
               <div class="flex-1 text-center md:text-left">
-                <h3 class="text-xl font-bold text-slate-900 mb-2">{evento.title}</h3>
-                <p class="text-slate-600 text-sm mb-4 leading-relaxed">{evento.descripcion}</p>
+                <h3 class="font-headline text-xl font-bold text-idp-azul mb-2">{evento.title}</h3>
+                <p class="font-sans font-light text-slate-600 text-sm mb-4 leading-relaxed">{evento.descripcion}</p>
                 
-                <div class="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-slate-500">
-                  <span class="flex items-center gap-1">🕒 {evento.hora.substring(0, 5)}</span>
+                <div class="flex flex-wrap justify-center md:justify-start gap-4 text-xs font-sans font-medium text-idp-purpura">
+                  <span class="flex items-center gap-1.5 bg-idp-purpura/10 px-3 py-1 rounded-full">
+                    🕒 {evento.hora.substring(0, 5)} hrs.
+                  </span>
                 </div>
               </div>
             </div>
           ))
         ) : (
-          <div class="text-center py-20 bg-white rounded-3xl border border-slate-200 border-dashed">
-            <h3 class="text-xl font-bold text-slate-900 mb-2">Sin eventos programados</h3>
-            <p class="text-slate-500">Por el momento no tenemos actividades públicas. ¡Vuelve pronto!</p>
+          <!-- Estado Vacío -->
+          <div class="text-center py-20 px-6 bg-white rounded-3xl border border-idp-dorado/40 border-dashed shadow-xs">
+            <h3 class="font-headline text-xl font-bold text-idp-azul mb-2">Sin eventos programados</h3>
+            <p class="font-sans font-light text-slate-500 text-sm md:text-base">Por el momento no tenemos actividades públicas. ¡Vuelve pronto!</p>
           </div>
         )}
       </div>
+
     </div>
   </div>
 </BaseLayout>

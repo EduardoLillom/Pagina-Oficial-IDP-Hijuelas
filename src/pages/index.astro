@@ -30,103 +30,107 @@ const slides: Slide[] = posts.map(post => ({
   type: post.type,
   target_url: post.target_url || '#',
 }));
-
 ---
 
 <BaseLayout 
   pageTitle="Inicio" 
   description="Bienvenidos a la IDP en Hijuelas. Un espacio de fe, amor y servicio donde vivimos juntos el llamado de Dios a través de la adoración y la unidad.">
+  
   <Hero />
-  <FeaturedCarousel slides={ slides }/>
-<section class="bg-white py-20">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6">
-    <div class="text-center">
-      <!-- Aquí reemplazamos la etiqueta Image original por tu nuevo componente genérico -->
-      <Carousel 
-        images={images} 
-        className="h-96 w-full rounded-3xl object-right" 
-      />
-    </div>
-    
-    <div class="mt-16 grid gap-6 md:grid-cols-3">
-      {services.map((service) => (
-        <div
-          class={`rounded-3xl border bg-slate-50 p-8 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl ${service.accent || 'border-cyan-500'}`}
-        >
-          <h3 class="text-2xl font-bold text-slate-900 mb-3">{service.title}</h3>
-          <p class="text-sm uppercase tracking-[0.28em] text-cyan-500 mb-4">{service.time}</p>
-          <p class="text-slate-600 leading-relaxed">{service.description}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+  <FeaturedCarousel slides={slides} />
 
-  <section class="bg-slate-950 py-20 text-white">
+  <!-- SECCIÓN DE SERVICIOS -->
+  <section class="bg-white py-20 text-idp-azul">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <div class="text-center">
+        <Carousel 
+          images={images} 
+          className="h-96 w-full rounded-3xl object-right shadow-md border-2 border-idp-dorado" 
+        />
+      </div>
+      
+      <div class="mt-16 grid gap-6 md:grid-cols-3">
+        {services.map((service) => (
+          <div
+            class="rounded-3xl border border-idp-dorado/40 bg-idp-azul/5 p-8 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
+          >
+            <h3 class="font-headline text-2xl font-bold text-idp-azul mb-3">{service.title}</h3>
+            <p class="font-highlight text-sm uppercase tracking-[0.28em] text-idp-rojo mb-4 font-semibold">{service.time}</p>
+            <p class="font-sans font-light text-slate-700 leading-relaxed">{service.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE VIDA COMUNITARIA -->
+  <section class="bg-idp-azul py-20 text-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
       <div class="grid gap-12 lg:grid-cols-2 items-center">
         <div>
-          <p class="text-sm uppercase tracking-[0.28em] text-cyan-300 font-semibold">Vida comunitaria</p>
-          <h2 class="mt-4 text-3xl font-bold sm:text-4xl">Un espacio de amor y servicio</h2>
-          <p class="mt-6 text-slate-300 leading-relaxed">
+          <p class="font-highlight text-sm uppercase tracking-[0.28em] text-idp-dorado font-semibold">Vida comunitaria</p>
+          <h2 class="font-headline mt-4 text-3xl font-bold sm:text-4xl text-white">Un espacio de amor y servicio</h2>
+          <p class="font-sans font-light mt-6 text-slate-200 leading-relaxed">
             Descubre cómo nuestras reuniones, ministerios y espacios de oración invitan a cada persona a vivir una fe auténtica y una comunidad cercana.
           </p>
           <div class="mt-8 flex flex-col gap-4 sm:flex-row">
             <a
               href="/quienes-somos"
-              class="inline-flex items-center justify-center rounded-full bg-cyan-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400"
+              class="inline-flex items-center justify-center rounded-full bg-idp-rojo px-6 py-3 font-sans font-bold text-white transition hover:opacity-90 shadow-md"
             >
               Conoce más
             </a>
             <a
               href="/contacto"
-              class="inline-flex items-center justify-center rounded-full border border-slate-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              class="inline-flex items-center justify-center rounded-full border border-idp-dorado px-6 py-3 font-sans font-semibold text-idp-dorado transition hover:bg-idp-dorado/10"
             >
               Contáctanos
             </a>
           </div>
         </div>
 
-        <div class="overflow-hidden relative rounded-3xl shadow-2xl ring-1 ring-white/10">
+        <div class="overflow-hidden relative rounded-3xl shadow-2xl ring-1 ring-idp-dorado/30">
           <Image
-            src={ bautizoImage }
+            src={bautizoImage}
             alt="Encuentro de hermanos en adoración"
             class="h-96 w-full object-cover object-right"
           />
-          <div class="absolute inset-0 bg-cyan-950/10 pointer-events-none"></div>
+          <div class="absolute inset-0 bg-idp-purpura/25 pointer-events-none"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="bg-slate-100 py-20">
+  <!-- SECCIÓN DE PRIORIDADES -->
+  <section class="bg-idp-purpura/10 py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 text-center">
-      <p class="text-sm uppercase tracking-[0.28em] text-cyan-500 font-semibold">Nuestras prioridades</p>
-      <h2 class="mt-4 text-3xl font-bold text-slate-900 sm:text-4xl">Fe, servicio y comunidad</h2>
-      <p class="mx-auto mt-5 max-w-2xl text-slate-600 leading-relaxed">
+      <p class="font-highlight text-sm uppercase tracking-[0.28em] text-idp-rojo font-semibold">Nuestras prioridades</p>
+      <h2 class="font-headline mt-4 text-3xl font-bold text-idp-azul sm:text-4xl">Fe, servicio y comunidad</h2>
+      <p class="font-sans font-normal mx-auto mt-5 max-w-2xl text-slate-700 leading-relaxed">
         En cada actividad buscamos impactar vidas con la Palabra, la oración y un llamado a la unidad.
       </p>
 
       <div class="mt-16 grid gap-6 md:grid-cols-3">
-        <div class="rounded-3xl bg-white p-8 shadow-lg text-center">
-          <div class="mb-4 flex justify-center text-indigo-600">
-            <Image src={ iconoAdoracion } alt="Adoración" class="w-32 h-32 object-contain">
+        <div class="rounded-3xl bg-white p-8 shadow-lg text-center border-t-4 border-idp-azul">
+          <div class="mb-4 flex justify-center">
+            <Image src={iconoAdoracion} alt="Adoración" class="w-32 h-32 object-contain" />
           </div>
-          <h3 class="text-2xl font-semibold text-slate-900 mb-3">Adoración</h3>
+          <h3 class="font-headline text-2xl font-semibold text-idp-azul mb-3">Adoración</h3>
         </div>
-        <div class="rounded-3xl bg-white p-8 shadow-lg text-center">
-          <div class="mb-4 flex justify-center text-indigo-600">
-            <Image src={ iconoOracion } alt="Oracion" class="w-32 h-32 object-contain">
+        <div class="rounded-3xl bg-white p-8 shadow-lg text-center border-t-4 border-idp-purpura">
+          <div class="mb-4 flex justify-center">
+            <Image src={iconoOracion} alt="Oracion" class="w-32 h-32 object-contain" />
           </div>
-          <h3 class="text-2xl font-semibold text-slate-900 mb-3">Oracion</h3>
+          <h3 class="font-headline text-2xl font-semibold text-idp-azul mb-3">Oración</h3>
         </div>
-        <div class="rounded-3xl bg-white p-8 shadow-lg text-center">
-          <div class="mb-4 flex justify-center text-indigo-600">
-            <Image src={ iconoServicio } alt="Servicio" class="w-32 h-32 object-contain">
+        <div class="rounded-3xl bg-white p-8 shadow-lg text-center border-t-4 border-idp-rojo">
+          <div class="mb-4 flex justify-center">
+            <Image src={iconoServicio} alt="Servicio" class="w-32 h-32 object-contain" />
           </div>
-          <h3 class="text-2xl font-semibold text-slate-900 mb-3">Servicio</h3>
+          <h3 class="font-headline text-2xl font-semibold text-idp-azul mb-3">Servicio</h3>
         </div>
       </div>
     </div>
   </section>
+
 </BaseLayout>

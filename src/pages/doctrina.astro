@@ -1,4 +1,5 @@
 ---
+// src/pages/doctrinas.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AccordionCard from '../components/AccordionCard.astro';
 import { doctrinas } from '../consts/doctrinas';
@@ -10,30 +11,35 @@ const categories = [...new Set(doctrinas.map(d => d.category))];
 <BaseLayout 
   pageTitle="Doctrinas"
   description="Explora los fundamentos de nuestra fe en la Iglesia de Dios de la Profecía. Principios bíblicos organizados para el estudio, la reflexión y la edificación espiritual."
-  >
-  <div class="bg-slate-50 min-h-screen pt-32 pb-20">
+>
+  <div class="bg-idp-azul/5 min-h-screen pt-32 pb-20">
     <div class="max-w-5xl mx-auto px-4">
       
+      <!-- Encabezado -->
       <header class="text-center mb-16">
-        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Nuestras Doctrinas</h1>
-        <p class="text-slate-600 max-w-lg mx-auto">Principios fundamentales de nuestra fe, organizados para tu estudio y edificación.</p>
+        <p class="font-highlight text-xs uppercase tracking-[0.28em] text-idp-rojo font-bold mb-3">Fundamentos Bíblicos</p>
+        <h1 class="font-headline text-4xl md:text-5xl font-bold text-idp-azul mb-4">Nuestras Doctrinas</h1>
+        <p class="font-sans font-light text-slate-600 max-w-lg mx-auto text-sm md:text-base">
+          Principios fundamentales de nuestra fe, organizados para tu estudio y edificación.
+        </p>
       </header>
 
-      <!-- Se añadió la clase 'scrollbar-hide' para ocultar la barra visualmente -->
-      <nav class="flex flex-nowrap md:flex-wrap gap-2 mb-16 justify-start md:justify-center overflow-x-auto md:overflow-visible sticky top-24 z-20 bg-slate-50/80 backdrop-blur-md py-4 px-4 -mx-4 md:mx-0 md:px-0 scrollbar-hide">
+      <!-- Navegación de Categorías (Tabs / Anclajes) -->
+      <nav class="flex flex-nowrap md:flex-wrap gap-2 mb-16 justify-start md:justify-center overflow-x-auto md:overflow-visible sticky top-24 z-20 bg-slate-50/0 backdrop-blur-md py-4 px-4 -mx-4 md:mx-0 md:px-0 scrollbar-hide">
         {categories.map(cat => (
           <a href={`#${cat.replace(/\s+/g, '-').toLowerCase()}`} 
-             class="whitespace-nowrap px-5 py-2.5 bg-white border border-slate-200 rounded-full text-sm font-semibold text-slate-700 hover:border-cyan-500 hover:text-cyan-700 transition-all shadow-sm">
+             class="font-sans whitespace-nowrap px-5 py-2.5 bg-white border border-idp-dorado/30 rounded-full text-sm font-semibold text-slate-700 hover:border-idp-rojo hover:text-idp-rojo hover:bg-idp-azul/5 transition-all shadow-xs">
             {cat}
           </a>
         ))}
       </nav>
 
+      <!-- Listado de Categorías y Doctrinas -->
       <div class="space-y-16">
         {categories.map(cat => (
           <section id={cat.replace(/\s+/g, '-').toLowerCase()} class="scroll-mt-45 md:scroll-mt-55">
-            <h2 class="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
-               <span class="h-6 w-1.5 bg-cyan-600 rounded-full"></span>
+            <h2 class="font-headline text-2xl font-bold text-idp-azul mb-8 flex items-center gap-3">
+               <span class="h-6 w-1.5 bg-idp-rojo rounded-full"></span>
                {cat}
             </h2>
             <div class="space-y-4">

@@ -1,3 +1,11 @@
 @import "tailwindcss";
 @import 'tailwind-animations';
 @plugin "@tailwindcss/typography";
+
+@theme {
+  /* Colores institucionales de la IDP */
+  --color-idp-rojo: #FD070C;
+  --color-idp-azul: #172172;
+  --color-idp-purpura: #4B2787;
+  --color-idp-dorado: #EDC732;
+}
