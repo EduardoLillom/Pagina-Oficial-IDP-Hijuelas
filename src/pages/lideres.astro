@@ -19,13 +19,16 @@ function initials(name: string) {
     <div class="mx-auto max-w-3xl px-4 sm:px-6 text-center">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-idp-rojo/10 border border-idp-rojo/20 mb-6">
         <span class="w-2 h-2 rounded-full bg-idp-rojo animate-pulse"></span>
-        <span class="font-highlight text-xs uppercase tracking-widest text-idp-rojo font-bold">
+        <!-- Texto resaltado con Berkeley Oldstyle -->
+        <span class="font-serif text-xs uppercase tracking-widest text-idp-rojo font-bold">
           Iglesia de Dios de la Profecía • Hijuelas
         </span>
       </div>
-      <h1 class="font-headline text-4xl sm:text-6xl font-extrabold text-idp-azul mb-6 tracking-tight">
+      <!-- Titular con Aktiv Grotesk Ex -->
+      <h1 class="font-heading text-4xl sm:text-6xl font-extrabold text-idp-azul mb-6 tracking-tight">
         Nuestro Liderazgo
       </h1>
+      <!-- Cuerpo de texto con Nunito Sans -->
       <p class="font-sans font-light text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
         Conoce al equipo comprometido que Dios ha levantado para guiar, servir y edificar a nuestra congregación.
       </p>
@@ -56,7 +59,8 @@ function initials(name: string) {
         <div class="flex items-center gap-4 mb-10">
           <div class="flex items-center gap-2">
             <span class="w-2 h-6 bg-idp-rojo rounded-full"></span>
-            <h2 class="font-headline text-2xl font-bold text-idp-azul tracking-tight">Equipo Pastoral</h2>
+            <!-- Titular con Aktiv Grotesk Ex -->
+            <h2 class="font-heading text-2xl font-bold text-idp-azul tracking-tight">Equipo Pastoral</h2>
           </div>
           <span class="h-px flex-1 bg-idp-dorado/40"></span>
         </div>
@@ -75,7 +79,8 @@ function initials(name: string) {
         <div class="flex items-center gap-4 mb-10">
           <div class="flex items-center gap-2">
             <span class="w-2 h-6 bg-idp-rojo rounded-full"></span>
-            <h2 class="font-headline text-2xl font-bold text-idp-azul tracking-tight">Liderazgo de Ministerios</h2>
+            <!-- Titular con Aktiv Grotesk Ex -->
+            <h2 class="font-heading text-2xl font-bold text-idp-azul tracking-tight">Liderazgo de Ministerios</h2>
           </div>
           <span class="h-px flex-1 bg-idp-dorado/40"></span>
         </div>
@@ -85,7 +90,8 @@ function initials(name: string) {
             <div class="bg-white rounded-3xl p-6 shadow-sm border border-idp-dorado/30 flex flex-col justify-between hover:shadow-xl hover:border-idp-dorado transition-all duration-300 mx-auto w-full max-w-sm lg:max-w-none">
               <div>
                 <div class="flex items-center justify-between gap-2 mb-4">
-                  <span class="font-highlight text-xs font-bold uppercase tracking-wider text-idp-rojo bg-idp-rojo/10 px-3 py-1 rounded-full inline-block">
+                  <!-- Texto resaltado con Berkeley Oldstyle -->
+                  <span class="font-serif text-xs font-bold uppercase tracking-wider text-idp-rojo bg-idp-rojo/10 px-3 py-1 rounded-full inline-block">
                     {ministry.ministryName}
                   </span>
                   {ministry.leader.dualRole && (
@@ -103,13 +109,15 @@ function initials(name: string) {
                   ) : (
                     <div class="flex items-center gap-4">
                       <div
-                        class="flex-0 w-14 h-14 rounded-full bg-idp-azul/10 text-idp-azul font-headline font-bold flex items-center justify-center text-lg border border-idp-azul/20"
+                        class="flex-0 w-14 h-14 rounded-full bg-idp-azul/10 text-idp-azul font-heading font-bold flex items-center justify-center text-lg border border-idp-azul/20"
                         aria-hidden="true"
                       >
                         {initials(ministry.leader.name)}
                       </div>
                       <div>
-                        <p class="font-headline font-bold text-slate-900 text-sm">{ministry.leader.name}</p>
+                        <!-- Titular con Aktiv Grotesk Ex -->
+                        <p class="font-heading font-bold text-slate-900 text-sm">{ministry.leader.name}</p>
+                        <!-- Cuerpo de texto con Nunito Sans -->
                         <p class="font-sans text-slate-500 text-xs">{ministry.leader.role}</p>
                       </div>
                     </div>
@@ -126,7 +134,8 @@ function initials(name: string) {
         <div class="flex items-center gap-4 mb-10">
           <div class="flex items-center gap-2">
             <span class="w-2 h-6 bg-idp-rojo rounded-full"></span>
-            <h2 class="font-headline text-2xl font-bold text-idp-azul tracking-tight">Equipo Administrativo</h2>
+            <!-- Titular con Aktiv Grotesk Ex -->
+            <h2 class="font-heading text-2xl font-bold text-idp-azul tracking-tight">Equipo Administrativo</h2>
           </div>
           <span class="h-px flex-1 bg-idp-dorado/40"></span>
         </div>
@@ -145,7 +154,8 @@ function initials(name: string) {
         <div class="flex items-center gap-4 mb-10">
           <div class="flex items-center gap-2">
             <span class="w-2 h-6 bg-idp-rojo rounded-full"></span>
-            <h2 class="font-headline text-2xl font-bold text-idp-azul tracking-tight">Comités de Trabajo</h2>
+            <!-- Titular con Aktiv Grotesk Ex -->
+            <h2 class="font-heading text-2xl font-bold text-idp-azul tracking-tight">Comités de Trabajo</h2>
           </div>
           <span class="h-px flex-1 bg-idp-dorado/40"></span>
         </div>
@@ -161,28 +171,33 @@ function initials(name: string) {
                     class={`w-full h-full object-contain sm:object-cover ${committee.imagePosition || 'object-center'}`}
                   />
                   <div class="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent flex items-end p-6">
-                    <span class="font-highlight text-xs font-bold uppercase tracking-wider text-idp-dorado bg-idp-azul/80 backdrop-blur-md px-3 py-1 rounded-full border border-idp-dorado/40">
+                    <!-- Texto resaltado con Berkeley Oldstyle -->
+                    <span class="font-serif text-xs font-bold uppercase tracking-wider text-idp-dorado bg-idp-azul/80 backdrop-blur-md px-3 py-1 rounded-full border border-idp-dorado/40">
                       Directorio
                     </span>
                   </div>
                 </div>
               ) : (
                 <div class="h-48 sm:h-56 w-full bg-linear-to-br from-idp-azul/10 to-white flex items-end p-6 border-b border-idp-dorado/20">
-                  <span class="font-highlight text-xs font-bold uppercase tracking-wider text-idp-purpura bg-white px-3 py-1 rounded-full shadow-xs">
+                  <!-- Texto resaltado con Berkeley Oldstyle -->
+                  <span class="font-serif text-xs font-bold uppercase tracking-wider text-idp-purpura bg-white px-3 py-1 rounded-full shadow-xs">
                     Comité
                   </span>
                 </div>
               )}
 
               <div class="p-6 sm:p-8 flex-1">
-                <h3 class="font-headline text-lg font-bold text-idp-azul mb-6 pb-3 border-b border-slate-100">
+                <!-- Titular con Aktiv Grotesk Ex -->
+                <h3 class="font-heading text-lg font-bold text-idp-azul mb-6 pb-3 border-b border-slate-100">
                   {committee.title}
                 </h3>
                 <ul class="space-y-4">
                   {committee.members.map((member) => (
                     <li class="flex items-center justify-between text-sm py-1.5 border-b border-slate-50 last:border-0">
+                      <!-- Cuerpo de texto con Nunito Sans -->
                       <span class="font-sans font-medium text-slate-800">{member.name}</span>
-                      <span class="font-highlight text-idp-purpura font-bold bg-idp-purpura/10 px-3 py-1 rounded-full text-xs">
+                      <!-- Texto resaltado con Berkeley Oldstyle -->
+                      <span class="font-serif text-idp-purpura font-bold bg-idp-purpura/10 px-3 py-1 rounded-full text-xs">
                         {member.role}
                       </span>
                     </li>
@@ -195,11 +210,12 @@ function initials(name: string) {
       </div>
 
       <!-- === LOGÍSTICA Y ÁREAS DE APOYO === -->
-      <div id="Areas de Apoyo y Servicio" class="scroll-mt-45 md:scroll-mt-55">
+      <div id="Apoyo" class="scroll-mt-45 md:scroll-mt-55">
         <div class="flex items-center gap-4 mb-10">
           <div class="flex items-center gap-2">
             <span class="w-2 h-6 bg-idp-rojo rounded-full"></span>
-            <h2 class="font-headline text-2xl font-bold text-idp-azul tracking-tight">Áreas de Apoyo y Servicio</h2>
+            <!-- Titular con Aktiv Grotesk Ex -->
+            <h2 class="font-heading text-2xl font-bold text-idp-azul tracking-tight">Áreas de Apoyo y Servicio</h2>
           </div>
           <span class="h-px flex-1 bg-idp-dorado/40"></span>
         </div>
@@ -217,8 +233,10 @@ function initials(name: string) {
                 </div>
               )}
               <div class="p-5 flex flex-col justify-between grow">
-                <p class="font-headline text-slate-800 font-bold text-sm mb-1">{item.name}</p>
-                <span class="font-highlight text-xs uppercase tracking-wider text-idp-rojo font-bold block">{item.role}</span>
+                <!-- Titular con Aktiv Grotesk Ex -->
+                <p class="font-heading text-slate-800 font-bold text-sm mb-1">{item.name}</p>
+                <!-- Texto resaltado con Berkeley Oldstyle -->
+                <span class="font-serif text-xs uppercase tracking-wider text-idp-rojo font-bold block">{item.role}</span>
               </div>
             </div>
           ))}

@@ -2,87 +2,135 @@
 // src/pages/horarios.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+const iconBook = `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>`;
+
+const iconBolt = `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>`;
+
+const iconHeart = `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>`;
+
+const iconUsers = `<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>`;
+
+const iconChurch = `<svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>`;
+
+const featured = {
+  day: "Domingo",
+  time: "10:30",
+  event: "Culto General",
+  location: "Sede villa los naranjos",
+  icon: iconChurch,
+};
+
 const horarios = [
-  { 
-    day: "Jueves", 
-    time: "19:30", 
-    event: "Estudio Bíblico", 
+  {
+    day: "Jueves",
+    time: "19:30",
+    event: "Estudio Bíblico",
     location: "Sede villa los naranjos",
-    gradient: "from-idp-azul/10 to-idp-purpura/5" 
+    icon: iconBook,
   },
-  { 
-    day: "Viernes", 
-    time: "19:30", 
-    event: "Reunión de Jóvenes", 
+  {
+    day: "Viernes",
+    time: "19:30",
+    event: "Reunión de Jóvenes",
     location: "Sede villa los naranjos",
-    gradient: "from-idp-purpura/10 to-idp-azul/5" 
+    icon: iconBolt,
   },
-  { 
-    day: "Viernes", 
-    time: "19:30", 
-    event: "Reunión de Damas", 
+  {
+    day: "Viernes",
+    time: "19:30",
+    event: "Reunión de Damas",
     location: "Pasaje el Rauli poblacion Sven krarup casa 940",
-    gradient: "from-idp-purpura/10 to-idp-azul/5" 
+    icon: iconHeart,
   },
-  { 
-    day: "Viernes", 
-    time: "20:00", 
-    event: "Reunión de Varones", 
+  {
+    day: "Viernes",
+    time: "20:00",
+    event: "Reunión de Varones",
     location: "Hogar hnm. Jaime Reinoso",
-    gradient: "from-idp-purpura/10 to-idp-azul/5" 
-  },
-  { 
-    day: "Domingo", 
-    time: "10:30", 
-    event: "Culto General", 
-    location: "Sede villa los naranjos",
-    gradient: "from-idp-azul/15 to-idp-dorado/10" 
+    icon: iconUsers,
   },
 ];
 ---
 
-<BaseLayout 
+<BaseLayout
   pageTitle="Horarios"
   description="Consulta nuestros horarios de reuniones en la Iglesia de Dios de la Profecía en Hijuelas. ¡Te esperamos en nuestros encuentros semanales de adoración, estudio y comunidad!"
 >
-  <section class="bg-idp-azul/5 py-20 pt-24 min-h-screen">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6">
-      
+  <section class="bg-idp-azul/5 py-24 pt-32 min-h-screen">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+
       <!-- Encabezado -->
-      <div class="text-center mb-16">
-        <p class="font-highlight text-xs uppercase tracking-[0.28em] text-idp-rojo font-bold mb-3">Nuestros encuentros</p>
-        <h1 class="font-headline text-4xl md:text-5xl font-extrabold text-idp-azul">Horarios de Reuniones</h1>
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="font-serif text-xs uppercase tracking-[0.3em] text-idp-rojo font-bold px-4 py-1.5 rounded-full bg-idp-rojo/10 border border-idp-rojo/20 inline-block mb-4">
+          Nuestros Encuentros
+        </span>
+        <h1 class="font-heading text-4xl md:text-5xl font-extrabold text-idp-azul tracking-tight">
+          Horarios de Reuniones
+        </h1>
+        <p class="font-sans font-light mt-4 text-base md:text-lg text-slate-600 leading-relaxed">
+          Ven y comparte la fe junto a nosotros. Descubre cuándo y dónde nos reunimos cada semana.
+        </p>
       </div>
 
-      <!-- Tarjetas de Horarios -->
-      <div class="space-y-6">
-        {horarios.map((item) => (
-          <div class={`group p-6 rounded-2xl border border-idp-dorado/30 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:shadow-xl hover:border-idp-dorado transition-all duration-300 bg-linear-to-r ${item.gradient}`}>
-            
-            <div class="flex items-center gap-6">
-              <div class="text-center min-w-20 bg-white/80 p-2 rounded-xl backdrop-blur-sm border border-idp-dorado/30 shadow-xs">
-                <span class="font-headline block text-2xl font-bold text-idp-azul">{item.day.slice(0,3)}</span>
-                <span class="font-highlight text-xs uppercase text-idp-purpura font-bold">{item.day}</span>
-              </div>
-              
-              <div>
-                <h3 class="font-headline text-xl font-bold text-idp-azul">{item.event}</h3>
-                <p class="font-sans font-light text-slate-700 text-sm mt-0.5"><strong class="font-semibold text-idp-azul">Ubicación:</strong> {item.location}</p>
-              </div>
-            </div>
+      <!-- Tarjeta destacada: Culto General (el evento principal de la semana) -->
+      <div class="relative overflow-hidden rounded-4xl bg-idp-azul text-white p-7 md:p-10 mb-10 shadow-xl shadow-idp-azul/25">
+        <div class="pointer-events-none absolute -right-8 -top-8 w-44 h-44 opacity-10">
+          <Fragment set:html={featured.icon} />
+        </div>
+        <div class="relative flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8">
+          <div class="w-16 h-16 shrink-0 rounded-2xl bg-white/15 flex items-center justify-center border border-white/20 p-3">
+            <Fragment set:html={featured.icon} />
+          </div>
+          <div class="flex-1 min-w-0">
+            <span class="font-serif text-xs uppercase tracking-[0.25em] text-idp-dorado font-bold block mb-1">
+              Servicio Principal · {featured.day}
+            </span>
+            <h2 class="font-heading text-2xl md:text-3xl font-extrabold">{featured.event}</h2>
+            <p class="font-sans font-light text-white/75 text-sm md:text-base mt-1">{featured.location}</p>
+          </div>
+          <div class="shrink-0 bg-white/10 border border-white/20 px-5 py-3 rounded-2xl text-center self-start sm:self-center">
+            <span class="font-serif text-[9px] uppercase font-bold text-idp-dorado tracking-wider block">Hora</span>
+            <span class="font-sans font-extrabold text-lg tracking-wide">{featured.time} hrs.</span>
+          </div>
+        </div>
+      </div>
 
-            <div class="bg-white/90 border border-idp-dorado/40 px-4 py-2 rounded-lg shadow-xs backdrop-blur-sm self-end sm:self-center">
-              <span class="font-sans text-idp-rojo font-bold tracking-wide">{item.time} hrs.</span>
+      <!--
+        Resto de reuniones: tarjetas horizontales (icono + texto en fila), una al lado
+        de otra.
+        - Mobile (<sm): cada tarjeta ocupa el 100% del ancho y se apilan verticalmente,
+          pero cada tarjeta en sí mantiene el layout horizontal (icono a la izquierda,
+          texto a la derecha) para que se lea cómodo en pantallas angostas.
+        - Tablet (sm): 2 columnas lado a lado.
+        - Desktop (lg+): las 4 tarjetas en una sola fila, una al lado de otra.
+      -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {horarios.map((item) => (
+          <div class="group relative min-w-0 bg-white/90 backdrop-blur-md border border-idp-azul/30 hover:border-idp-azul p-5 rounded-3xl shadow-lg shadow-idp-azul/5 flex items-start gap-4 transition-all duration-300 hover:-translate-y-1">
+            <div class="w-13 h-13 shrink-0 rounded-2xl flex items-center justify-center border border-black/5 shadow-inner bg-idp-azul/15 text-idp-azul group-hover:bg-idp-azul group-hover:text-white transition-colors duration-300">
+              <Fragment set:html={item.icon} />
+            </div>
+            <div class="min-w-0 flex-1">
+              <span class="font-serif text-[10px] uppercase font-bold tracking-wider block mb-0.5 text-idp-azul">
+                {item.day} · {item.time} hrs.
+              </span>
+              <h3 class="font-heading text-base md:text-lg font-bold text-idp-azul leading-snug">
+                {item.event}
+              </h3>
+              <p class="font-sans font-light text-slate-600 text-xs mt-1 leading-snug">
+                {item.location}
+              </p>
             </div>
           </div>
         ))}
       </div>
 
       <!-- Tarjeta Informativa Final -->
-      <div class="mt-12 p-8 bg-idp-azul rounded-3xl text-center text-white shadow-xl border border-idp-dorado/40">
-        <h3 class="font-headline text-xl md:text-2xl font-bold mb-2 text-idp-dorado">¿Es tu primera vez?</h3>
-        <p class="font-sans font-light text-slate-200 max-w-xl mx-auto text-sm md:text-base">
-          Te recibiremos con los brazos abiertos. No necesitas invitación, solo ven con ganas de compartir y alabar a Dios.
+      <div class="mt-12 p-8 md:p-12 bg-white border border-idp-dorado/40 rounded-4xl text-center shadow-sm max-w-4xl mx-auto">
+        <span class="font-serif text-xs uppercase tracking-widest text-idp-rojo font-bold block mb-2">Comunidad Abierta</span>
+        <h3 class="font-heading text-2xl md:text-3xl font-bold mb-3 text-idp-azul">¿Es tu primera vez con nosotros?</h3>
+        <p class="font-sans font-light text-slate-600 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+          Te recibiremos con los brazos abiertos. No necesitas invitación formal, solo ven con ganas de compartir, aprender de la palabra y alabar a Dios.
         </p>
       </div>
 

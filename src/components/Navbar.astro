@@ -35,13 +35,15 @@ const navItems = [
     <a href="/" class="flex items-center gap-2 pl-2 shrink-0 group">
       <Image src={logoIdp} alt="Logo IDP Hijuelas" class="h-9 w-9 shrink-0 sm:h-10 sm:w-10 object-contain" />
       <div class="flex flex-col min-w-0">
-        <p class="font-headline text-xs font-bold text-idp-azul truncate group-hover:text-idp-rojo transition-colors">IDP Hijuelas</p>
-        <p class="font-highlight text-[10px] uppercase tracking-[0.2em] text-idp-purpura truncate">Fe, unidad y santidad</p>
+        <!-- Titular con Aktiv Grotesk Ex -->
+        <p class="font-heading text-xs font-bold text-idp-azul truncate group-hover:text-idp-rojo transition-colors">IDP Hijuelas</p>
+        <!-- Texto resaltado con Berkeley Oldstyle -->
+        <p class="font-serif text-[10px] uppercase tracking-[0.2em] text-idp-purpura truncate">Fe, unidad y santidad</p>
       </div>
     </a>
 
     <!-- Menú de Escritorio -->
-    <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700">
+    <nav class="hidden md:flex items-center gap-6 text-sm font-sans text-slate-700">
       {navItems.map((item) => (
         item.dropdown ? (
           <div class="relative group" tabindex="0">
@@ -83,7 +85,8 @@ const navItems = [
       {navItems.map((item) => (
         item.dropdown ? (
           <div>
-            <p class="font-highlight text-[10px] font-bold text-idp-purpura uppercase tracking-widest mb-2">{item.label}</p>
+            <!-- Texto resaltado con Berkeley Oldstyle -->
+            <p class="font-serif text-[10px] font-bold text-idp-purpura uppercase tracking-widest mb-2">{item.label}</p>
             {item.dropdown.flatMap(col => col.links).map(link => (
               <a href={link.to} class="font-sans py-2 text-slate-700 pl-4 border-l-2 border-idp-purpura/30 hover:border-idp-rojo hover:text-idp-rojo transition-colors block">{link.label}</a>
             ))}

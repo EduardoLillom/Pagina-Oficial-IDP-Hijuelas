@@ -17,8 +17,11 @@ const categories = [...new Set(doctrinas.map(d => d.category))];
       
       <!-- Encabezado -->
       <header class="text-center mb-16">
-        <p class="font-highlight text-xs uppercase tracking-[0.28em] text-idp-rojo font-bold mb-3">Fundamentos Bíblicos</p>
-        <h1 class="font-headline text-4xl md:text-5xl font-bold text-idp-azul mb-4">Nuestras Doctrinas</h1>
+        <!-- Texto resaltado con Berkeley Oldstyle -->
+        <p class="font-serif text-xs uppercase tracking-[0.28em] text-idp-rojo font-bold mb-3">Fundamentos Bíblicos</p>
+        <!-- Titular con Aktiv Grotesk Ex -->
+        <h1 class="font-heading text-4xl md:text-5xl font-bold text-idp-azul mb-4">Nuestras Doctrinas</h1>
+        <!-- Cuerpo de texto con Nunito Sans -->
         <p class="font-sans font-light text-slate-600 max-w-lg mx-auto text-sm md:text-base">
           Principios fundamentales de nuestra fe, organizados para tu estudio y edificación.
         </p>
@@ -38,7 +41,8 @@ const categories = [...new Set(doctrinas.map(d => d.category))];
       <div class="space-y-16">
         {categories.map(cat => (
           <section id={cat.replace(/\s+/g, '-').toLowerCase()} class="scroll-mt-45 md:scroll-mt-55">
-            <h2 class="font-headline text-2xl font-bold text-idp-azul mb-8 flex items-center gap-3">
+            <!-- Titular con Aktiv Grotesk Ex -->
+            <h2 class="font-heading text-2xl font-bold text-idp-azul mb-8 flex items-center gap-3">
                <span class="h-6 w-1.5 bg-idp-rojo rounded-full"></span>
                {cat}
             </h2>

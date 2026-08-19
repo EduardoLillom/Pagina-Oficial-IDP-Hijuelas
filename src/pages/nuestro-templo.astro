@@ -23,8 +23,11 @@ const hitos = [
       
       <!-- Encabezado -->
       <div class="text-center mb-20">
-        <p class="font-highlight text-xs uppercase tracking-[0.28em] text-idp-rojo font-bold mb-3">Fe y Progreso</p>
-        <h1 class="font-headline text-4xl md:text-6xl font-bold text-idp-azul mb-6">Construyendo nuestra casa</h1>
+        <!-- Texto resaltado con Berkeley Oldstyle -->
+        <p class="font-serif text-xs uppercase tracking-[0.28em] text-idp-rojo font-bold mb-3">Fe y Progreso</p>
+        <!-- Titular con Aktiv Grotesk Ex -->
+        <h1 class="font-heading text-4xl md:text-6xl font-bold text-idp-azul mb-6">Construyendo nuestra casa</h1>
+        <!-- Cuerpo de texto con Nunito Sans -->
         <p class="font-sans font-light text-slate-600 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
           Un espacio diseñado para adorar, aprender y servir a nuestra comunidad en Hijuelas.
         </p>
@@ -34,10 +37,13 @@ const hitos = [
       <section class="mb-20 bg-white p-10 rounded-3xl border border-idp-dorado/30 shadow-md">
         <div class="grid md:grid-cols-2 gap-10 items-center">
           <div>
-            <h2 class="font-headline text-2xl md:text-3xl font-bold text-idp-azul mb-6">Nuestra Historia</h2>
+            <!-- Titular con Aktiv Grotesk Ex -->
+            <h2 class="font-heading text-2xl md:text-3xl font-bold text-idp-azul mb-6">Nuestra Historia</h2>
+            <!-- Cuerpo de texto con Nunito Sans -->
             <p class="font-sans font-light text-slate-700 leading-relaxed mb-4 text-sm md:text-base">
               Desde nuestros inicios en Hijuelas, nuestra comunidad ha crecido no solo en número, sino en fe y servicio. Tras años de reuniones en espacios temporales, Dios abrió la puerta para obtener nuestro terreno propio.
             </p>
+            <!-- Cuerpo de texto con Nunito Sans -->
             <p class="font-sans font-light text-slate-700 leading-relaxed text-sm md:text-base">
               Este templo no es solo un edificio; es el cumplimiento de una visión de décadas. Necesitamos un espacio permanente que nos permita acoger a más familias y albergar nuestros programas de ayuda social.
             </p>
@@ -56,7 +62,9 @@ const hitos = [
       <!-- Barra de Progreso de Obra -->
       <div class="bg-white p-8 rounded-3xl shadow-md border border-idp-dorado/30 mb-16">
         <div class="flex justify-between mb-2">
-          <span class="font-headline font-bold text-idp-azul">Progreso de obra</span>
+          <!-- Titular con Aktiv Grotesk Ex -->
+          <span class="font-heading font-bold text-idp-azul">Progreso de obra</span>
+          <!-- Cuerpo de texto con Nunito Sans -->
           <span class="font-sans text-idp-rojo font-bold">45%</span>
         </div>
         <div class="w-full bg-idp-azul/10 rounded-full h-4 overflow-hidden border border-idp-azul/15">
@@ -69,8 +77,11 @@ const hitos = [
         {hitos.map((hito) => (
           <div class="relative pl-8">
             <div class="absolute -left-2.25 top-1 w-4 h-4 bg-idp-rojo rounded-full ring-4 ring-white shadow-xs"></div>
-            <span class="font-highlight text-xs font-bold text-idp-rojo uppercase tracking-widest">{hito.fecha}</span>
-            <h3 class="font-headline text-xl font-bold text-idp-azul mt-1">{hito.titulo}</h3>
+            <!-- Texto resaltado con Berkeley Oldstyle -->
+            <span class="font-serif text-xs font-bold text-idp-rojo uppercase tracking-widest">{hito.fecha}</span>
+            <!-- Titular con Aktiv Grotesk Ex -->
+            <h3 class="font-heading text-xl font-bold text-idp-azul mt-1">{hito.titulo}</h3>
+            <!-- Cuerpo de texto con Nunito Sans -->
             <p class="font-sans font-light text-slate-600 mt-2 text-sm md:text-base">{hito.desc}</p>
           </div>
         ))}
@@ -78,7 +89,7 @@ const hitos = [
 
     <!-- Bloque de Llamado a la Acción (Comentado originalmente) -->
     <!-- <div class="text-center bg-idp-azul p-12 rounded-3xl text-white shadow-xl border border-idp-dorado/40">
-        <h2 class="font-headline text-3xl font-bold mb-4 text-idp-dorado">¿Quieres ser parte?</h2>
+        <h2 class="font-heading text-3xl font-bold mb-4 text-idp-dorado">¿Quieres ser parte?</h2>
         <p class="font-sans font-light text-slate-200 mb-8 max-w-md mx-auto text-sm md:text-base">Cada oración y cada aporte cuenta para ver esta visión hecha realidad.</p>
         <a href="/donar" class="bg-idp-rojo px-8 py-4 rounded-full font-sans font-bold hover:bg-red-700 transition shadow-lg text-white">Conocer cómo ayudar</a>
     </div> -->

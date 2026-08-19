@@ -22,8 +22,11 @@ try {
       
       <!-- Encabezado -->
       <header class="text-center mb-16">
-        <p class="font-highlight text-xs uppercase tracking-[0.28em] text-idp-rojo font-bold mb-3">Próximas Actividades</p>
-        <h1 class="font-headline text-4xl md:text-5xl font-bold text-idp-azul mb-4">Nuestros Eventos</h1>
+        <!-- Texto resaltado con Berkeley Oldstyle -->
+        <p class="font-serif text-xs uppercase tracking-[0.28em] text-idp-rojo font-bold mb-3">Próximas Actividades</p>
+        <!-- Titular con Aktiv Grotesk Ex -->
+        <h1 class="font-heading text-4xl md:text-5xl font-bold text-idp-azul mb-4">Nuestros Eventos</h1>
+        <!-- Cuerpo de texto con Nunito Sans -->
         <p class="font-sans font-light text-slate-600 max-w-lg mx-auto text-sm md:text-base">
           Únete a nuestras próximas actividades y sé parte de nuestra comunidad.
         </p>
@@ -37,15 +40,19 @@ try {
               
               <!-- Tarjeta de Fecha -->
               <div class="flex flex-col items-center justify-center bg-idp-azul/5 rounded-2xl p-4 min-w-20 w-20 shrink-0 border border-idp-azul/15">
-                <span class="font-headline text-idp-azul font-bold text-2xl">{new Date(evento.fecha).getDate()}</span>
-                <span class="font-highlight text-idp-rojo font-bold uppercase text-xs tracking-wider">
+                <!-- Titular con Aktiv Grotesk Ex -->
+                <span class="font-heading text-idp-azul font-bold text-2xl">{new Date(evento.fecha).getDate()}</span>
+                <!-- Texto resaltado con Berkeley Oldstyle -->
+                <span class="font-serif text-idp-rojo font-bold uppercase text-xs tracking-wider">
                   {new Date(evento.fecha).toLocaleString('es-ES', { month: 'short' })}
                 </span>
               </div>
 
               <!-- Información del Evento -->
               <div class="flex-1 text-center md:text-left">
-                <h3 class="font-headline text-xl font-bold text-idp-azul mb-2">{evento.title}</h3>
+                <!-- Titular con Aktiv Grotesk Ex -->
+                <h3 class="font-heading text-xl font-bold text-idp-azul mb-2">{evento.title}</h3>
+                <!-- Cuerpo de texto con Nunito Sans -->
                 <p class="font-sans font-light text-slate-600 text-sm mb-4 leading-relaxed">{evento.descripcion}</p>
                 
                 <div class="flex flex-wrap justify-center md:justify-start gap-4 text-xs font-sans font-medium text-idp-purpura">
@@ -59,7 +66,9 @@ try {
         ) : (
           <!-- Estado Vacío -->
           <div class="text-center py-20 px-6 bg-white rounded-3xl border border-idp-dorado/40 border-dashed shadow-xs">
-            <h3 class="font-headline text-xl font-bold text-idp-azul mb-2">Sin eventos programados</h3>
+            <!-- Titular con Aktiv Grotesk Ex -->
+            <h3 class="font-heading text-xl font-bold text-idp-azul mb-2">Sin eventos programados</h3>
+            <!-- Cuerpo de texto con Nunito Sans -->
             <p class="font-sans font-light text-slate-500 text-sm md:text-base">Por el momento no tenemos actividades públicas. ¡Vuelve pronto!</p>
           </div>
         )}

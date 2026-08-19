@@ -1,4 +1,5 @@
 ---
+// src/components/AccordionCard.astro
 const { title, text, icon: IconComponent } = Astro.props;
 ---
 <details class="group bg-white border border-idp-purpura/20 rounded-2xl p-6 transition-all duration-300 hover:border-idp-dorado shadow-sm">
@@ -6,10 +7,12 @@ const { title, text, icon: IconComponent } = Astro.props;
     <div class="flex items-center gap-4">
       <!-- Verificamos si existe el icono antes de renderizarlo -->
       {IconComponent && <IconComponent class="w-12 h-12 fill-idp-rojo stroke-idp-rojo" />}
-      <span class="font-headline font-bold text-idp-azul">{title}</span>
+      <!-- Titular con Aktiv Grotesk Ex -->
+      <span class="font-heading font-bold text-idp-azul">{title}</span>
     </div>
     <span class="transition group-open:rotate-45 text-2xl text-idp-rojo font-bold">+</span>
   </summary>
+  <!-- Cuerpo de texto con Nunito Sans -->
   <div class="font-sans font-light mt-4 pt-4 border-t border-idp-purpura/10 text-slate-700 leading-relaxed text-base" set:html={text} />
 </details>
 
