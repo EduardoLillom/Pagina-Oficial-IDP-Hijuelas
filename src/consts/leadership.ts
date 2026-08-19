@@ -21,7 +21,7 @@ export const pastoralTeam = [
   },
   {
     name: "Nelsy Saez Salinas",
-    role: "Pastora • Licenciada en Teología • Ministra Ordenada",
+    role: "Ministra Ordenada • Licenciada en Teología",
     description: "Dedicada a guiar y formar a los hermanos en la Palabra, la Pastora Nelsy camina junto a la congregación con firmeza y amor, tal como lo hace nuestro Pastor Fernando.",
     image: pastoraNelsySaez,
     imagePosition: "object-[center_20%]",
@@ -151,5 +151,5 @@ export const sections = [
   { id: "ministerios", label: "Ministerios" },
   { id: "administracion", label: "Administración" },
   { id: "comites", label: "Comités" },
-  { id: "Apeople/reas de Apoyo y Servicio", label: "Áreas de Apoyo y Servicio" }
+  { id: "Apoyo", label: "Áreas de Apoyo y Servicio" }
 ];
