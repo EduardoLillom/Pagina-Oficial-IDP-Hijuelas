@@ -9,3 +9,49 @@
   --color-idp-purpura: #4B2787;
   --color-idp-dorado: #EDC732;
 }
+
+@font-face {
+  font-family: "Aktiv Grotesk Ex";
+  src: url("/fonts/Aktiv-Grotesk-Ex.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Berkeley Oldstyle";
+  src: url("/fonts/Berkeley-Oldstyle-Book-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("/fonts/nunito-sans-v19-latin-300.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("/fonts/nunito-sans-v19-latin-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("/fonts/nunito-sans-v19-latin-900.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-heading: "Aktiv Grotesk Ex", sans-serif;
+  --font-serif: "Berkeley Oldstyle", serif;
+  --font-sans: "Nunito Sans", sans-serif;
+}
