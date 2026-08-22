@@ -1,0 +1,50 @@
+---
+import Layout from '../../../../layouts/AdminLayout.astro';
+import { getHitoById } from '../../../../lib/hitos';
+
+const { id } = Astro.params;
+const hito = await getHitoById(Astro.locals.supabase, id!);
+
+if (!hito) {
+  return Astro.redirect('/admin/hitos?error=not_found');
+}
+---
+<Layout title="Editar hito">
+  <h1 class="text-2xl font-bold mb-6">Editar hito</h1>
+  <form method="POST" action="/api/admin/hitos" enctype="multipart/form-data" class="space-y-4 max-w-lg">
+    <input type="hidden" name="accion" value="editar" />
+    <input type="hidden" name="id" value={hito.id} />
+    <input type="hidden" name="url_imagen_actual" value={hito.url_imagen ?? ''} />
+
+    <div>
+      <label class="block text-sm font-medium mb-1">Título</label>
+      <input type="text" name="titulo" value={hito.titulo} required class="w-full border rounded-lg px-3 py-2" />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1">Fecha</label>
+      <input type="date" name="fecha" value={hito.fecha} required class="w-full border rounded-lg px-3 py-2" />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1">Descripción</label>
+      <textarea name="descripcion" rows="3" class="w-full border rounded-lg px-3 py-2">{hito.descripcion}</textarea>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1">Orden</label>
+      <input type="number" name="orden" value={hito.orden} class="w-full border rounded-lg px-3 py-2" />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1">Imagen</label>
+      {hito.url_imagen && <img src={hito.url_imagen} alt={hito.titulo} class="w-24 h-24 object-cover rounded mb-2" />}
+      <input type="file" name="imagen" accept="image/*" class="w-full" />
+      <p class="text-xs text-gray-500 mt-1">Deja vacío para mantener la imagen actual.</p>
+    </div>
+
+    <button type="submit" class="bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700">
+      Guardar cambios
+    </button>
+  </form>
+</Layout>

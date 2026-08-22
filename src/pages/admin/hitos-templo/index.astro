@@ -1,0 +1,36 @@
+---
+import Layout from '../../../layouts/AdminLayout.astro';
+import { getHitos } from '../../../lib/hitos';
+
+const hitos = await getHitos(Astro.locals.supabase);
+---
+<Layout title="Hitos">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold">Hitos de construcción</h1>
+    <a href="/admin/hitos/nuevo" class="bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700">
+      + Nuevo hito
+    </a>
+  </div>
+
+  <div class="space-y-3">
+    {hitos.map((h) => (
+      <div class="flex items-center gap-4 border rounded-lg p-4">
+        {h.url_imagen && (
+          <img src={h.url_imagen} alt={h.titulo} class="w-16 h-16 object-cover rounded" />
+        )}
+        <div class="flex-1">
+          <p class="font-semibold">{h.titulo}</p>
+          <p class="text-sm text-gray-500">
+            {new Date(h.fecha).toLocaleDateString('es-CL', { month: 'long', year: 'numeric' })}
+          </p>
+        </div>
+        <a href={`/admin/hitos/editar/${h.id}`} class="text-cyan-600 hover:underline">Editar</a>
+        <form method="POST" action="/api/admin/hitos" onsubmit="return confirm('¿Eliminar este hito?')">
+          <input type="hidden" name="accion" value="eliminar" />
+          <input type="hidden" name="id" value={h.id} />
+          <button type="submit" class="text-red-600 hover:underline">Eliminar</button>
+        </form>
+      </div>
+    ))}
+  </div>
+</Layout>
