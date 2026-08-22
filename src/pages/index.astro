@@ -3,22 +3,19 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
-import FeaturedCarousel from '../components/FeaturedCarousel.astro';
+
+import HeroTarjetas from '../components/HeroTarjetas.astro';
+
 import Carousel from '../components/Carousel.astro';
 import { services } from '../consts/services.js';
-import { getActivePosts, type Slide } from '../lib/posts';
 
 import JovenImage from '../assets/gallery/joven.webp'
 import bibliaImage from '../assets/gallery/biblia.webp'
 import alabanzaBautizoImage from '../assets/gallery/alabanzaBautizo.webp'
-
 import bautizoImage from '../assets/gallery/bautizo.webp'
-import iconoOracion from '../assets/icons/icono-oracion.webp'
-import iconoAdoracion from '../assets/icons/icono-adoracion.webp'
-import iconoServicio from '../assets/icons/icono-servicio.webp'
 
 import Oracion from "../components/icons/Oracion.astro";
-// import Adoracion from "../components/icons/Adoracion.astro";
+import Adoracion from "../components/icons/Adoracion.astro";
 import Servicio from "../components/icons/Servicio.astro";
 
 const images = [
@@ -26,14 +23,6 @@ const images = [
   { src: bibliaImage, pos: 'object-center', alt: 'Biblia abierta' },
   { src: alabanzaBautizoImage, pos: 'object-[10%_center]', alt: 'Alabanza en bautizo' },
 ];
-const posts = await getActivePosts();
-
-const slides: Slide[] = posts.map(post => ({
-  title: post.title,
-  summary: post.summary || (post.content ? `${post.content.substring(0, 100)}...` : ''),
-  type: post.type,
-  target_url: post.target_url || '#',
-}));
 ---
 
 <BaseLayout 
@@ -41,7 +30,7 @@ const slides: Slide[] = posts.map(post => ({
   description="Bienvenidos a la IDP en Hijuelas. Un espacio de fe, amor y servicio donde vivimos juntos el llamado de Dios a través de la adoración y la unidad.">
   
   <Hero />
-  <FeaturedCarousel slides={slides} />
+  <HeroTarjetas />
 
   <!-- SECCIÓN DE SERVICIOS -->
   <section class="bg-white py-20 text-idp-azul">
@@ -126,7 +115,8 @@ const slides: Slide[] = posts.map(post => ({
       <div class="mt-16 grid gap-6 md:grid-cols-3">
         <div class="rounded-3xl bg-white p-8 shadow-lg text-center border-t-4 border-idp-azul">
           <div class="mb-4 flex justify-center">
-            <Image src={iconoAdoracion} alt="Adoración" class="w-32 h-32 object-contain" />
+            <!-- <Image src={iconoAdoracion} alt="Adoración" class="w-32 h-32 object-contain" /> -->
+            <Adoracion class="w-32 h-32 fill-idp-azul stroke-idp-dorado" />
           </div>
           <!-- Titular con Aktiv Grotesk Ex -->
           <h3 class="font-heading text-2xl font-semibold text-idp-azul mb-3">Adoración</h3>
