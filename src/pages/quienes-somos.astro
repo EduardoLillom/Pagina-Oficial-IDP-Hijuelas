@@ -56,7 +56,7 @@ const misionPilares = [
       <div class="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-center">
         <div class="space-y-6 order-2 lg:order-1">
           <SectionTitle title="Quiénes somos" />
-          <p class="font-sans font-light text-slate-700 text-base md:text-lg leading-relaxed">
+          <p class="font-sans font-light text-slate-700 text-justify text-base md:text-lg leading-relaxed">
             La Iglesia de Dios de la Profecía en Hijuelas nació con el propósito de compartir el amor de Cristo y 
             servir a la comunidad local. Sus inicios se remontan al año 2016, cuando comenzó como una misión dedicada 
             a la evangelización mediante campañas al aire libre, actividades comunitarias y un firme compromiso con la 
@@ -217,13 +217,13 @@ const misionPilares = [
         const targetId = btn.getAttribute('data-tab-target');
 
         buttons.forEach(b => {
-          b.classList.remove('bg-[#172172]', 'text-white', 'shadow-md');
-          b.classList.add('text-slate-600', 'hover:text-[#172172]', 'hover:bg-[#172172]/10');
+          b.classList.remove('bg-idp-azul', 'text-white', 'shadow-md');
+          b.classList.add('text-slate-600', 'hover:text-idp-azul', 'hover:bg-idp-azul/10');
           b.setAttribute('aria-selected', 'false');
         });
 
-        btn.classList.add('bg-[#172172]', 'text-white', 'shadow-md');
-        btn.classList.remove('text-slate-600', 'hover:text-[#172172]', 'hover:bg-[#172172]/10');
+        btn.classList.add('bg-idp-azul', 'text-white', 'shadow-md');
+        btn.classList.remove('text-slate-600', 'hover:text-idp-azul', 'hover:bg-idp-azul/10');
         btn.setAttribute('aria-selected', 'true');
 
         contents.forEach(content => {
