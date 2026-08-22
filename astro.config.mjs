@@ -21,7 +21,10 @@ export default defineConfig({
 
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    ssr: {
+      noExternal: ['sanitize-html', 'htmlparser2']
+    },
   },
 
   integrations: [sitemap()]
