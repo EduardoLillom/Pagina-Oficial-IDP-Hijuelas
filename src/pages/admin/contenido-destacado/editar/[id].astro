@@ -1,143 +1,122 @@
 ---
-// src/pages/admin/contenido-destacado/editar/[id].astro
-import AdminLayout from '../../../../layouts/AdminLayout.astro';
-import { getPostById } from '../../../../lib/posts';
+// src/pages/admin/tarjetas-hero/editar/[id].astro
+import Layout from '../../../../layouts/AdminLayout.astro';
+import { getTarjetaById } from '../../../../lib/tarjetasHero';
+
+if (!Astro.locals.user) return Astro.redirect('/admin/login');
 
 const { id } = Astro.params;
+const tarjeta = await getTarjetaById(Astro.locals.supabase, id as string);
 
-if (!id) {
-  return Astro.redirect('/admin/contenido-destacado?error=not_found');
-}
+if (!tarjeta) return Astro.redirect('/admin/tarjetas-hero?error=not_found');
 
-const { supabase } = Astro.locals;
-let post;
-
-try {
-  post = await getPostById(supabase, id);
-} catch (err) {
-  console.error('Error al cargar post', id, err);
-  return Astro.redirect('/admin/contenido-destacado?error=not_found');
-}
-
-if (!post) {
-  return Astro.redirect('/admin/contenido-destacado?error=not_found');
-}
+// Para datetime-local hay que cortar a "YYYY-MM-DDTHH:mm"
+const toLocalInput = (iso: string | null) => (iso ? iso.slice(0, 16) : '');
+const botones = tarjeta.botones ?? [];
 ---
 
-<AdminLayout title="Editar Publicación">
-  <div class="mx-auto max-w-4xl space-y-8">
+<Layout title="Editar tarjeta">
+  <h1 class="text-2xl font-bold text-slate-900 mb-6">Editar tarjeta</h1>
 
-    <!-- Cabecera -->
-    <div class="flex items-center gap-4">
-      <a href="/admin/contenido-destacado" class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-slate-200/80 bg-white text-slate-600 transition hover:border-cyan-600 hover:text-cyan-600 shadow-sm">
-        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-      </a>
+  <form method="POST" action="/api/admin/tarjetas-hero" class="bg-white rounded-xl shadow p-6 space-y-5 max-w-2xl">
+    <input type="hidden" name="action" value="editar" />
+    <input type="hidden" name="id" value={tarjeta.id} />
+
+    <div>
+      <label class="block text-sm font-semibold text-slate-700 mb-1">Tipo</label>
+      <select name="tipo" required class="w-full border border-slate-300 rounded-lg px-3 py-2">
+        <option value="aviso" selected={tarjeta.tipo === 'aviso'}>Aviso</option>
+        <option value="noticia" selected={tarjeta.tipo === 'noticia'}>Noticia</option>
+        <option value="evento" selected={tarjeta.tipo === 'evento'}>Evento</option>
+        <option value="cita" selected={tarjeta.tipo === 'cita'}>Cita bíblica</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold text-slate-700 mb-1">Título</label>
+      <input type="text" name="titulo" required value={tarjeta.titulo} class="w-full border border-slate-300 rounded-lg px-3 py-2" />
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold text-slate-700 mb-1">
+        Contenido <span class="font-normal text-slate-400">(markdown: **negrita**, [texto](url). Si el tipo es "Cita", este es el texto de la cita)</span>
+      </label>
+      <textarea name="contenido" rows="4" required class="w-full border border-slate-300 rounded-lg px-3 py-2">{tarjeta.contenido}</textarea>
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold text-slate-700 mb-1">
+        Referencia de la cita <span class="font-normal text-slate-400">(solo aplica si el tipo es "Cita", ej: Juan 3:16)</span>
+      </label>
+      <input type="text" name="cita_referencia" value={tarjeta.cita_referencia ?? ''} class="w-full border border-slate-300 rounded-lg px-3 py-2" />
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold text-slate-700 mb-1">
+        Fecha del evento <span class="font-normal text-slate-400">(solo aplica si el tipo es "Evento")</span>
+      </label>
+      <input
+        type="datetime-local"
+        name="fecha_evento"
+        value={toLocalInput(tarjeta.fecha_evento)}
+        class="w-full border border-slate-300 rounded-lg px-3 py-2"
+      />
+    </div>
+
+    <fieldset class="border border-slate-200 rounded-lg p-4">
+      <legend class="text-sm font-semibold text-slate-700 px-1">Botones (opcional, hasta 3)</legend>
+      <div class="space-y-3">
+        {[0, 1, 2].map((i) => (
+          <div class="grid grid-cols-2 gap-3">
+            <input
+              type="text"
+              name={`boton_texto_${i + 1}`}
+              placeholder={`Texto botón ${i + 1}`}
+              value={botones[i]?.texto ?? ''}
+              class="border border-slate-300 rounded-lg px-3 py-2"
+            />
+            <input
+              type="url"
+              name={`boton_url_${i + 1}`}
+              placeholder={`URL botón ${i + 1}`}
+              value={botones[i]?.url ?? ''}
+              class="border border-slate-300 rounded-lg px-3 py-2"
+            />
+          </div>
+        ))}
+      </div>
+    </fieldset>
+
+    <div class="grid grid-cols-2 gap-4">
       <div>
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 text-cyan-700 text-xs font-semibold mb-1 border border-cyan-100">
-          <span class="h-1.5 w-1.5 rounded-full bg-cyan-600 animate-pulse"></span> Editor
-        </div>
-        <h1 class="text-3xl font-bold tracking-tight text-slate-900">Editar publicación</h1>
-        <p class="text-sm text-slate-500">Modifica el contenido para el carrusel y las secciones principales.</p>
+        <label class="block text-sm font-semibold text-slate-700 mb-1">Orden</label>
+        <input type="number" name="orden" value={tarjeta.orden} class="w-full border border-slate-300 rounded-lg px-3 py-2" />
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1">
+          Fecha de expiración <span class="font-normal text-slate-400">(opcional)</span>
+        </label>
+        <input
+          type="datetime-local"
+          name="fecha_expiracion"
+          value={toLocalInput(tarjeta.fecha_expiracion)}
+          class="w-full border border-slate-300 rounded-lg px-3 py-2"
+        />
       </div>
     </div>
 
-    <form action="/api/admin/post" method="POST" class="space-y-6">
-      <input type="hidden" name="_action" value="update" />
-      <input type="hidden" name="id" value={post.id} />
+    <label class="flex items-center gap-2">
+      <input type="checkbox" name="is_active" checked={tarjeta.is_active} class="rounded border-slate-300" />
+      <span class="text-sm font-semibold text-slate-700">Activa (visible en el sitio)</span>
+    </label>
 
-      <!-- Bloque Principal de Configuración -->
-      <div class="rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm space-y-6">
-        <div class="grid gap-6 sm:grid-cols-2">
-          <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-2">Tipo de contenido</label>
-            <select id="type-selector" name="type" class="w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-2 focus:ring-cyan-500/20">
-              <option value="noticia" selected={post.type === 'noticia'}>Noticia</option>
-              <option value="evento" selected={post.type === 'evento'}>Evento</option>
-              <option value="aviso" selected={post.type === 'aviso'}>Aviso</option>
-              <option value="cita" selected={post.type === 'cita'}>Cita / Frase</option>
-            </select>
-          </div>
-
-          <div class="flex items-end">
-            <label class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 w-full cursor-pointer">
-              <input
-                type="checkbox"
-                name="is_active"
-                checked={post.is_active}
-                class="h-4 w-4 rounded border-slate-300 text-cyan-600 focus:ring-cyan-500"
-              />
-              <span class="text-sm font-semibold text-slate-700">Publicación activa</span>
-            </label>
-          </div>
-
-          <div class="sm:col-span-2">
-            <label id="label-title" class="block text-sm font-semibold text-slate-700 mb-2">Título *</label>
-            <input id="input-title" name="title" type="text" required value={post.title} placeholder="Título principal..." class="w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-2 focus:ring-cyan-500/20" />
-          </div>
-        </div>
-      </div>
-
-      <!-- Resumen -->
-      <div id="section-summary" class="rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm">
-        <label id="label-summary" class="block text-sm font-semibold text-slate-700 mb-2">Resumen</label>
-        <textarea id="input-summary" name="summary" rows="3" placeholder="Descripción breve..." class="w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-2 focus:ring-cyan-500/20">{post.summary}</textarea>
-      </div>
-
-      <!-- Contenido Detallado -->
-      <div id="group-content" class="rounded-3xl border border-slate-200/80 bg-white p-8 shadow-sm">
-        <label class="block text-sm font-semibold text-slate-700 mb-2">Contenido Detallado</label>
-        <textarea name="content" rows="5" placeholder="Detalles extendidos..." class="w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-cyan-500 focus:bg-white focus:ring-2 focus:ring-cyan-500/20">{post.content}</textarea>
-      </div>
-
-      <!-- Botones de Acción -->
-      <div class="flex items-center justify-end gap-4 pt-2">
-        <a href="/admin/contenido-destacado" class="text-sm font-semibold text-slate-600 hover:text-slate-900 px-4 py-2 transition">Cancelar</a>
-        <button type="submit" class="inline-flex items-center justify-center rounded-2xl bg-cyan-600 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-cyan-600/20 transition hover:bg-cyan-500 active:scale-[0.98]">
-          Guardar cambios
-        </button>
-      </div>
-    </form>
-  </div>
-</AdminLayout>
-
-<script>
-  function setupForm() {
-    const selector = document.getElementById('type-selector') as HTMLSelectElement;
-    const groupContent = document.getElementById('group-content');
-    const sectionSummary = document.getElementById('section-summary');
-    const labelTitle = document.getElementById('label-title');
-    const labelSummary = document.getElementById('label-summary');
-    const inputTitle = document.getElementById('input-title') as HTMLInputElement;
-
-    function applyTypeUI(type: string) {
-      groupContent?.classList.remove('hidden');
-      sectionSummary?.classList.remove('hidden');
-
-      if (type === 'cita') {
-        if (labelTitle) labelTitle.innerText = "Cita Completa (con autor) *";
-        if (inputTitle) inputTitle.placeholder = "Ej: \"La fe es dar el primer paso...\" — Autor";
-        sectionSummary?.classList.add('hidden');
-        groupContent?.classList.add('hidden');
-      } else if (type === 'aviso') {
-        if (labelTitle) labelTitle.innerText = "Título del Aviso *";
-        if (labelSummary) labelSummary.innerText = "Mensaje breve";
-        if (inputTitle) inputTitle.placeholder = "Título principal...";
-        groupContent?.classList.add('hidden');
-      } else if (type === 'evento') {
-        if (labelTitle) labelTitle.innerText = "Nombre del Evento *";
-        if (labelSummary) labelSummary.innerText = "Breve descripción";
-        if (inputTitle) inputTitle.placeholder = "Título principal...";
-      } else {
-        if (labelTitle) labelTitle.innerText = "Título de la Noticia *";
-        if (labelSummary) labelSummary.innerText = "Resumen / Extracto";
-        if (inputTitle) inputTitle.placeholder = "Título principal...";
-      }
-    }
-
-    selector?.addEventListener('change', () => applyTypeUI(selector.value));
-
-    // Aplica el estado correcto al cargar, según el tipo ya guardado
-    if (selector) applyTypeUI(selector.value);
-  }
-  setupForm();
-</script>
+    <div class="flex gap-3 pt-2">
+      <button type="submit" class="bg-cyan-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-cyan-700 transition">
+        Guardar cambios
+      </button>
+      <a href="/admin/contenido-destacado" class="px-5 py-2 rounded-lg font-semibold text-slate-600 hover:bg-slate-100 transition">
+        Cancelar
+      </a>
+    </div>
+  </form>
+</Layout>

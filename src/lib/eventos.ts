@@ -32,10 +32,13 @@ export async function actualizarEvento(supabase: SupabaseClient, id: string, dat
 
 // Obtener eventos activos/todos para el admin
 export async function getEventos() {
+  // Obtenemos la fecha de hoy en formato 'YYYY-MM-DD'
+  const hoy = new Date().toISOString().split('T')[0];
+
   const { data, error } = await supabasePublic
-    .from('eventos')
+    .from('eventos') // Asegúrate de cambiar esto a 'monthly_programs' si renombraste la tabla
     .select('*')
-    // Ordenar cronológicamente para que el admin vea la agenda organizada
+    .gte('fecha', hoy) // Filtra: fecha >= hoy
     .order('fecha', { ascending: true })
     .order('hora', { ascending: true });
 
