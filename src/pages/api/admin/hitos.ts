@@ -21,7 +21,7 @@ export const POST: APIRoute = async ({ request, locals, redirect }) => {
       const id = formData.get('id')?.toString();
       if (!id) throw new Error('Falta id');
       await deleteHito(supabase, id);
-      return redirect('/admin/hitos');
+      return redirect('/admin/hitos-templo');
     }
 
     const titulo = formData.get('titulo')?.toString() ?? '';
@@ -47,9 +47,9 @@ export const POST: APIRoute = async ({ request, locals, redirect }) => {
       await updateHito(supabase, id, input);
     }
 
-    return redirect('/admin/hitos');
+    return redirect('/admin/hitos-templo');
   } catch (err) {
     console.error(err);
-    return redirect('/admin/hitos?error=1');
+    return redirect('/admin/hitos-templo?error=1');
   }
 };

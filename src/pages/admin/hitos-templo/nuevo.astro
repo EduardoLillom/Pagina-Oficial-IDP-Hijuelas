@@ -1,38 +1,81 @@
 ---
-import Layout from '../../../layouts/AdminLayout.astro';
+import AdminLayout from '../../../layouts/AdminLayout.astro';
 ---
-<Layout title="Nuevo hito">
-  <h1 class="text-2xl font-bold mb-6">Nuevo hito</h1>
-  <form method="POST" action="/api/admin/hitos" enctype="multipart/form-data" class="space-y-4 max-w-lg">
-    <input type="hidden" name="accion" value="crear" />
-
-    <div>
-      <label class="block text-sm font-medium mb-1">Título</label>
-      <input type="text" name="titulo" required class="w-full border rounded-lg px-3 py-2" />
+<AdminLayout title="Nuevo hito">
+  <div class="mx-auto max-w-2xl">
+    <div class="mb-8">
+      <h1 class="text-2xl font-bold text-slate-900">Nuevo hito</h1>
+      <p class="text-sm text-slate-500">Agrega un nuevo hito a la línea de tiempo de la construcción.</p>
     </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">Fecha</label>
-      <input type="date" name="fecha" required class="w-full border rounded-lg px-3 py-2" />
-    </div>
+    <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+      <form method="POST" action="/api/admin/hitos" enctype="multipart/form-data" class="space-y-5">
+        <input type="hidden" name="accion" value="crear" />
 
-    <div>
-      <label class="block text-sm font-medium mb-1">Descripción</label>
-      <textarea name="descripcion" rows="3" class="w-full border rounded-lg px-3 py-2"></textarea>
-    </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">Título</label>
+          <input
+            type="text"
+            name="titulo"
+            required
+            class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+          />
+        </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">Orden</label>
-      <input type="number" name="orden" value="0" class="w-full border rounded-lg px-3 py-2" />
-    </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">Fecha</label>
+          <input
+            type="date"
+            name="fecha"
+            required
+            class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+          />
+        </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">Imagen</label>
-      <input type="file" name="imagen" accept="image/*" class="w-full" />
-    </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">Descripción</label>
+          <textarea
+            name="descripcion"
+            rows="3"
+            class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+          ></textarea>
+        </div>
 
-    <button type="submit" class="bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700">
-      Guardar
-    </button>
-  </form>
-</Layout>
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">Orden</label>
+          <input
+            type="number"
+            name="orden"
+            value="0"
+            class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">Imagen</label>
+          <input
+            type="file"
+            name="imagen"
+            accept="image/*"
+            class="w-full text-sm text-slate-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200"
+          />
+        </div>
+
+        <div class="flex items-center gap-3 pt-2">
+          <button
+            type="submit"
+            class="bg-cyan-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-cyan-700 shadow-sm transition-all"
+          >
+            Guardar
+          </button>
+          <a
+            href="/admin/hitos-templo"
+            class="text-sm font-medium text-slate-500 hover:text-slate-700 px-5 py-2.5"
+          >
+            Cancelar
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</AdminLayout>
