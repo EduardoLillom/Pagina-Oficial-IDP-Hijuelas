@@ -5,6 +5,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
 
+const isBuild = process.argv.includes('build');
+
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
@@ -23,7 +25,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     ssr: {
-      noExternal: ['sanitize-html', 'htmlparser2']
+      noExternal: isBuild ? ['sanitize-html', 'htmlparser2'] : [],
     },
   },
 
