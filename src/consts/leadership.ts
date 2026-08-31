@@ -13,7 +13,7 @@ import pamelaCollao from "../assets/people/pamela_collao_olivares.webp";
 
 export const pastoralTeam = [
   {
-    name: "Fernando Toro",
+    name: "Fernando Toro Larenas",
     role: "Pastor Principal • Maestría en Teología • Ministro Ordenado",
     description: "Con 11 años de estudios en Teología y habiendo egresado recientemente de su Maestría, el Pastor Fernando guía nuestra congregación con firmeza, amor y un compromiso inquebrantable con la enseñanza bíblica.",
     image: pastorFernandoToro,
